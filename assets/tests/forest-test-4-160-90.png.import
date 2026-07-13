@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ebphbs8dti0p"
-path="res://.godot/imported/player-idle.png-810a9e7bd948589303efe5e4604eb95c.ctex"
+uid="uid://cd25hqwd68x6s"
+path="res://.godot/imported/forest-test-4-160-90.png-b3a02f34196aee3b5b46e4647da0e2d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/player-idle.png"
-dest_files=["res://.godot/imported/player-idle.png-810a9e7bd948589303efe5e4604eb95c.ctex"]
+source_file="res://assets/tests/forest-test-4-160-90.png"
+dest_files=["res://.godot/imported/forest-test-4-160-90.png-b3a02f34196aee3b5b46e4647da0e2d9.ctex"]
 
 [params]
 
