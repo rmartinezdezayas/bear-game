@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://nma2d4wbcgdx"]
+
+[ext_resource type="Texture2D" uid="uid://bl1pl52gmqov5" path="res://assets/tests/true-forest-test-1-160-90.png" id="1_ka884"]
+[ext_resource type="PackedScene" uid="uid://cgd7skkpupnj4" path="res://scenes/player.tscn" id="1_ta4h7"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tol2v"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_tol2v"]
+distance = 7.0
+
+[node name="scene_1" type="Node2D" unique_id=1598948707]
+
+[node name="TrueForestTest116090" type="Sprite2D" parent="." unique_id=1190469094]
+texture = ExtResource("1_ka884")
+
+[node name="player" parent="." unique_id=623324050 instance=ExtResource("1_ta4h7")]
+position = Vector2(0, 38)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=697527603]
+zoom = Vector2(7.2, 7.2)
+
+[node name="ground" type="StaticBody2D" parent="." unique_id=1285708268]
+physics_material_override = SubResource("PhysicsMaterial_tol2v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ground" unique_id=702676671]
+position = Vector2(0, 45)
+shape = SubResource("WorldBoundaryShape2D_tol2v")
