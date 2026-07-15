@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://bucjl7aogf7ix"]
+
+[ext_resource type="Texture2D" uid="uid://dtk453gxk0q1s" path="res://assets/environment/backgrounds/moving-road-1.png" id="1_l6e1y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ou4x2"]
+atlas = ExtResource("1_l6e1y")
+region = Rect2(0, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13y15"]
+atlas = ExtResource("1_l6e1y")
+region = Rect2(0, 90, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kb7bf"]
+atlas = ExtResource("1_l6e1y")
+region = Rect2(0, 180, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcotv"]
+atlas = ExtResource("1_l6e1y")
+region = Rect2(0, 270, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkrku"]
+atlas = ExtResource("1_l6e1y")
+region = Rect2(0, 360, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mv8bj"]
+atlas = ExtResource("1_l6e1y")
+region = Rect2(0, 450, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6x1v6"]
+atlas = ExtResource("1_l6e1y")
+region = Rect2(0, 540, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywdhc"]
+atlas = ExtResource("1_l6e1y")
+region = Rect2(0, 630, 160, 90)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tol2v"]
+animations = [{
+"frames": [{
+"duration": 0.1,
+"texture": SubResource("AtlasTexture_ou4x2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13y15")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kb7bf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcotv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xkrku")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mv8bj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6x1v6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywdhc")
+}],
+"loop": 1,
+"name": &"moving-road",
+"speed": 30.0
+}]
+
+[node name="moving-road-1" type="Node2D" unique_id=183119197]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1510374449]
+sprite_frames = SubResource("SpriteFrames_tol2v")
+animation = &"moving-road"
+autoplay = "moving-road"
+frame_progress = 0.6102518

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://nma2d4wbcgdx"]
 
-[ext_resource type="Texture2D" uid="uid://cd25hqwd68x6s" path="res://assets/environment/backgrounds/forest-test-4-160-90.png" id="1_cn2eb"]
-[ext_resource type="PackedScene" uid="uid://cgd7skkpupnj4" path="res://scenes/player.tscn" id="1_ta4h7"]
-[ext_resource type="PackedScene" uid="uid://qwjn1slavbi8" path="res://scenes/rock_1.tscn" id="3_cn2eb"]
+[ext_resource type="Texture2D" uid="uid://cd25hqwd68x6s" path="res://assets/environment/backgrounds/forest-test-4-160-90.png" id="1_ido5y"]
+[ext_resource type="PackedScene" uid="uid://cgd7skkpupnj4" path="res://scenes/objects/player/player.tscn" id="2_kx5p7"]
+[ext_resource type="PackedScene" uid="uid://qwjn1slavbi8" path="res://scenes/objects/environment/rocks/rock_1.tscn" id="3_p2ku2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tol2v"]
 
@@ -12,9 +12,9 @@ distance = 7.0
 [node name="scene_0" type="Node2D" unique_id=1598948707]
 
 [node name="TrueForestTest116090" type="Sprite2D" parent="." unique_id=1190469094]
-texture = ExtResource("1_cn2eb")
+texture = ExtResource("1_ido5y")
 
-[node name="player" parent="." unique_id=623324050 instance=ExtResource("1_ta4h7")]
+[node name="player" parent="." unique_id=623324050 instance=ExtResource("2_kx5p7")]
 z_index = 1
 position = Vector2(0, 38)
 
@@ -34,5 +34,5 @@ physics_material_override = SubResource("PhysicsMaterial_tol2v")
 position = Vector2(0, 45)
 shape = SubResource("WorldBoundaryShape2D_tol2v")
 
-[node name="rock-1" parent="." unique_id=573143425 instance=ExtResource("3_cn2eb")]
+[node name="rock-1" parent="." unique_id=573143425 instance=ExtResource("3_p2ku2")]
 position = Vector2(-110, 37)
