@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://qwjn1slavbi8"]
+
+[ext_resource type="Texture2D" uid="uid://cshwsrx6t56an" path="res://assets/environment/rock-1.png" id="1_yitr1"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tol2v"]
+
+[node name="rock-1" type="StaticBody2D" unique_id=573143425]
+physics_material_override = SubResource("PhysicsMaterial_tol2v")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=498217582]
+position = Vector2(0, -16)
+texture = ExtResource("1_yitr1")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1558947106]
+polygon = PackedVector2Array(25, 0, 21, -16, 4, -13, -17, -4, -28, 0)
