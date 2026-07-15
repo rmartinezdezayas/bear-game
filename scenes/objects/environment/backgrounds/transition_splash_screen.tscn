@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://kop41ttjf71c"]
 
-[node name="transition_splash_screen" type="CanvasLayer" unique_id=358570490]
+[node name="transition_splash_screen" type="Node2D" unique_id=1645034372]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=358570490]
 layer = 100
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1897425957]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1897425957]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.35686275, 0.32156864, 0.5019608, 0)
+color = Color(0.35686275, 0.32156864, 0.5019608, 1)
