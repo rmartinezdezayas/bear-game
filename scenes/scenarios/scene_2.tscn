@@ -36,7 +36,7 @@ position = Vector2(-102, -11)
 scale = Vector2(-1, 1)
 
 [node name="player" parent="." unique_id=623324050 instance=ExtResource("3_pif6w")]
-position = Vector2(61, 37)
+position = Vector2(38, 37)
 
 [node name="ground" type="StaticBody2D" parent="." unique_id=144119261]
 physics_material_override = SubResource("PhysicsMaterial_pif6w")
@@ -48,9 +48,9 @@ shape = SubResource("WorldBoundaryShape2D_7p1wf")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1426337310]
 process_priority = 1
 position = Vector2(0, -38)
-limit_left = -150
+limit_left = -10000
 limit_top = 0
-limit_right = 150
+limit_right = 10000
 limit_bottom = 0
 position_smoothing_speed = 7.0
 
