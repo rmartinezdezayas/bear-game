@@ -5,10 +5,10 @@ const FADE_IN_DURATION: float = 3.5      # Time to reveal scene 2 from black
 const WAIT_0_DISABLE_INPUT: float = 1.0  # Time to wait initially before crouch
 const WAIT_3_CROUCH_DURATION: float = 2.0 # Wait while crouched
 const WAIT_4_FLIP_LOOK: float = 1.5      # Wait after flipping the player's face
-const RUN_DURATION: float = 2.5          # How long the player runs before gaining control
+const RUN_DURATION: float = 3          # How long the player runs before gaining control
 
 # --- Positions ---
-const BEAR_TARGET_X_FAST: float = 1200.0 # X coordinate where the bear flees quickly
+const BEAR_TARGET_X_FAST: float = -60.0 # X coordinate where the bear flees quickly
 
 # --- Node References ---
 @onready var player: CharacterBody2D = $player
@@ -62,25 +62,30 @@ func run_cutscene() -> void:
 	# STEP 4: Flip player horizontally (Turn Left) & wait
 	# ----------------------------------------------------
 	if player:
-		# Simulate tapping left for a split second to flip the character face
-		player.simulated_left = true
-		await get_tree().create_timer(0.1).timeout
-		player.simulated_left = false
+		var sprite = player.get_node_or_null("Sprite2D")
+		if sprite:
+			sprite.flip_h = true # Look left
 			
 	await get_tree().create_timer(WAIT_4_FLIP_LOOK).timeout
 
-	# ----------------------------------------------------
+	 # ----------------------------------------------------
 	# STEP 5: Wait briefly, then make the Bear flee quickly
 	# ----------------------------------------------------
-	#await get_tree().create_timer(0.5).timeout
-	#
-	#if bear:
-		#var bear_run_tween = create_tween()
-		#bear_run_tween.tween_property(bear, "global_position:x", BEAR_TARGET_X_FAST, 1.5)\
-			#.set_trans(Tween.TRANS_QUAD)\
-			#.set_ease(Tween.EASE_IN)
-		#await bear_run_tween.finished
-		#bear.visible = false 
+	await get_tree().create_timer(0.5).timeout
+	
+	if bear:
+		# Tell the bear script to start running to the target position
+		if bear.has_method("move_to_position"):
+			bear.call("move_to_position", BEAR_TARGET_X_FAST, false)
+			
+			# Wait until the bear is done moving
+			# (We monitor its 'should_move' status until it arrives at the destination)
+			while bear.should_move:
+				await get_tree().process_frame
+				
+		# Move faster now
+		if bear.has_method("move_to_position"):
+			bear.call("move_to_position", 10000, true)
 
 	# ----------------------------------------------------
 	# STEP 7: Pan camera back to Player & make Player run
@@ -88,7 +93,7 @@ func run_cutscene() -> void:
 	if camera and player:
 		# Smoothly slide camera back to focus on our player
 		var cam_return_tween = create_tween()
-		cam_return_tween.tween_property(camera, "global_position:x", player.global_position.x, 2.0)\
+		cam_return_tween.tween_property(camera, "global_position:x", player.global_position.x, 1.0)\
 			.set_trans(Tween.TRANS_SINE)\
 			.set_ease(Tween.EASE_IN_OUT)
 		await cam_return_tween.finished
