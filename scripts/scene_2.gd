@@ -110,7 +110,10 @@ func run_cutscene() -> void:
 			.set_trans(Tween.TRANS_SINE)\
 			.set_ease(Tween.EASE_IN_OUT)
 		await cam_return_tween.finished
-		
+
+		# Attach camera to player so it follows during the run
+		camera.reparent(player)
+
 		# Put Player in run state and move them to the right
 		if anim_state_machine:
 			# Make sure your Sprite2D scale/flip faces right first
