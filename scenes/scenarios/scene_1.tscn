@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://blkcgr8dvd2g1" path="res://scripts/scene_1.gd" id="1_a72bn"]
 [ext_resource type="PackedScene" uid="uid://cyje22e86w3cd" path="res://scenes/scenarios/scene_2.tscn" id="2_a72bn"]
+[ext_resource type="PackedScene" uid="uid://bm3gnq7n27rkn" path="res://scenes/objects/environment/backgrounds/solid_color_background.tscn" id="3_2huyk"]
 [ext_resource type="PackedScene" uid="uid://bucjl7aogf7ix" path="res://scenes/objects/environment/backgrounds/moving_road_1.tscn" id="3_avgf8"]
 [ext_resource type="PackedScene" uid="uid://b38sor4o4fxn8" path="res://scenes/objects/cars/car_1.tscn" id="4_ll8da"]
 [ext_resource type="PackedScene" uid="uid://cqla0vaxaspus" path="res://scenes/objects/environment/trees/branch_1.tscn" id="5_po4em"]
@@ -10,6 +11,8 @@
 [node name="scene_1" type="Node2D" unique_id=316734408]
 script = ExtResource("1_a72bn")
 next_scene = ExtResource("2_a72bn")
+
+[node name="solid_color_background" parent="." unique_id=257021227 instance=ExtResource("3_2huyk")]
 
 [node name="moving-road-1" parent="." unique_id=183119197 instance=ExtResource("3_avgf8")]
 

@@ -3,17 +3,64 @@
 [ext_resource type="Script" uid="uid://d1cs8lfly67kw" path="res://scripts/scene_2.gd" id="1_eujh0"]
 [ext_resource type="Texture2D" uid="uid://tycsr3gtky54" path="res://assets/environment/backgrounds/road-1.png" id="1_fubmo"]
 [ext_resource type="PackedScene" uid="uid://b38sor4o4fxn8" path="res://scenes/objects/cars/car_1.tscn" id="1_n5sij"]
+[ext_resource type="Texture2D" uid="uid://bkc42jo6w7u3p" path="res://assets/environment/scene-sketches/scene-2-sketch.png" id="2_xtpp7"]
+[ext_resource type="PackedScene" uid="uid://bm3gnq7n27rkn" path="res://scenes/objects/environment/backgrounds/solid_color_background.tscn" id="2_yrxad"]
 [ext_resource type="PackedScene" uid="uid://d1r5n7c6fm08k" path="res://scenes/objects/npcs/bear.tscn" id="3_7p1wf"]
 [ext_resource type="PackedScene" uid="uid://cgd7skkpupnj4" path="res://scenes/objects/player/player.tscn" id="3_pif6w"]
+[ext_resource type="PackedScene" uid="uid://2sv74egv2d6i" path="res://scenes/objects/environment/trees/tree_3.tscn" id="4_lk4pe"]
+[ext_resource type="PackedScene" uid="uid://bdmwnk014l536" path="res://scenes/objects/environment/trees/tree_1.tscn" id="5_jl0fa"]
+[ext_resource type="PackedScene" uid="uid://c8t04cyut28ek" path="res://scenes/objects/environment/trees/tree_2.tscn" id="6_bq3tb"]
 [ext_resource type="PackedScene" uid="uid://kop41ttjf71c" path="res://scenes/objects/environment/backgrounds/transition_splash_screen.tscn" id="6_xqmc3"]
+[ext_resource type="PackedScene" uid="uid://k8bga01vlylb" path="res://scenes/objects/environment/trees/thin_tree_1.tscn" id="7_76fyk"]
+[ext_resource type="PackedScene" uid="uid://dmi56jvf65wwg" path="res://scenes/objects/environment/trees/thin_tree_2.tscn" id="8_v3ecj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pif6w"]
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7p1wf"]
-distance = 7.0
-
 [node name="scene_2" type="Node2D" unique_id=1638654853]
 script = ExtResource("1_eujh0")
+
+[node name="solid_color_background" parent="." unique_id=257021227 instance=ExtResource("2_yrxad")]
+position = Vector2(668, -116)
+
+[node name="scene-2-sketch" type="Sprite2D" parent="." unique_id=1741438703]
+position = Vector2(867, 405)
+texture = ExtResource("2_xtpp7")
+
+[node name="forest" type="Node2D" parent="." unique_id=1526827226]
+
+[node name="tree_6" parent="forest" unique_id=292558 instance=ExtResource("4_lk4pe")]
+position = Vector2(742, 59)
+
+[node name="tree_3" parent="forest" unique_id=1088757356 instance=ExtResource("4_lk4pe")]
+position = Vector2(885, 60)
+scale = Vector2(-1, 1)
+
+[node name="tree_1" parent="forest" unique_id=823549748 instance=ExtResource("5_jl0fa")]
+position = Vector2(1060, 41)
+
+[node name="tree_2" parent="forest" unique_id=362760161 instance=ExtResource("6_bq3tb")]
+position = Vector2(698, 61)
+
+[node name="tree_4" parent="forest" unique_id=1999509888 instance=ExtResource("5_jl0fa")]
+position = Vector2(608, 44)
+
+[node name="tree_5" parent="forest" unique_id=1626018709 instance=ExtResource("6_bq3tb")]
+position = Vector2(1029, 58)
+scale = Vector2(-1, 1)
+
+[node name="thin_tree_1" parent="forest" unique_id=42411524 instance=ExtResource("7_76fyk")]
+position = Vector2(636, 59)
+
+[node name="thin_tree_2" parent="forest" unique_id=1885788962 instance=ExtResource("8_v3ecj")]
+position = Vector2(860, 58)
+
+[node name="thin_tree_3" parent="forest" unique_id=1162761009 instance=ExtResource("7_76fyk")]
+position = Vector2(1020, 60)
+scale = Vector2(-1, 1)
+
+[node name="thin_tree_4" parent="forest" unique_id=897429882 instance=ExtResource("8_v3ecj")]
+position = Vector2(765, 58)
+scale = Vector2(-1, 1)
 
 [node name="full-road" type="Node2D" parent="." unique_id=429495972]
 
@@ -32,26 +79,25 @@ texture = ExtResource("1_fubmo")
 position = Vector2(40, 35)
 
 [node name="bear" parent="." unique_id=468607151 instance=ExtResource("3_7p1wf")]
-position = Vector2(-102, -11)
+position = Vector2(-102, -10)
 scale = Vector2(-1, 1)
 
 [node name="player" parent="." unique_id=623324050 instance=ExtResource("3_pif6w")]
-position = Vector2(38, 37)
+position = Vector2(38, 38)
 
 [node name="ground" type="StaticBody2D" parent="." unique_id=144119261]
 physics_material_override = SubResource("PhysicsMaterial_pif6w")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ground" unique_id=1760272634]
-position = Vector2(0, 45)
-shape = SubResource("WorldBoundaryShape2D_7p1wf")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ground" unique_id=1968079594]
+position = Vector2(-101, 55)
+polygon = PackedVector2Array(-25, -17, 356, -17, 365, 30, 479, 30, 555, 41, 805, 41, 915, 38, 1093, 46, 1478, 20, 1480, 59, 1096, 79, 361, 47)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1426337310]
 process_priority = 1
-position = Vector2(0, -38)
 limit_left = -10000
-limit_top = 0
+limit_top = -10000
 limit_right = 10000
-limit_bottom = 0
+limit_bottom = 10000
 position_smoothing_speed = 7.0
 
 [node name="transition_splash_screen" parent="." unique_id=1645034372 instance=ExtResource("6_xqmc3")]

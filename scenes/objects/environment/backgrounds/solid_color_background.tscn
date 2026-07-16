@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bm3gnq7n27rkn"]
+
+[ext_resource type="Texture2D" uid="uid://be7ewvh612sxw" path="res://assets/environment/scene-sketches/solid-color-background.png" id="1_83kar"]
+
+[node name="solid_color_background" type="Sprite2D" unique_id=257021227]
+texture = ExtResource("1_83kar")
