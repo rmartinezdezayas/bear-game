@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://d1r5n7c6fm08k"]
+
+[ext_resource type="Texture2D" uid="uid://blvfulrk5smv8" path="res://assets/npcs/bear.png" id="1_xu8t6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tol2v"]
+radius = 12.0
+height = 32.0
+
+[node name="bear" type="CharacterBody2D" unique_id=468607151]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=42508572]
+texture = ExtResource("1_xu8t6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1487440639]
+position = Vector2(3, 36)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_tol2v")

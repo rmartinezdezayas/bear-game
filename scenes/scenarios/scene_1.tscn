@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://d0sukyfq23jtd"]
+
+[ext_resource type="Script" uid="uid://blkcgr8dvd2g1" path="res://scripts/scene_1.gd" id="1_a72bn"]
+[ext_resource type="PackedScene" uid="uid://cyje22e86w3cd" path="res://scenes/scenarios/scene_2.tscn" id="2_a72bn"]
+[ext_resource type="PackedScene" uid="uid://bucjl7aogf7ix" path="res://scenes/objects/environment/backgrounds/moving_road_1.tscn" id="3_avgf8"]
+[ext_resource type="PackedScene" uid="uid://b38sor4o4fxn8" path="res://scenes/objects/cars/car_1.tscn" id="4_ll8da"]
+[ext_resource type="PackedScene" uid="uid://cqla0vaxaspus" path="res://scenes/objects/environment/trees/branch_1.tscn" id="5_po4em"]
+[ext_resource type="PackedScene" uid="uid://kop41ttjf71c" path="res://scenes/objects/environment/backgrounds/transition_splash_screen.tscn" id="6_wokjw"]
+
+[node name="scene_1" type="Node2D" unique_id=316734408]
+script = ExtResource("1_a72bn")
+next_scene = ExtResource("2_a72bn")
+
+[node name="moving-road-1" parent="." unique_id=183119197 instance=ExtResource("3_avgf8")]
+
+[node name="car_1" parent="." unique_id=1161502545 instance=ExtResource("4_ll8da")]
+position = Vector2(-99, 35)
+
+[node name="branch_1" parent="." unique_id=1124844314 instance=ExtResource("5_po4em")]
+visible = false
+position = Vector2(38, 34)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=326272505]
+process_priority = 1
+position = Vector2(0, -38)
+limit_left = -150
+limit_top = 0
+limit_right = 150
+limit_bottom = 0
+position_smoothing_speed = 7.0
+
+[node name="transition_splash_screen" parent="." unique_id=358570490 instance=ExtResource("6_wokjw")]

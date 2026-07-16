@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cyje22e86w3cd"]
+
+[ext_resource type="Script" uid="uid://d1cs8lfly67kw" path="res://scripts/scene_2.gd" id="1_eujh0"]
+[ext_resource type="Texture2D" uid="uid://tycsr3gtky54" path="res://assets/environment/backgrounds/road-1.png" id="1_fubmo"]
+[ext_resource type="PackedScene" uid="uid://b38sor4o4fxn8" path="res://scenes/objects/cars/car_1.tscn" id="1_n5sij"]
+[ext_resource type="PackedScene" uid="uid://d1r5n7c6fm08k" path="res://scenes/objects/npcs/bear.tscn" id="3_7p1wf"]
+[ext_resource type="PackedScene" uid="uid://cgd7skkpupnj4" path="res://scenes/objects/player/player.tscn" id="3_pif6w"]
+[ext_resource type="PackedScene" uid="uid://kop41ttjf71c" path="res://scenes/objects/environment/backgrounds/transition_splash_screen.tscn" id="6_xqmc3"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pif6w"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7p1wf"]
+distance = 7.0
+
+[node name="scene_2" type="Node2D" unique_id=1638654853]
+script = ExtResource("1_eujh0")
+
+[node name="full-road" type="Node2D" parent="." unique_id=429495972]
+
+[node name="road-1" type="Sprite2D" parent="full-road" unique_id=1720670752]
+texture = ExtResource("1_fubmo")
+
+[node name="road-2" type="Sprite2D" parent="full-road" unique_id=2110903058]
+position = Vector2(155, 0)
+texture = ExtResource("1_fubmo")
+
+[node name="road-3" type="Sprite2D" parent="full-road" unique_id=1650846708]
+position = Vector2(-155, 0)
+texture = ExtResource("1_fubmo")
+
+[node name="car_1" parent="." unique_id=1161502545 instance=ExtResource("1_n5sij")]
+position = Vector2(40, 35)
+
+[node name="bear" parent="." unique_id=468607151 instance=ExtResource("3_7p1wf")]
+position = Vector2(-102, -11)
+scale = Vector2(-1, 1)
+
+[node name="player" parent="." unique_id=623324050 instance=ExtResource("3_pif6w")]
+position = Vector2(61, 37)
+
+[node name="ground" type="StaticBody2D" parent="." unique_id=144119261]
+physics_material_override = SubResource("PhysicsMaterial_pif6w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ground" unique_id=1760272634]
+position = Vector2(0, 45)
+shape = SubResource("WorldBoundaryShape2D_7p1wf")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1426337310]
+process_priority = 1
+position = Vector2(0, -38)
+limit_left = -150
+limit_top = 0
+limit_right = 150
+limit_bottom = 0
+position_smoothing_speed = 7.0
+
+[node name="transition_splash_screen" parent="." unique_id=1645034372 instance=ExtResource("6_xqmc3")]
