@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d1cs8lfly67kw" path="res://scripts/scene_2.gd" id="1_eujh0"]
 [ext_resource type="Texture2D" uid="uid://tycsr3gtky54" path="res://assets/environment/backgrounds/road-1.png" id="1_fubmo"]
 [ext_resource type="PackedScene" uid="uid://b38sor4o4fxn8" path="res://scenes/objects/cars/car_1.tscn" id="1_n5sij"]
+[ext_resource type="PackedScene" uid="uid://bt6rnlc8pcge8" path="res://scenes/scenarios/scene_3.tscn" id="2_jl0fa"]
 [ext_resource type="Texture2D" uid="uid://bkc42jo6w7u3p" path="res://assets/environment/scene-sketches/scene-2-sketch.png" id="2_xtpp7"]
 [ext_resource type="PackedScene" uid="uid://bm3gnq7n27rkn" path="res://scenes/objects/environment/backgrounds/solid_color_background.tscn" id="2_yrxad"]
 [ext_resource type="PackedScene" uid="uid://d1r5n7c6fm08k" path="res://scenes/objects/npcs/bear.tscn" id="3_7p1wf"]
@@ -18,6 +19,7 @@
 
 [node name="scene_2" type="Node2D" unique_id=1638654853]
 script = ExtResource("1_eujh0")
+next_scene = ExtResource("2_jl0fa")
 
 [node name="solid_color_background" parent="." unique_id=257021227 instance=ExtResource("2_yrxad")]
 position = Vector2(668, -116)

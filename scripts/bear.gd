@@ -50,3 +50,9 @@ func move_to_position(target_x_coord: float, run_fast: bool = false) -> void:
 	target_x = target_x_coord
 	is_fleeing = run_fast
 	should_move = true
+
+
+func stop_movement() -> void:
+	should_move = false
+	is_fleeing = false
+	velocity = Vector2.ZERO

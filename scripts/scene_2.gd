@@ -6,14 +6,20 @@ const WAIT_0_DISABLE_INPUT: float = 1.0  # Time to wait initially before crouch
 const WAIT_3_CROUCH_DURATION: float = 2.0 # Wait while crouched
 const WAIT_4_FLIP_LOOK: float = 1.5      # Wait after flipping the player's face
 const RUN_DURATION: float = 3          # How long the player runs before gaining control
+const TRANSITION_DELAY: float = 1.5     # Seconds to wait after stopping before fading out
+const FADE_OUT_DURATION: float = 0.5    # How long the fadeout should take
 
 # --- Positions ---
 const BEAR_TARGET_X_FAST: float = -60.0 # X coordinate where the bear flees quickly
 const MAX_BEAR_DISTANCE: float = 90.0  # Maximum distance to maintain from player
 const BEAR_CHASE_SPEED: float = 55.0  # Pixels per second when chasing player
+const BEAR_STOP_X: float = 1374.0      # X coordinate where the bear stops and the scene transitions
 
 # --- State ---
 var cutscene_finished: bool = false
+var transition_started: bool = false
+
+@export var next_scene: PackedScene
 
 # --- Node References ---
 @onready var player: CharacterBody2D = $player
@@ -25,6 +31,12 @@ var cutscene_finished: bool = false
 @onready var fade_rect: ColorRect = $transition_splash_screen/CanvasLayer/ColorRect
 
 func _ready() -> void:
+	# Make sure the overlay starts transparent and hidden for the fade-in
+	if fade_rect:
+		fade_rect.modulate.a = 0.0
+	if transition_canvas_layer:
+		transition_canvas_layer.visible = false
+	
 	# Start the cinematic sequence
 	run_cutscene()
 
@@ -73,7 +85,7 @@ func run_cutscene() -> void:
 			
 	await get_tree().create_timer(WAIT_4_FLIP_LOOK).timeout
 
-	 # ----------------------------------------------------
+	# ----------------------------------------------------
 	# STEP 5: Wait briefly, then make the Bear flee quickly
 	# ----------------------------------------------------
 	await get_tree().create_timer(0.5).timeout
@@ -130,6 +142,15 @@ func _process(delta: float) -> void:
 	if not cutscene_finished or not player or not bear:
 		return
 	
+	# Stop the bear once it reaches the designated x position
+	if bear.global_position.x >= BEAR_STOP_X:
+		bear.global_position.x = BEAR_STOP_X
+		if not transition_started:
+			transition_started = true
+			stop_player_and_bear()
+			trigger_scene_transition()
+		return
+	
 	# Calculate distance between player and bear
 	var distance = player.global_position.distance_to(bear.global_position)
 	
@@ -140,3 +161,37 @@ func _process(delta: float) -> void:
 		
 		# Move bear towards player with smooth speed-based movement
 		bear.global_position += direction * BEAR_CHASE_SPEED * delta
+
+
+func stop_player_and_bear() -> void:
+	if player:
+		player.velocity = Vector2.ZERO
+		player.set_physics_process(false)
+		player.set_process(false)
+		player.set_process_input(false)
+		player.set_input_enabled(false)
+		player.simulated_right = false
+		player.simulated_crouch = false
+		player.simulated_left = false
+
+	if bear and bear.has_method("stop_movement"):
+		bear.call("stop_movement")
+
+
+func trigger_scene_transition() -> void:
+	await get_tree().create_timer(TRANSITION_DELAY).timeout
+	
+	if transition_canvas_layer and fade_rect:
+		transition_canvas_layer.visible = true
+		var fade_tween = create_tween()
+		fade_tween.tween_property(fade_rect, "modulate:a", 1.0, FADE_OUT_DURATION)\
+			.set_trans(Tween.TRANS_SINE)\
+			.set_ease(Tween.EASE_IN_OUT)
+		await fade_tween.finished
+	else:
+		push_warning("transition_splash_screen structure is missing! Changing scenes immediately.")
+	
+	if next_scene:
+		get_tree().change_scene_to_packed(next_scene)
+	else:
+		push_warning("Next scene is not assigned in the Inspector.")

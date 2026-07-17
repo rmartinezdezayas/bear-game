@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bt6rnlc8pcge8"]
+
+[ext_resource type="PackedScene" uid="uid://kop41ttjf71c" path="res://scenes/objects/environment/backgrounds/transition_splash_screen.tscn" id="1_v5kny"]
+
+[node name="Scene3" type="Node2D" unique_id=273871966]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=58121032]
+
+[node name="transition_splash_screen" parent="." unique_id=1645034372 instance=ExtResource("1_v5kny")]
