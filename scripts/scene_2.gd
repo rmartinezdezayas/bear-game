@@ -9,6 +9,10 @@ const RUN_DURATION: float = 3          # How long the player runs before gaining
 
 # --- Positions ---
 const BEAR_TARGET_X_FAST: float = -60.0 # X coordinate where the bear flees quickly
+const MAX_BEAR_DISTANCE: float = 90.0  # Maximum distance to maintain from player
+
+# --- State ---
+var cutscene_finished: bool = false
 
 # --- Node References ---
 @onready var player: CharacterBody2D = $player
@@ -111,9 +115,27 @@ func run_cutscene() -> void:
 	# FINISH: Return control to Player
 	# ----------------------------------------------------
 	set_player_control(true)
+	cutscene_finished = true
 
 
 # Helper function to enable/disable your gameplay input script
 func set_player_control(has_control: bool) -> void:
 	if player and player.has_method("set_input_enabled"):
 		player.set_input_enabled(has_control)
+
+
+# Maintain minimum distance from player during gameplay
+func _process(delta: float) -> void:
+	if not cutscene_finished or not player or not bear:
+		return
+	
+	# Calculate distance between player and bear
+	var distance = player.global_position.distance_to(bear.global_position)
+	
+	# If distance is greater than or equal to minimum, keep it at minimum distance
+	if distance >= MAX_BEAR_DISTANCE:
+		# Get direction from player to bear
+		var direction = (player.global_position - bear.global_position).normalized()
+		
+		# Set bear position to maintain minimum distance
+		bear.global_position = bear.global_position + direction
