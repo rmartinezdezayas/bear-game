@@ -3,6 +3,8 @@ extends CharacterBody2D
 const SPEED = 50.0
 const JUMP_VELOCITY = -250.0
 const CROUCH_VELOCITY_MULTIPLIER = 0.5
+const MAX_JUMP_HOLD_TIME = 0.2
+const JUMP_HOLD_FORCE = 180.0
 
 @onready var animation_tree : AnimationTree = $AnimationTree
 var state_machine
@@ -12,6 +14,8 @@ var simulated_left: bool = false
 var simulated_right: bool = false
 var simulated_crouch: bool = false
 var input_enabled: bool = true
+var jump_hold_timer: float = 0.0
+var jump_is_held: bool = false
 
 func _ready() -> void:
 	state_machine = animation_tree["parameters/playback"]
@@ -25,8 +29,25 @@ func _physics_process(delta: float) -> void:
 	var is_crouching = (Input.is_action_pressed("crouch") if input_enabled else simulated_crouch)
 
 	# Handle jump (Only allow if input is enabled)
-	if input_enabled and Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if input_enabled:
+		if is_on_floor():
+			jump_hold_timer = 0.0
+			jump_is_held = false
+
+		if is_on_floor() and Input.is_action_just_pressed("jump"):
+			velocity.y = JUMP_VELOCITY
+			jump_is_held = true
+			jump_hold_timer = 0.0
+		elif jump_is_held and Input.is_action_pressed("jump") and velocity.y < 0.0:
+			if jump_hold_timer < MAX_JUMP_HOLD_TIME:
+				velocity.y -= JUMP_HOLD_FORCE * delta
+				jump_hold_timer += delta
+			else:
+				jump_is_held = false
+		elif Input.is_action_just_released("jump"):
+			jump_is_held = false
+			if velocity.y < 0.0:
+				velocity.y *= 0.6
 
 	# Get the input direction based on control state
 	var direction := 0.0
