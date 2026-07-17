@@ -10,6 +10,7 @@ const RUN_DURATION: float = 3          # How long the player runs before gaining
 # --- Positions ---
 const BEAR_TARGET_X_FAST: float = -60.0 # X coordinate where the bear flees quickly
 const MAX_BEAR_DISTANCE: float = 90.0  # Maximum distance to maintain from player
+const BEAR_CHASE_SPEED: float = 55.0  # Pixels per second when chasing player
 
 # --- State ---
 var cutscene_finished: bool = false
@@ -137,5 +138,5 @@ func _process(delta: float) -> void:
 		# Get direction from player to bear
 		var direction = (player.global_position - bear.global_position).normalized()
 		
-		# Set bear position to maintain minimum distance
-		bear.global_position = bear.global_position + direction
+		# Move bear towards player with smooth speed-based movement
+		bear.global_position += direction * BEAR_CHASE_SPEED * delta

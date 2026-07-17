@@ -94,10 +94,10 @@ polygon = PackedVector2Array(-25, -17, 356, -17, 365, 30, 479, 30, 555, 41, 805,
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1426337310]
 process_priority = 1
-limit_left = -10000
-limit_top = -10000
-limit_right = 10000
-limit_bottom = 10000
+limit_left = -9994
+limit_top = -9999
+limit_right = 1518
+limit_bottom = 123
 position_smoothing_speed = 7.0
 
 [node name="transition_splash_screen" parent="." unique_id=1645034372 instance=ExtResource("6_xqmc3")]
