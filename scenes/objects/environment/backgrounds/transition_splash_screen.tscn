@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://kop41ttjf71c"]
 
+[ext_resource type="Script" uid="uid://b8h2c6j2n4k1q" path="res://scripts/transition_splash_screen.gd" id="1_8n3k2"]
+
 [node name="transition_splash_screen" type="Node2D" unique_id=1645034372]
+script = ExtResource("1_8n3k2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=358570490]
 layer = 100

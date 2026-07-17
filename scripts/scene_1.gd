@@ -16,21 +16,16 @@ const FADE_DURATION: float = 0.3         # How long the fadeout should take (in 
 @onready var car: Node2D = $car_1
 @onready var branch: Node2D = $branch_1
 
-# References to your nested transition nodes
+# Reference to the reusable transition node
 @onready var transition_splash_screen: Node2D = $transition_splash_screen
-@onready var transition_canvas_layer: CanvasLayer = $transition_splash_screen/CanvasLayer
-@onready var fade_rect: ColorRect = $transition_splash_screen/CanvasLayer/ColorRect
 
 # A boolean variable to keep track of whether we've already started the wait timer
 var reached_target: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Make sure the overlay is fully transparent and hidden on game launch
-	if fade_rect:
-		fade_rect.modulate.a = 0.0
-	if transition_canvas_layer:
-		transition_canvas_layer.visible = false
+	if transition_splash_screen and transition_splash_screen.has_method("prepare"):
+		transition_splash_screen.prepare()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -58,19 +53,9 @@ func trigger_branch_appearance() -> void:
 	# 3. Wait while the branch is on screen
 	await get_tree().create_timer(BRANCH_DISPLAY_TIME).timeout
 	
-	# 4. Perform the fade in of the custom transition splash screen
-	if transition_canvas_layer and fade_rect:
-		# Show the CanvasLayer so the color rect becomes active
-		transition_canvas_layer.visible = true
-		
-		# We target "fade_rect" directly to smoothly animate its transparency to 1.0
-		var fade_tween = create_tween()
-		fade_tween.tween_property(fade_rect, "modulate:a", 1.0, FADE_DURATION)\
-			.set_trans(Tween.TRANS_SINE)\
-			.set_ease(Tween.EASE_OUT)
-		
-		# Wait until the screen is completely covered by your custom color
-		await fade_tween.finished
+	# 4. Perform the fade out of the custom transition splash screen
+	if transition_splash_screen and transition_splash_screen.has_method("fade_out"):
+		await transition_splash_screen.fade_out(FADE_DURATION)
 	else:
 		push_warning("transition_splash_screen structure is missing! Changing scenes immediately.")
 

@@ -27,15 +27,11 @@ var transition_started: bool = false
 @onready var camera: Camera2D = $Camera2D
 
 # Splash overlay to handle the fade-in at the start of this level
-@onready var transition_canvas_layer: CanvasLayer = $transition_splash_screen/CanvasLayer
-@onready var fade_rect: ColorRect = $transition_splash_screen/CanvasLayer/ColorRect
+@onready var transition_splash_screen: Node2D = $transition_splash_screen
 
 func _ready() -> void:
-	# Make sure the overlay starts transparent and hidden for the fade-in
-	if fade_rect:
-		fade_rect.modulate.a = 0.0
-	if transition_canvas_layer:
-		transition_canvas_layer.visible = false
+	if transition_splash_screen and transition_splash_screen.has_method("prepare"):
+		transition_splash_screen.prepare()
 	
 	# Start the cinematic sequence
 	run_cutscene()
@@ -47,17 +43,8 @@ func run_cutscene() -> void:
 	# ----------------------------------------------------
 	set_player_control(false)
 	
-	if fade_rect and transition_canvas_layer:
-		transition_canvas_layer.visible = true
-		fade_rect.modulate.a = 1.0 # Start fully covered
-		
-		# Fade OUT the black screen to reveal scene_2
-		var reveal_tween = create_tween()
-		reveal_tween.tween_property(fade_rect, "modulate:a", 0.0, FADE_IN_DURATION)\
-			.set_trans(Tween.TRANS_SINE)\
-			.set_ease(Tween.EASE_IN_OUT)
-		await reveal_tween.finished
-		transition_canvas_layer.visible = false
+	if transition_splash_screen and transition_splash_screen.has_method("fade_in"):
+		await transition_splash_screen.fade_in(FADE_IN_DURATION)
 
 	# ----------------------------------------------------
 	# STEP 1: Wait for a moment
@@ -181,13 +168,8 @@ func stop_player_and_bear() -> void:
 func trigger_scene_transition() -> void:
 	await get_tree().create_timer(TRANSITION_DELAY).timeout
 	
-	if transition_canvas_layer and fade_rect:
-		transition_canvas_layer.visible = true
-		var fade_tween = create_tween()
-		fade_tween.tween_property(fade_rect, "modulate:a", 1.0, FADE_OUT_DURATION)\
-			.set_trans(Tween.TRANS_SINE)\
-			.set_ease(Tween.EASE_IN_OUT)
-		await fade_tween.finished
+	if transition_splash_screen and transition_splash_screen.has_method("fade_out"):
+		await transition_splash_screen.fade_out(FADE_OUT_DURATION)
 	else:
 		push_warning("transition_splash_screen structure is missing! Changing scenes immediately.")
 	
