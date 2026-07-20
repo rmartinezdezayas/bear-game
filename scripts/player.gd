@@ -21,11 +21,16 @@ var input_enabled: bool = true
 var jump_hold_timer: float = 0.0
 var jump_is_held: bool = false
 var air_start_y: float = 0.0
-var roll_triggered: bool = false
 
 func _ready() -> void:
 	state_machine = animation_tree["parameters/playback"]
 	air_start_y = global_position.y
+
+func set_animation_condition(condition_name: StringName, value: bool) -> void:
+	animation_tree["parameters/conditions/" + condition_name] = value
+
+func get_animation_condition(condition_name: StringName) -> bool:
+	return bool(animation_tree["parameters/conditions/" + condition_name])
 
 func _physics_process(delta: float) -> void:
 	var was_on_floor: bool = is_on_floor()
@@ -82,17 +87,19 @@ func _physics_process(delta: float) -> void:
 
 	if was_on_floor and not is_on_floor():
 		air_start_y = global_position.y
-		roll_triggered = false
 	elif not was_on_floor and is_on_floor():
 		var fall_height = air_start_y - global_position.y
-		print(state_machine.get_current_node())
 		var is_holding_horizontal = Input.is_action_pressed("left") or Input.is_action_pressed("right")
-		if not roll_triggered and fall_height >= ROLL_MIN_FALL_HEIGHT and fall_height <= ROLL_MAX_FALL_HEIGHT and is_holding_horizontal:
-			print("rolling")
-			roll_triggered = true
-			state_machine.travel("roll")
+		print("testing getter")
+		print(get_animation_condition("roll_requested"))
+		print(get_animation_condition("land_requested"))
+		if fall_height >= ROLL_MIN_FALL_HEIGHT and fall_height <= ROLL_MAX_FALL_HEIGHT and is_holding_horizontal:
+			print("Setting roll_requested to true")
+			set_animation_condition("roll_requested", true)
 		else:
-			roll_triggered = false
+			print("Setting land_requested to true")
+			set_animation_condition("land_requested", true)
+			
 
 	animations(is_crouching)
 
@@ -107,12 +114,15 @@ func animations(is_crouching: bool):
 		$Sprite2D.flip_h = false
 	elif moving_left:
 		$Sprite2D.flip_h = true
-	
+
 	# 2. Air/Jump state logic (Highest Priority)
 	if not is_on_floor():
 		if velocity.y < 0:
 			state_machine.travel("jump-max")
 		else:
+			set_animation_condition("land_requested", false)
+			set_animation_condition("roll_requested", false)
+			print("set land_requested and roll_requested to false")
 			state_machine.travel("fall")
 			
 	# 3. Ground state logic (Only runs when is_on_floor() is true)
