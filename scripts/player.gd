@@ -134,9 +134,13 @@ func animations(is_crouching: bool):
 				state_machine.travel("crouch-idle")
 		else:
 			if is_moving:
-				state_machine.travel("run")
+				# state_machine.travel("run")
+				set_animation_condition("idle", false)
+				set_animation_condition("run", true)
 			else:
-				state_machine.travel("idle")
+				# state_machine.travel("idle")
+				set_animation_condition("run", false)
+				set_animation_condition("idle", true)
 				
 # Called by cutscene director to toggle control style
 func set_input_enabled(enabled: bool) -> void:
