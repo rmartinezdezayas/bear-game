@@ -5,8 +5,10 @@ const JUMP_VELOCITY = -200.0
 const CROUCH_VELOCITY_MULTIPLIER = 0.5
 const MAX_JUMP_HOLD_TIME = 0.16
 const JUMP_HOLD_FORCE = 110.0
-const JUMP_GRAVITY_MULTIPLIER = 1
+const JUMP_GRAVITY_MULTIPLIER = 1.0
 const FALL_GRAVITY_MULTIPLIER = 0.45
+const ROLL_MIN_FALL_HEIGHT = -140.0
+const ROLL_MAX_FALL_HEIGHT = -6.0
 
 @onready var animation_tree : AnimationTree = $AnimationTree
 var state_machine
@@ -18,11 +20,16 @@ var simulated_crouch: bool = false
 var input_enabled: bool = true
 var jump_hold_timer: float = 0.0
 var jump_is_held: bool = false
+var air_start_y: float = 0.0
+var roll_triggered: bool = false
 
 func _ready() -> void:
 	state_machine = animation_tree["parameters/playback"]
+	air_start_y = global_position.y
 
 func _physics_process(delta: float) -> void:
+	var was_on_floor: bool = is_on_floor()
+
 	# Add the gravity.
 	if not is_on_floor():
 		var gravity_multiplier = FALL_GRAVITY_MULTIPLIER if velocity.y >= 0.0 else JUMP_GRAVITY_MULTIPLIER
@@ -72,9 +79,24 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED * crouch_multiplier)
 
 	move_and_slide()
-	animations(direction, is_crouching)
 
-func animations(direction: float, is_crouching: bool):
+	if was_on_floor and not is_on_floor():
+		air_start_y = global_position.y
+		roll_triggered = false
+	elif not was_on_floor and is_on_floor():
+		var fall_height = air_start_y - global_position.y
+		print(state_machine.get_current_node())
+		var is_holding_horizontal = Input.is_action_pressed("left") or Input.is_action_pressed("right")
+		if not roll_triggered and fall_height >= ROLL_MIN_FALL_HEIGHT and fall_height <= ROLL_MAX_FALL_HEIGHT and is_holding_horizontal:
+			print("rolling")
+			roll_triggered = true
+			state_machine.travel("roll")
+		else:
+			roll_triggered = false
+
+	animations(is_crouching)
+
+func animations(is_crouching: bool):
 	# 1. Flip player sprite logic
 	# Check if moving based on current control mode
 	var moving_left = Input.is_action_pressed("left") if input_enabled else simulated_left
