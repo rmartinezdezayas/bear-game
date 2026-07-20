@@ -1,10 +1,12 @@
 extends CharacterBody2D
 
 const SPEED = 50.0
-const JUMP_VELOCITY = -250.0
+const JUMP_VELOCITY = -200.0
 const CROUCH_VELOCITY_MULTIPLIER = 0.5
-const MAX_JUMP_HOLD_TIME = 0.2
-const JUMP_HOLD_FORCE = 180.0
+const MAX_JUMP_HOLD_TIME = 0.16
+const JUMP_HOLD_FORCE = 110.0
+const JUMP_GRAVITY_MULTIPLIER = 1
+const FALL_GRAVITY_MULTIPLIER = 0.45
 
 @onready var animation_tree : AnimationTree = $AnimationTree
 var state_machine
@@ -23,10 +25,22 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		var gravity_multiplier = FALL_GRAVITY_MULTIPLIER if velocity.y >= 0.0 else JUMP_GRAVITY_MULTIPLIER
+		velocity += get_gravity() * delta * gravity_multiplier
 
 	# Determine if we are crouched (either from real input or simulated)
 	var is_crouching = (Input.is_action_pressed("crouch") if input_enabled else simulated_crouch)
+
+	# Get the input direction based on control state
+	var direction := 0.0
+	if input_enabled:
+		direction = Input.get_axis("left", "right")
+	else:
+		# Calculate simulated axis (-1, 0, or 1)
+		if simulated_left:
+			direction -= 1.0
+		if simulated_right:
+			direction += 1.0
 
 	# Handle jump (Only allow if input is enabled)
 	if input_enabled:
@@ -48,17 +62,6 @@ func _physics_process(delta: float) -> void:
 			jump_is_held = false
 			if velocity.y < 0.0:
 				velocity.y *= 0.6
-
-	# Get the input direction based on control state
-	var direction := 0.0
-	if input_enabled:
-		direction = Input.get_axis("left", "right")
-	else:
-		# Calculate simulated axis (-1, 0, or 1)
-		if simulated_left:
-			direction -= 1.0
-		if simulated_right:
-			direction += 1.0
 
 	# Use the crouch multiplier when crouched
 	var crouch_multiplier = CROUCH_VELOCITY_MULTIPLIER if is_crouching else 1.0

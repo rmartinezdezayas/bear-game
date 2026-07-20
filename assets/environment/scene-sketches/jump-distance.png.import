@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://denph54g78htw"
-path="res://.godot/imported/idle3.png-43586404b8b6a1587cdd49a2b220df99.ctex"
+uid="uid://cqf84irxspalc"
+path="res://.godot/imported/jump-distance.png-b2f6b5e9708d121ab7a304254218901c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/idle/idle3.png"
-dest_files=["res://.godot/imported/idle3.png-43586404b8b6a1587cdd49a2b220df99.ctex"]
+source_file="res://assets/environment/scene-sketches/jump-distance.png"
+dest_files=["res://.godot/imported/jump-distance.png-b2f6b5e9708d121ab7a304254218901c.ctex"]
 
 [params]
 

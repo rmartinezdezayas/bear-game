@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://qwjn1slavbi8"]
 
-[ext_resource type="Texture2D" uid="uid://cshwsrx6t56an" path="res://assets/environment/rock-1.png" id="1_yitr1"]
+[ext_resource type="Texture2D" uid="uid://cshwsrx6t56an" path="res://assets/environment/rocks/rock-1.png" id="1_yitr1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tol2v"]
 
@@ -12,4 +12,4 @@ position = Vector2(0, -16)
 texture = ExtResource("1_yitr1")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1558947106]
-polygon = PackedVector2Array(25, 0, 21, -16, 4, -13, -17, -4, -28, 0)
+polygon = PackedVector2Array(25, 0, 21, -16, 4, -13, -17, -4, -28, 1)
