@@ -242,6 +242,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_ys1ae"]
 resource_name = "roll"
+length = 0.33333334
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -249,7 +250,7 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.09334017, 0.18597093, 0.29228052, 0.39783552, 0.50028354, 0.6027315, 0.70404935, 0.8029192, 0.9047083, 1),
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3, 0.33333334),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [ExtResource("42_ys1ae"), ExtResource("43_twuy0"), ExtResource("44_c1hhp"), ExtResource("45_ugfu1"), ExtResource("46_tuph1"), ExtResource("47_p3bub"), ExtResource("48_y8sqo"), ExtResource("49_ju8re"), ExtResource("50_ncfio"), ExtResource("51_wipsm"), ExtResource("52_3soij")]
@@ -374,10 +375,15 @@ node_connections = [&"output", 0, &"Animation"]
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_twuy0"]
 animation = &"roll"
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ys1ae"]
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_c1hhp"]
+nodes/output/position = Vector2(520, 240)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_twuy0")
 nodes/Animation/position = Vector2(60, 140)
-node_connections = [&"output", 0, &"Animation"]
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ys1ae")
+nodes/TimeScale/position = Vector2(300, 60)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uukdq"]
 animation = &"run"
@@ -389,6 +395,7 @@ nodes/Animation/position = Vector2(195, 108)
 node_connections = [&"output", 0, &"Animation"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0bpox"]
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5c21n"]
 advance_mode = 2
@@ -476,7 +483,7 @@ states/roll/position = Vector2(902.4465, -14.105499)
 states/run/node = SubResource("AnimationNodeBlendTree_3k3j0")
 states/run/position = Vector2(335.1388, 230)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_0bpox"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_5c21n"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_e8m1u"), "idle", "idle-to-crouch", SubResource("AnimationNodeStateMachineTransition_77pet"), "idle-to-crouch", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_tlhxf"), "crouch-idle", "crouch-to-idle", SubResource("AnimationNodeStateMachineTransition_hrkfm"), "crouch-idle", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_oxcmq"), "crouch-walk", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_wylla"), "crouch-to-idle", "idle", SubResource("AnimationNodeStateMachineTransition_a3eqm"), "crouch-walk", "run", SubResource("AnimationNodeStateMachineTransition_plx2b"), "idle", "jump-prep", SubResource("AnimationNodeStateMachineTransition_3capk"), "jump-prep", "jump-up", SubResource("AnimationNodeStateMachineTransition_kg5hq"), "jump-up", "jump-max", SubResource("AnimationNodeStateMachineTransition_kp0if"), "jump-max", "fall", SubResource("AnimationNodeStateMachineTransition_2xkbm"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_dqoq3"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_y8tjj"), "run", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_u2ulf"), "run", "jump-up", SubResource("AnimationNodeStateMachineTransition_6e8lb"), "fall", "roll", SubResource("AnimationNodeStateMachineTransition_ugfu1"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_tuph1")]
-graph_offset = Vector2(95.05289, -154.73859)
+graph_offset = Vector2(-235.94711, -146.73859)
 
 [node name="player" type="CharacterBody2D" unique_id=623324050]
 script = ExtResource("1_qhqgy")
@@ -496,7 +503,8 @@ libraries/ = SubResource("AnimationLibrary_mx1m4")
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=176635298]
 tree_root = SubResource("AnimationNodeStateMachine_tol2v")
 anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/idle = false
+parameters/conditions/idle = true
 parameters/conditions/land_requested = false
 parameters/conditions/roll_requested = false
 parameters/conditions/run = false
+parameters/roll/TimeScale/scale = 0.5

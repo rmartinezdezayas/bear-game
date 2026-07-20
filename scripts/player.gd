@@ -8,7 +8,7 @@ const JUMP_HOLD_FORCE = 110.0
 const JUMP_GRAVITY_MULTIPLIER = 1.0
 const FALL_GRAVITY_MULTIPLIER = 0.45
 const ROLL_MIN_FALL_HEIGHT = -140.0
-const ROLL_MAX_FALL_HEIGHT = -6.0
+const ROLL_MAX_FALL_HEIGHT = -19.0
 
 @onready var animation_tree : AnimationTree = $AnimationTree
 var state_machine
@@ -32,6 +32,9 @@ func set_animation_condition(condition_name: StringName, value: bool) -> void:
 func get_animation_condition(condition_name: StringName) -> bool:
 	return bool(animation_tree["parameters/conditions/" + condition_name])
 
+func is_roll_playing() -> bool:
+	return state_machine.get_current_node() == "roll"
+
 func _physics_process(delta: float) -> void:
 	var was_on_floor: bool = is_on_floor()
 
@@ -53,6 +56,12 @@ func _physics_process(delta: float) -> void:
 			direction -= 1.0
 		if simulated_right:
 			direction += 1.0
+
+	var rolling := is_roll_playing()
+
+	# Prevent horizontal direction changes during roll
+	if rolling:
+		direction = 0.0
 
 	# Handle jump (Only allow if input is enabled)
 	if input_enabled:
@@ -78,7 +87,10 @@ func _physics_process(delta: float) -> void:
 	# Use the crouch multiplier when crouched
 	var crouch_multiplier = CROUCH_VELOCITY_MULTIPLIER if is_crouching else 1.0
 	
-	if direction != 0.0:
+	if rolling:
+		# Preserve existing horizontal velocity during roll
+		velocity.x = sign(velocity.x) * SPEED * crouch_multiplier
+	elif direction != 0.0:
 		velocity.x = direction * SPEED * crouch_multiplier
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * crouch_multiplier)
@@ -90,14 +102,10 @@ func _physics_process(delta: float) -> void:
 	elif not was_on_floor and is_on_floor():
 		var fall_height = air_start_y - global_position.y
 		var is_holding_horizontal = Input.is_action_pressed("left") or Input.is_action_pressed("right")
-		print("testing getter")
-		print(get_animation_condition("roll_requested"))
-		print(get_animation_condition("land_requested"))
+		print("fall_height:", fall_height)
 		if fall_height >= ROLL_MIN_FALL_HEIGHT and fall_height <= ROLL_MAX_FALL_HEIGHT and is_holding_horizontal:
-			print("Setting roll_requested to true")
 			set_animation_condition("roll_requested", true)
 		else:
-			print("Setting land_requested to true")
 			set_animation_condition("land_requested", true)
 			
 
@@ -109,11 +117,13 @@ func animations(is_crouching: bool):
 	var moving_left = Input.is_action_pressed("left") if input_enabled else simulated_left
 	var moving_right = Input.is_action_pressed("right") if input_enabled else simulated_right
 	var is_moving = (moving_right or moving_left) and !(moving_right and moving_left)
+	var rolling := is_roll_playing()
 
-	if moving_right:
-		$Sprite2D.flip_h = false
-	elif moving_left:
-		$Sprite2D.flip_h = true
+	if not rolling:
+		if moving_right:
+			$Sprite2D.flip_h = false
+		elif moving_left:
+			$Sprite2D.flip_h = true
 
 	# 2. Air/Jump state logic (Highest Priority)
 	if not is_on_floor():
@@ -122,7 +132,6 @@ func animations(is_crouching: bool):
 		else:
 			set_animation_condition("land_requested", false)
 			set_animation_condition("roll_requested", false)
-			print("set land_requested and roll_requested to false")
 			state_machine.travel("fall")
 			
 	# 3. Ground state logic (Only runs when is_on_floor() is true)

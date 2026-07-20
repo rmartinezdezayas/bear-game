@@ -45,6 +45,9 @@ shape = SubResource("WorldBoundaryShape2D_tol2v")
 [node name="rock-1" parent="." unique_id=573143425 instance=ExtResource("3_p2ku2")]
 position = Vector2(-89, 37)
 
+[node name="rock-2" parent="." unique_id=1745922833 instance=ExtResource("3_p2ku2")]
+position = Vector2(280, 12)
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=519323553]
 position = Vector2(47, 15)
 
