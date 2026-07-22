@@ -44,31 +44,69 @@ func is_roll_playing() -> bool:
 func _physics_process(delta: float) -> void:
 	var was_on_floor: bool = is_on_floor()
 
-	# Add the gravity.
-	if not is_on_floor():
-		var gravity_multiplier = FALL_GRAVITY_MULTIPLIER if velocity.y >= 0.0 else JUMP_GRAVITY_MULTIPLIER
-		velocity += get_gravity() * delta * gravity_multiplier
-
-	# Determine if we are crouched (either from real input or simulated)
-	var is_crouching = (Input.is_action_pressed("crouch") if input_enabled else simulated_crouch)
-
-	# Get the input direction based on control state
+	# Get input direction first so we can track player facing
 	if input_enabled:
 		direction = Input.get_axis("left", "right")
 	else:
-		# Calculate simulated axis (-1, 0, or 1)
 		if simulated_left:
 			direction -= 1.0
 		if simulated_right:
 			direction += 1.0
 
+	# -------------------------------------------------------------
+	# LEDGE CLIMB STATE HANDLING
+	# -------------------------------------------------------------
+	if on_ledge:
+		velocity = Vector2.ZERO # Completely disable physics/gravity while hanging/climbing
+		
+		if Input.is_action_just_pressed("up"):
+			var facing_dir: float = -1.0 if $Sprite2D.flip_h else 1.0
+			
+			# 1. Define intermediate (up only) and final (forward) positions
+			var vertical_target: Vector2 = global_position + Vector2(0.0, -20.0)
+			var forward_target: Vector2 = vertical_target + Vector2(facing_dir * 10.0, 0.0)
+			
+			set_animation_condition("climb", true)
+			set_animation_condition("ledge_grab", false)
+			
+			# 2. Chain two separate motions with custom durations and transitions
+			var climb_tween: Tween = create_tween()
+			
+			# Step 1: Move UP only
+			climb_tween.tween_property(self, "global_position", vertical_target, 0.4)\
+				.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+				
+			# Step 2: Move FORWARD onto the ledge
+			climb_tween.tween_property(self, "global_position", forward_target, 0.2)\
+				.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+			
+			# 3. Finish state cleanup when both tweens complete
+			climb_tween.finished.connect(func():
+				on_ledge = false
+				set_animation_condition("climb", false)
+			)
+			
+		elif Input.is_action_just_pressed("down"):
+			velocity.y = JUMP_VELOCITY * -0.5
+			on_ledge = false
+			set_animation_condition("ledge_grab", false)
+
+		return # Bypass gravity, movement, and move_and_slide completely while on ledge
+
+	# -------------------------------------------------------------
+	# STANDARD PHYSICS & GRAVITY (Only runs when NOT on ledge)
+	# -------------------------------------------------------------
+	if not is_on_floor():
+		var gravity_multiplier = FALL_GRAVITY_MULTIPLIER if velocity.y >= 0.0 else JUMP_GRAVITY_MULTIPLIER
+		velocity += get_gravity() * delta * gravity_multiplier
+
+	var is_crouching = (Input.is_action_pressed("crouch") if input_enabled else simulated_crouch)
 	var rolling := is_roll_playing()
 
-	# Prevent horizontal direction changes during roll
 	if rolling:
 		direction = 0.0
 
-	# Handle jump (Only allow if input is enabled)
+	# Jump Logic
 	if input_enabled:
 		if is_on_floor():
 			jump_hold_timer = 0.0
@@ -89,45 +127,30 @@ func _physics_process(delta: float) -> void:
 			if velocity.y < 0.0:
 				velocity.y *= 0.6
 
-	# Use the crouch multiplier when crouched
+	# Horizontal Movement
 	var crouch_multiplier = CROUCH_VELOCITY_MULTIPLIER if is_crouching else 1.0
-	
 	if rolling:
-		# Preserve existing horizontal velocity during roll
 		velocity.x = sign(velocity.x) * SPEED * crouch_multiplier
 	elif direction != 0.0:
 		velocity.x = direction * SPEED * crouch_multiplier
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * crouch_multiplier)
 
-	# Logic to handle ledge climb
-	if !on_ledge:
-		_ledge_logic()
-	else:
-		if Input.is_action_just_pressed("up"):
-			velocity.y = JUMP_VELOCITY
-			on_ledge = false
-			set_animation_condition("climb", true)
-			set_animation_condition("ledge_grab", false)
-		elif Input.is_action_just_pressed("down"):
-			velocity.y = JUMP_VELOCITY * -0.5
-			on_ledge = false
-			set_animation_condition("ledge_grab", false)
-		else:
-			velocity = Vector2.ZERO
-		return
-	
-	# Also for ledge climbing
-	if direction:
+	# Ledge Grab Detection
+	_ledge_logic()
+
+	# Raycast Offset Adjustments
+	if direction != 0.0:
 		if direction > 0:
 			$ledge_grab_miss.target_position.x = 7.0
 			$ledge_grab_hit.target_position.x = 6.0
 		else:
 			$ledge_grab_miss.target_position.x = -7.0
 			$ledge_grab_hit.target_position.x = -6.0
-	
+
 	move_and_slide()
 
+	# Landing/Fall Height Calculations
 	if was_on_floor and not is_on_floor():
 		air_start_y = global_position.y
 	elif not was_on_floor and is_on_floor():
@@ -204,7 +227,7 @@ func _ledge_logic() ->  void:
 	if !$ledge_grab_hit.is_colliding() or $ledge_grab_miss.is_colliding():
 		return
 		
-	var desire_position: Vector2 = global_position.snapped(TILE_SIZE) + Vector2(-2.5*direction, -1)
+	var desire_position: Vector2 = global_position.snapped(TILE_SIZE) + Vector2(-1*direction, -2)
 	var pos_tween: Tween = create_tween().set_trans(Tween.TRANS_SINE)
 	pos_tween.tween_property(self, "global_position", desire_position, 0.05)
 	
