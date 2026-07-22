@@ -49,11 +49,17 @@
 [ext_resource type="Texture2D" uid="uid://jexwv778usak" path="res://assets/player/land/land1.png" id="39_1da1t"]
 [ext_resource type="Texture2D" uid="uid://qh3gkspsalw5" path="res://assets/player/land/land2.png" id="40_p21yu"]
 [ext_resource type="Texture2D" uid="uid://7jb1ey0hmhjg" path="res://assets/player/land/land3.png" id="41_irpag"]
+[ext_resource type="Texture2D" uid="uid://6525cn0olnf" path="res://assets/player/ledge-climb/ledge-climb1.png" id="42_y8sqo"]
 [ext_resource type="Texture2D" uid="uid://eyd5f0s2tjbf" path="res://assets/player/roll/roll1.png" id="42_ys1ae"]
+[ext_resource type="Texture2D" uid="uid://chvhg8e4aml0r" path="res://assets/player/ledge-climb/ledge-climb2.png" id="43_ju8re"]
 [ext_resource type="Texture2D" uid="uid://c5rvfqgpu341s" path="res://assets/player/roll/roll2.png" id="43_twuy0"]
 [ext_resource type="Texture2D" uid="uid://dvp6i31y6jkdg" path="res://assets/player/roll/roll3.png" id="44_c1hhp"]
+[ext_resource type="Texture2D" uid="uid://ctto73isxxfw6" path="res://assets/player/ledge-climb/ledge-climb3.png" id="44_ncfio"]
 [ext_resource type="Texture2D" uid="uid://cvywt2bhvyv7m" path="res://assets/player/roll/roll4.png" id="45_ugfu1"]
+[ext_resource type="Texture2D" uid="uid://bvij0snp1174n" path="res://assets/player/ledge-climb/ledge-climb4.png" id="45_wipsm"]
+[ext_resource type="Texture2D" uid="uid://bvo8so223rtcf" path="res://assets/player/ledge-climb/ledge-climb5.png" id="46_3soij"]
 [ext_resource type="Texture2D" uid="uid://c6bnm4a6i3n0e" path="res://assets/player/roll/roll5.png" id="46_tuph1"]
+[ext_resource type="Texture2D" uid="uid://d01i3jodsvr0l" path="res://assets/player/ledge-grab/ledge-grab.png" id="47_6quye"]
 [ext_resource type="Texture2D" uid="uid://7aoft77wqwbu" path="res://assets/player/roll/roll6.png" id="47_p3bub"]
 [ext_resource type="Texture2D" uid="uid://bb07w6cn0wj7i" path="res://assets/player/roll/roll7.png" id="48_y8sqo"]
 [ext_resource type="Texture2D" uid="uid://cydrsdxp7lauy" path="res://assets/player/roll/roll8.png" id="49_ju8re"]
@@ -240,6 +246,39 @@ tracks/0/keys = {
 "values": [ExtResource("39_1da1t"), ExtResource("40_p21yu"), ExtResource("41_irpag")]
 }
 
+[sub_resource type="Animation" id="Animation_278xx"]
+resource_name = "ledge-climb"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.11, 0.21, 0.31, 0.42),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("42_y8sqo"), ExtResource("43_ju8re"), ExtResource("44_ncfio"), ExtResource("45_wipsm"), ExtResource("46_3soij")]
+}
+
+[sub_resource type="Animation" id="Animation_v8645"]
+resource_name = "ledge-grab"
+length = 0.13333334
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("47_6quye")]
+}
+
 [sub_resource type="Animation" id="Animation_ys1ae"]
 resource_name = "roll"
 length = 0.33333334
@@ -285,6 +324,8 @@ _data = {
 &"jump-prep": SubResource("Animation_w5j5w"),
 &"jump-up": SubResource("Animation_cbf1i"),
 &"land": SubResource("Animation_4vfid"),
+&"ledge-climb": SubResource("Animation_278xx"),
+&"ledge-grab": SubResource("Animation_v8645"),
 &"roll": SubResource("Animation_ys1ae"),
 &"run": SubResource("Animation_holxr")
 }
@@ -487,7 +528,7 @@ states/roll/position = Vector2(902.4465, -14.105499)
 states/run/node = SubResource("AnimationNodeBlendTree_3k3j0")
 states/run/position = Vector2(335.1388, 230)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_0bpox"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_5c21n"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_e8m1u"), "idle", "idle-to-crouch", SubResource("AnimationNodeStateMachineTransition_77pet"), "idle-to-crouch", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_tlhxf"), "crouch-idle", "crouch-to-idle", SubResource("AnimationNodeStateMachineTransition_hrkfm"), "crouch-idle", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_oxcmq"), "crouch-walk", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_wylla"), "crouch-to-idle", "idle", SubResource("AnimationNodeStateMachineTransition_a3eqm"), "crouch-walk", "run", SubResource("AnimationNodeStateMachineTransition_plx2b"), "idle", "jump-prep", SubResource("AnimationNodeStateMachineTransition_3capk"), "jump-prep", "jump-up", SubResource("AnimationNodeStateMachineTransition_kg5hq"), "jump-up", "jump-max", SubResource("AnimationNodeStateMachineTransition_kp0if"), "jump-max", "fall", SubResource("AnimationNodeStateMachineTransition_2xkbm"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_dqoq3"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_y8tjj"), "run", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_u2ulf"), "run", "jump-up", SubResource("AnimationNodeStateMachineTransition_6e8lb"), "fall", "roll", SubResource("AnimationNodeStateMachineTransition_ugfu1"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_tuph1")]
-graph_offset = Vector2(-97.94711, 71.32024)
+graph_offset = Vector2(-88.94711, -40.679764)
 
 [node name="player" type="CharacterBody2D" unique_id=623324050]
 script = ExtResource("1_qhqgy")
