@@ -412,8 +412,11 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hrkfm"]
+advance_condition = &"idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oxcmq"]
+advance_mode = 2
+advance_condition = &"run"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wylla"]
 
@@ -422,6 +425,7 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_plx2b"]
+advance_condition = &"run"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3capk"]
 
@@ -459,7 +463,7 @@ advance_mode = 2
 states/End/position = Vector2(963, 121)
 states/Start/position = Vector2(21, 72)
 states/crouch-idle/node = SubResource("AnimationNodeBlendTree_fr8ja")
-states/crouch-idle/position = Vector2(800.1388, 209)
+states/crouch-idle/position = Vector2(852.1388, 230)
 states/crouch-to-idle/node = SubResource("AnimationNodeBlendTree_fcu33")
 states/crouch-to-idle/position = Vector2(619.1388, 209)
 states/crouch-walk/node = SubResource("AnimationNodeBlendTree_5vs2b")
@@ -483,7 +487,7 @@ states/roll/position = Vector2(902.4465, -14.105499)
 states/run/node = SubResource("AnimationNodeBlendTree_3k3j0")
 states/run/position = Vector2(335.1388, 230)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_0bpox"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_5c21n"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_e8m1u"), "idle", "idle-to-crouch", SubResource("AnimationNodeStateMachineTransition_77pet"), "idle-to-crouch", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_tlhxf"), "crouch-idle", "crouch-to-idle", SubResource("AnimationNodeStateMachineTransition_hrkfm"), "crouch-idle", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_oxcmq"), "crouch-walk", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_wylla"), "crouch-to-idle", "idle", SubResource("AnimationNodeStateMachineTransition_a3eqm"), "crouch-walk", "run", SubResource("AnimationNodeStateMachineTransition_plx2b"), "idle", "jump-prep", SubResource("AnimationNodeStateMachineTransition_3capk"), "jump-prep", "jump-up", SubResource("AnimationNodeStateMachineTransition_kg5hq"), "jump-up", "jump-max", SubResource("AnimationNodeStateMachineTransition_kp0if"), "jump-max", "fall", SubResource("AnimationNodeStateMachineTransition_2xkbm"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_dqoq3"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_y8tjj"), "run", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_u2ulf"), "run", "jump-up", SubResource("AnimationNodeStateMachineTransition_6e8lb"), "fall", "roll", SubResource("AnimationNodeStateMachineTransition_ugfu1"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_tuph1")]
-graph_offset = Vector2(-235.94711, -146.73859)
+graph_offset = Vector2(-97.94711, 71.32024)
 
 [node name="player" type="CharacterBody2D" unique_id=623324050]
 script = ExtResource("1_qhqgy")
@@ -499,6 +503,7 @@ texture = ExtResource("3_a8ls1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=668141534]
 libraries/ = SubResource("AnimationLibrary_mx1m4")
+autoplay = &"idle"
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=176635298]
 tree_root = SubResource("AnimationNodeStateMachine_tol2v")

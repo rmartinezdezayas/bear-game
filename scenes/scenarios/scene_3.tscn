@@ -1,9 +1,25 @@
 [gd_scene format=3 uid="uid://bt6rnlc8pcge8"]
 
 [ext_resource type="PackedScene" uid="uid://kop41ttjf71c" path="res://scenes/objects/environment/backgrounds/transition_splash_screen.tscn" id="1_v5kny"]
+[ext_resource type="Texture2D" uid="uid://c1h8xyc5xbhba" path="res://assets/environment/scene-sketches/scene-3-sketch.png" id="2_vt0na"]
+[ext_resource type="PackedScene" uid="uid://cgd7skkpupnj4" path="res://scenes/objects/player/player.tscn" id="3_mygcv"]
 
 [node name="Scene3" type="Node2D" unique_id=273871966]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=58121032]
-
 [node name="transition_splash_screen" parent="." unique_id=1645034372 instance=ExtResource("1_v5kny")]
+
+[node name="scene-sketch" type="Sprite2D" parent="." unique_id=1274307234]
+position = Vector2(2721, -8)
+texture = ExtResource("2_vt0na")
+
+[node name="player" parent="." unique_id=623324050 instance=ExtResource("3_mygcv")]
+position = Vector2(-4, -3)
+
+[node name="Camera2D" type="Camera2D" parent="player" unique_id=58121032]
+position = Vector2(14, -22)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=24431466]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1610726820]
+position = Vector2(-12, -35)
+polygon = PackedVector2Array(-76, -32, -3, 47, 194, 47, 196, 6, 371, 4, 376, -43, 711, -45, 713, -3, 732, -4, 732, -45, 1074, -52, 1072, 53, -41, 138)

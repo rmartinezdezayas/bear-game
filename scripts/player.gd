@@ -21,6 +21,7 @@ var input_enabled: bool = true
 var jump_hold_timer: float = 0.0
 var jump_is_held: bool = false
 var air_start_y: float = 0.0
+var was_crouching: bool = false
 
 func _ready() -> void:
 	state_machine = animation_tree["parameters/playback"]
@@ -102,7 +103,6 @@ func _physics_process(delta: float) -> void:
 	elif not was_on_floor and is_on_floor():
 		var fall_height = air_start_y - global_position.y
 		var is_holding_horizontal = Input.is_action_pressed("left") or Input.is_action_pressed("right")
-		print("fall_height:", fall_height)
 		if fall_height >= ROLL_MIN_FALL_HEIGHT and fall_height <= ROLL_MAX_FALL_HEIGHT and is_holding_horizontal:
 			set_animation_condition("roll_requested", true)
 		else:
@@ -118,6 +118,7 @@ func animations(is_crouching: bool):
 	var moving_right = Input.is_action_pressed("right") if input_enabled else simulated_right
 	var is_moving = (moving_right or moving_left) and !(moving_right and moving_left)
 	var rolling := is_roll_playing()
+	var current_state = state_machine.get_current_node()
 
 	if not rolling:
 		if moving_right:
@@ -133,23 +134,30 @@ func animations(is_crouching: bool):
 			set_animation_condition("land_requested", false)
 			set_animation_condition("roll_requested", false)
 			state_machine.travel("fall")
-			
+		return
+
 	# 3. Ground state logic (Only runs when is_on_floor() is true)
-	else:
-		if is_crouching:
+	if is_crouching:
+		if current_state != "idle-to-crouch" and current_state != "crouch-idle" and current_state != "crouch-walk" and current_state != "crouch-to-idle":
+			state_machine.travel("idle-to-crouch")
+			was_crouching = true
+		elif current_state == "idle-to-crouch":
+			pass
+		elif current_state == "crouch-idle" or current_state == "crouch-walk":
 			if is_moving:
 				state_machine.travel("crouch-walk")
 			else:
 				state_machine.travel("crouch-idle")
+	elif was_crouching and current_state != "crouch-to-idle" and current_state != "idle":
+		state_machine.travel("crouch-to-idle")
+		was_crouching = false
+	else:
+		if is_moving:
+			set_animation_condition("idle", false)
+			set_animation_condition("run", true)
 		else:
-			if is_moving:
-				# state_machine.travel("run")
-				set_animation_condition("idle", false)
-				set_animation_condition("run", true)
-			else:
-				# state_machine.travel("idle")
-				set_animation_condition("run", false)
-				set_animation_condition("idle", true)
+			set_animation_condition("run", false)
+			set_animation_condition("idle", true)
 				
 # Called by cutscene director to toggle control style
 func set_input_enabled(enabled: bool) -> void:
