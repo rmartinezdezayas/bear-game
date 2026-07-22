@@ -62,25 +62,27 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("up"):
 			var facing_dir: float = -1.0 if $Sprite2D.flip_h else 1.0
 			
-			# 1. Define intermediate (up only) and final (forward) positions
-			var vertical_target: Vector2 = global_position + Vector2(0.0, -20.0)
-			var forward_target: Vector2 = vertical_target + Vector2(facing_dir * 10.0, 0.0)
+			# Define intermediate (up only) and final (forward) positions
+			var vertical_target: Vector2 = global_position + Vector2(0.0, -15.0)
+			var forward_target: Vector2 = vertical_target + Vector2(facing_dir * 10.0, -2.0)
 			
 			set_animation_condition("climb", true)
 			set_animation_condition("ledge_grab", false)
 			
-			# 2. Chain two separate motions with custom durations and transitions
 			var climb_tween: Tween = create_tween()
 			
-			# Step 1: Move UP only
-			climb_tween.tween_property(self, "global_position", vertical_target, 0.4)\
+			# 1. Brief pause to let the grab/climb animation start
+			climb_tween.tween_interval(0.2)
+			
+			# 2. Step 1: Move UP only
+			climb_tween.tween_property(self, "global_position", vertical_target, 0.09)\
 				.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 				
-			# Step 2: Move FORWARD onto the ledge
+			# 3. Step 2: Move FORWARD onto the ledge
 			climb_tween.tween_property(self, "global_position", forward_target, 0.2)\
 				.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 			
-			# 3. Finish state cleanup when both tweens complete
+			# Finish state cleanup when the entire sequence completes
 			climb_tween.finished.connect(func():
 				on_ledge = false
 				set_animation_condition("climb", false)
