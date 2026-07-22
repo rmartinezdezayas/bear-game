@@ -533,6 +533,8 @@ switch_mode = 2
 advance_mode = 2
 advance_condition = &"ledge_grab"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y8sqo"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tol2v"]
 states/End/position = Vector2(963, 121)
 states/Start/position = Vector2(21, 72)
@@ -555,19 +557,19 @@ states/jump-prep/position = Vector2(320.1388, -103)
 states/jump-up/node = SubResource("AnimationNodeBlendTree_qe2k6")
 states/jump-up/position = Vector2(480.1388, -103)
 states/land/node = SubResource("AnimationNodeBlendTree_5eiju")
-states/land/position = Vector2(664.1388, 52)
+states/land/position = Vector2(531.1388, -43)
 states/ledge-climb/node = SubResource("AnimationNodeBlendTree_ju8re")
-states/ledge-climb/position = Vector2(1155.0529, 19.320236)
+states/ledge-climb/position = Vector2(1142.0529, 65.32024)
 states/ledge-grab/node = SubResource("AnimationNodeBlendTree_wipsm")
 states/ledge-grab/position = Vector2(1142.0529, -94.67976)
 states/roll/node = SubResource("AnimationNodeBlendTree_c1hhp")
-states/roll/position = Vector2(902.4465, -14.105499)
+states/roll/position = Vector2(538.4465, 28)
 states/run/node = SubResource("AnimationNodeBlendTree_3k3j0")
 states/run/position = Vector2(335.1388, 230)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_0bpox"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_5c21n"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_e8m1u"), "idle", "idle-to-crouch", SubResource("AnimationNodeStateMachineTransition_77pet"), "idle-to-crouch", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_tlhxf"), "crouch-idle", "crouch-to-idle", SubResource("AnimationNodeStateMachineTransition_hrkfm"), "crouch-idle", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_oxcmq"), "crouch-walk", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_wylla"), "crouch-to-idle", "idle", SubResource("AnimationNodeStateMachineTransition_a3eqm"), "crouch-walk", "run", SubResource("AnimationNodeStateMachineTransition_plx2b"), "idle", "jump-prep", SubResource("AnimationNodeStateMachineTransition_3capk"), "jump-prep", "jump-up", SubResource("AnimationNodeStateMachineTransition_kg5hq"), "jump-up", "jump-max", SubResource("AnimationNodeStateMachineTransition_kp0if"), "jump-max", "fall", SubResource("AnimationNodeStateMachineTransition_2xkbm"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_dqoq3"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_y8tjj"), "run", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_u2ulf"), "run", "jump-up", SubResource("AnimationNodeStateMachineTransition_6e8lb"), "fall", "roll", SubResource("AnimationNodeStateMachineTransition_ugfu1"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_tuph1"), "ledge-grab", "ledge-climb", SubResource("AnimationNodeStateMachineTransition_3soij"), "ledge-climb", "idle", SubResource("AnimationNodeStateMachineTransition_6quye"), "fall", "ledge-grab", SubResource("AnimationNodeStateMachineTransition_278xx"), "jump-max", "ledge-grab", SubResource("AnimationNodeStateMachineTransition_v8645")]
-graph_offset = Vector2(108.05289, -130.60132)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_0bpox"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_5c21n"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_e8m1u"), "idle", "idle-to-crouch", SubResource("AnimationNodeStateMachineTransition_77pet"), "idle-to-crouch", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_tlhxf"), "crouch-idle", "crouch-to-idle", SubResource("AnimationNodeStateMachineTransition_hrkfm"), "crouch-idle", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_oxcmq"), "crouch-walk", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_wylla"), "crouch-to-idle", "idle", SubResource("AnimationNodeStateMachineTransition_a3eqm"), "crouch-walk", "run", SubResource("AnimationNodeStateMachineTransition_plx2b"), "idle", "jump-prep", SubResource("AnimationNodeStateMachineTransition_3capk"), "jump-prep", "jump-up", SubResource("AnimationNodeStateMachineTransition_kg5hq"), "jump-up", "jump-max", SubResource("AnimationNodeStateMachineTransition_kp0if"), "jump-max", "fall", SubResource("AnimationNodeStateMachineTransition_2xkbm"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_dqoq3"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_y8tjj"), "run", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_u2ulf"), "run", "jump-up", SubResource("AnimationNodeStateMachineTransition_6e8lb"), "fall", "roll", SubResource("AnimationNodeStateMachineTransition_ugfu1"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_tuph1"), "ledge-grab", "ledge-climb", SubResource("AnimationNodeStateMachineTransition_3soij"), "ledge-climb", "idle", SubResource("AnimationNodeStateMachineTransition_6quye"), "fall", "ledge-grab", SubResource("AnimationNodeStateMachineTransition_278xx"), "jump-max", "ledge-grab", SubResource("AnimationNodeStateMachineTransition_v8645"), "ledge-grab", "fall", SubResource("AnimationNodeStateMachineTransition_y8sqo")]
+graph_offset = Vector2(105.05289, -154.60132)
 
-[node name="player" type="CharacterBody2D" unique_id=623324050]
+[node name="player" type="CharacterBody2D" unique_id=218348890]
 script = ExtResource("1_qhqgy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1213061414]
@@ -593,3 +595,13 @@ parameters/conditions/ledge_grab = false
 parameters/conditions/roll_requested = false
 parameters/conditions/run = false
 parameters/roll/TimeScale/scale = 0.5
+
+[node name="ledge_grab_miss" type="RayCast2D" parent="." unique_id=348539148]
+position = Vector2(0, -20)
+target_position = Vector2(7, 0)
+hit_from_inside = true
+
+[node name="ledge_grab_hit" type="RayCast2D" parent="." unique_id=1136948997]
+position = Vector2(0, -18)
+target_position = Vector2(6, 0)
+hit_from_inside = true

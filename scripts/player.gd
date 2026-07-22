@@ -10,6 +10,10 @@ const FALL_GRAVITY_MULTIPLIER = 0.45
 const ROLL_MIN_FALL_HEIGHT = -140.0
 const ROLL_MAX_FALL_HEIGHT = -19.0
 
+# Ledge climb logic
+const TILE_SIZE: Vector2 = Vector2(8, 8)
+var on_ledge: bool = false
+
 @onready var animation_tree : AnimationTree = $AnimationTree
 var state_machine
 
@@ -22,6 +26,7 @@ var jump_hold_timer: float = 0.0
 var jump_is_held: bool = false
 var air_start_y: float = 0.0
 var was_crouching: bool = false
+var direction := 0.0
 
 func _ready() -> void:
 	state_machine = animation_tree["parameters/playback"]
@@ -48,7 +53,6 @@ func _physics_process(delta: float) -> void:
 	var is_crouching = (Input.is_action_pressed("crouch") if input_enabled else simulated_crouch)
 
 	# Get the input direction based on control state
-	var direction := 0.0
 	if input_enabled:
 		direction = Input.get_axis("left", "right")
 	else:
@@ -96,6 +100,32 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * crouch_multiplier)
 
+	# Logic to handle ledge climb
+	if !on_ledge:
+		_ledge_logic()
+	else:
+		if Input.is_action_just_pressed("up"):
+			velocity.y = JUMP_VELOCITY
+			on_ledge = false
+			set_animation_condition("climb", true)
+			set_animation_condition("ledge_grab", false)
+		elif Input.is_action_just_pressed("down"):
+			velocity.y = JUMP_VELOCITY * -0.5
+			on_ledge = false
+			set_animation_condition("ledge_grab", false)
+		else:
+			velocity = Vector2.ZERO
+		return
+	
+	# Also for ledge climbing
+	if direction:
+		if direction > 0:
+			$ledge_grab_miss.target_position.x = 7.0
+			$ledge_grab_hit.target_position.x = 6.0
+		else:
+			$ledge_grab_miss.target_position.x = -7.0
+			$ledge_grab_hit.target_position.x = -6.0
+	
 	move_and_slide()
 
 	if was_on_floor and not is_on_floor():
@@ -107,7 +137,6 @@ func _physics_process(delta: float) -> void:
 			set_animation_condition("roll_requested", true)
 		else:
 			set_animation_condition("land_requested", true)
-			
 
 	animations(is_crouching)
 
@@ -167,3 +196,19 @@ func set_input_enabled(enabled: bool) -> void:
 		simulated_left = false
 		simulated_right = false
 		simulated_crouch = false
+		
+# Handles ledge climb logic. Checks if we are on ledge
+func _ledge_logic() ->  void:
+	if is_on_floor() or velocity.y <=0 or direction == 0:
+		return
+	if !$ledge_grab_hit.is_colliding() or $ledge_grab_miss.is_colliding():
+		return
+		
+	var desire_position: Vector2 = global_position.snapped(TILE_SIZE) + Vector2(-2.5*direction, -1)
+	var pos_tween: Tween = create_tween().set_trans(Tween.TRANS_SINE)
+	pos_tween.tween_property(self, "global_position", desire_position, 0.05)
+	
+	velocity = Vector2.ZERO
+	set_animation_condition("climb", false)
+	set_animation_condition("ledge_grab", true)
+	on_ledge = true

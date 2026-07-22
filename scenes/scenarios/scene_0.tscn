@@ -13,6 +13,8 @@ distance = 7.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tol2v"]
 size = Vector2(40, 6)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_821qg"]
+
 [node name="scene_0" type="Node2D" unique_id=1598948707]
 
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1208088206]
@@ -46,7 +48,7 @@ shape = SubResource("WorldBoundaryShape2D_tol2v")
 position = Vector2(-89, 37)
 
 [node name="rock-2" parent="." unique_id=1745922833 instance=ExtResource("3_p2ku2")]
-position = Vector2(280, 12)
+position = Vector2(281, 19)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=519323553]
 position = Vector2(47, 15)
@@ -92,3 +94,17 @@ color = Color(0.3764706, 0.45490196, 0.67058825, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=799219458]
 position = Vector2(106, 20)
 shape = SubResource("RectangleShape2D_tol2v")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="." unique_id=1127050515]
+position = Vector2(52, 6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4" unique_id=376567739]
+position = Vector2(-29, 11)
+shape = SubResource("RectangleShape2D_821qg")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D4" unique_id=983382299]
+offset_left = -39.0
+offset_top = 1.0
+offset_right = -19.0
+offset_bottom = 21.0
+color = Color(0.45490196, 0.627451, 0.81960785, 1)
