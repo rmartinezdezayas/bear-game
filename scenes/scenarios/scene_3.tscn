@@ -8,6 +8,18 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tol2v"]
 size = Vector2(78, 13.602295)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mygcv"]
+size = Vector2(906, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_if4ar"]
+size = Vector2(86.147766, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1n0yk"]
+size = Vector2(151.01527, 12.825623)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vclkk"]
+size = Vector2(226.53668, 12.825623)
+
 [node name="Scene3" type="Node2D" unique_id=273871966]
 
 [node name="transition_splash_screen" parent="." unique_id=1645034372 instance=ExtResource("1_v5kny")]
@@ -17,7 +29,7 @@ position = Vector2(2721, -8)
 texture = ExtResource("2_vt0na")
 
 [node name="player" parent="." unique_id=623324050 instance=ExtResource("3_mygcv")]
-position = Vector2(837, -104)
+position = Vector2(3871.6646, -137.00742)
 
 [node name="Camera2D" type="Camera2D" parent="player" unique_id=58121032]
 position = Vector2(14, -22)
@@ -26,15 +38,40 @@ position = Vector2(14, -22)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1610726820]
 position = Vector2(-12, -35)
-polygon = PackedVector2Array(-76, -32, -3, 47, 194, 47, 195, 10, 373, 3, 373, -39, 711, -45, 713, -3, 732, -4, 732, -45, 1074, -52, 1072, 53, -41, 138)
+polygon = PackedVector2Array(-76, -32, -3, 47, 194, 47, 195, 10, 373, 3, 373, -39, 711, -45, 713, -3, 732, -4, 732, -45, 869, -49, 960, -49, 1074, -52, 1072, 53, -41, 138)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=147958098]
-polygon = PackedVector2Array(1101, -86, 1239, -34, 1237, 11, 1149, 8, 1096, -31, 1057, -34, 1058, 37, 1308, 40, 1483, 3, 1518, -103, 1523, -145, 1463, -140, 1395, -138, 1377, -138, 1375, -89, 1297, -73, 1199, -82)
+polygon = PackedVector2Array(1092, -87, 1239, -34, 1237, 11, 1149, 8, 1096, -31, 1057, -34, 1058, 37, 1308, 40, 1483, 3, 1518, -103, 1523, -145, 1463, -140, 1402, -131, 1376, -128, 1375, -95, 1300, -77, 1199, -82)
 
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D" unique_id=830684209]
-polygon = PackedVector2Array(1581, -102, 1582, -89, 1629, -88, 1631, -53, 3142, -47, 3139, -81, 2773, -84, 2606, -87, 2428, -89, 2216, -93, 1959, -97, 1869, -101)
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1985839213]
+position = Vector2(1, 0)
+polygon = PackedVector2Array(1056, -66, 1069, -66, 1057, -45)
 
-[node name="ledge" parent="." unique_id=204562003 instance=ExtResource("4_mygcv")]
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1887478643]
+polygon = PackedVector2Array(1562, -102, 1562, -87, 1621, -87, 1630, -57, 3141, -51, 3138, -81, 2850, -80, 2773, -84, 2553.9844, -87.600266, 2408, -90, 2304, -96, 2042, -96, 1874, -96, 1660, -101)
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D/CollisionPolygon2D4" unique_id=1420394446]
+offset_left = 1562.0
+offset_top = -102.0
+offset_right = 1602.0
+offset_bottom = -89.0
+color = Color(0.3764706, 0.45490196, 0.67058825, 1)
+
+[node name="ledge6" parent="StaticBody2D/CollisionPolygon2D4/ColorRect" unique_id=624027761 instance=ExtResource("4_mygcv")]
+position = Vector2(6, 1)
+grab_offset = Vector2(-6, 1)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=640119554]
+polygon = PackedVector2Array(3952, -116, 3865, -110, 3727, -105, 3635, -102, 3526, -92, 3485, -93, 3478, -101, 3469, -101, 3469, -93, 3382, -93, 3346, -95, 3339, -76, 3188.117, -79.59246, 3171, -80, 3189, -3)
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=766474051]
+position = Vector2(6, 2)
+polygon = PackedVector2Array(3581, -118, 3597, -120, 3599, -127, 3600, -137, 3580, -138)
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=332557127]
+polygon = PackedVector2Array(3920, -109, 3987, 7, 4067, 97, 4032, 184, 4135, 188, 4181, 189, 4329, 191, 4480, 185, 4889, 185, 5131, 185, 4132, 250, 3884, 122, 3888, -35)
+
+[node name="ledge" parent="." unique_id=1966392521 instance=ExtResource("4_mygcv")]
 position = Vector2(366, -73)
 grab_offset = Vector2(-6, 1)
 
@@ -55,3 +92,53 @@ offset_top = -7.0
 offset_right = 62.0
 offset_bottom = 7.0
 color = Color(0.6392157, 0.5764706, 0.5686275, 1)
+
+[node name="ledge3" parent="." unique_id=1676938406 instance=ExtResource("4_mygcv")]
+position = Vector2(1064, -65)
+grab_offset = Vector2(2, 1)
+
+[node name="ledge4" parent="." unique_id=1957891608 instance=ExtResource("4_mygcv")]
+position = Vector2(1099, -86)
+grab_offset = Vector2(-6, 1)
+
+[node name="ledge5" parent="." unique_id=401625886 instance=ExtResource("4_mygcv")]
+position = Vector2(1382, -127)
+grab_offset = Vector2(-6, 1)
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=1760270137]
+position = Vector2(1901, -119)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=1119477515]
+position = Vector2(437, 0.5)
+shape = SubResource("RectangleShape2D_mygcv")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D3" unique_id=522649596]
+offset_left = -16.0
+offset_top = -7.0
+offset_right = 881.0
+offset_bottom = 7.0
+color = Color(0.6392157, 0.5764706, 0.5686275, 1)
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="." unique_id=4640500]
+position = Vector2(2373.6008, -147.26901)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4" unique_id=942739474]
+position = Vector2(-7.5285645, 31.674019)
+rotation = 0.06981315
+shape = SubResource("RectangleShape2D_if4ar")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D4" unique_id=1157228590]
+position = Vector2(109.39917, 36.269012)
+rotation = 0.017453287
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_1n0yk")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D4" unique_id=873127463]
+position = Vector2(295.15845, 38.598534)
+rotation = 0.008726646
+scale = Vector2(1.0000002, 1.0000002)
+shape = SubResource("RectangleShape2D_vclkk")
+
+[node name="ledge6" parent="." unique_id=204562003 instance=ExtResource("4_mygcv")]
+position = Vector2(3177, -79)
+grab_offset = Vector2(-6, 1)

@@ -104,7 +104,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta * gravity_multiplier
 	
 	var forced_crouch = $ceiling_check.is_colliding()
-	var is_crouching = (Input.is_action_pressed("crouch") or forced_crouch if input_enabled else simulated_crouch)
+	var is_crouching = ((Input.is_action_pressed("crouch") and is_on_floor()) or forced_crouch if input_enabled else simulated_crouch)
 	var rolling := is_roll_playing()
 
 	if rolling:
@@ -229,9 +229,11 @@ func set_input_enabled(enabled: bool) -> void:
 		
 # Handles ledge climb logic. Checks if we are on ledge
 func _ledge_logic() -> void:
-	if is_on_floor() or velocity.y <= 0 or direction == 0:
+	if is_on_floor() or velocity.y <= 0:
 		return
 	if !$ledge_grab_hit.is_colliding() or $ledge_grab_miss.is_colliding():
+		return
+	if !Input.is_action_pressed("up") and direction == 0:
 		return
 		
 	# Verify the collider has our grab method before continuing

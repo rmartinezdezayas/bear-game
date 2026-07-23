@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bd1ougjy7enlm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tol2v"]
+size = Vector2(56, 4)
+
+[node name="crouch_ceiling" type="Area2D" unique_id=1369335389]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=677090057]
+shape = SubResource("RectangleShape2D_tol2v")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=575099615]
+offset_left = -28.0
+offset_top = -2.0
+offset_right = 28.0
+offset_bottom = 2.0
+color = Color(0.3764706, 0.45490196, 0.67058825, 1)
