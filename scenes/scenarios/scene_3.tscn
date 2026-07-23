@@ -29,7 +29,7 @@ position = Vector2(2721, -8)
 texture = ExtResource("2_vt0na")
 
 [node name="player" parent="." unique_id=623324050 instance=ExtResource("3_mygcv")]
-position = Vector2(3871.6646, -137.00742)
+position = Vector2(367.86835, -96.52893)
 
 [node name="Camera2D" type="Camera2D" parent="player" unique_id=58121032]
 position = Vector2(14, -22)

@@ -49,6 +49,7 @@ func _physics_process(delta: float) -> void:
 	if input_enabled:
 		direction = Input.get_axis("left", "right")
 	else:
+		direction = 0.0 # RESET DIRECTION HERE FIRST!
 		if simulated_left:
 			direction -= 1.0
 		if simulated_right:
@@ -140,6 +141,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * crouch_multiplier)
 
+	move_and_slide()
+
 	# Ledge Grab Detection
 	_ledge_logic()
 
@@ -151,8 +154,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			$ledge_grab_miss.target_position.x = -7.0
 			$ledge_grab_hit.target_position.x = -6.0
-
-	move_and_slide()
 
 	# Landing/Fall Height Calculations
 	if was_on_floor and not is_on_floor():
