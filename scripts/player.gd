@@ -11,7 +11,6 @@ const ROLL_MIN_FALL_HEIGHT = -140.0
 const ROLL_MAX_FALL_HEIGHT = -19.0
 
 # Ledge climb logic
-const TILE_SIZE: Vector2 = Vector2(8, 8)
 var on_ledge: bool = false
 
 @onready var animation_tree : AnimationTree = $AnimationTree
@@ -223,13 +222,21 @@ func set_input_enabled(enabled: bool) -> void:
 		simulated_crouch = false
 		
 # Handles ledge climb logic. Checks if we are on ledge
-func _ledge_logic() ->  void:
-	if is_on_floor() or velocity.y <=0 or direction == 0:
+func _ledge_logic() -> void:
+	if is_on_floor() or velocity.y <= 0 or direction == 0:
 		return
 	if !$ledge_grab_hit.is_colliding() or $ledge_grab_miss.is_colliding():
 		return
 		
-	var desire_position: Vector2 = global_position.snapped(TILE_SIZE) + Vector2(-1*direction, -2)
+	# 1. Get the exact global coordinates where the raycast touches the StaticBody2D
+	var collision_point: Vector2 = $ledge_grab_hit.get_collision_point()
+	
+	# 2. Align horizontal position to wall contact, and vertical position to your raycast level
+	# Adjust hands_offset to match where your player sprite's hands are relative to global_position
+	var hands_offset: Vector2 = Vector2(-5.0 * direction, 17.0) 
+	var desire_position: Vector2 = Vector2(collision_point.x, $ledge_grab_hit.global_position.y) + hands_offset
+	
+	# 3. Smoothly move player to the exact ledge edge
 	var pos_tween: Tween = create_tween().set_trans(Tween.TRANS_SINE)
 	pos_tween.tween_property(self, "global_position", desire_position, 0.05)
 	
