@@ -228,13 +228,18 @@ func _ledge_logic() -> void:
 	if !$ledge_grab_hit.is_colliding() or $ledge_grab_miss.is_colliding():
 		return
 		
-	# 1. Get the exact global coordinates where the raycast touches the StaticBody2D
-	var collision_point: Vector2 = $ledge_grab_hit.get_collision_point()
+	# Verify the collider has our grab method before continuing
+	var collider = $ledge_grab_hit.get_collider()
+	if not collider or not collider.has_method("get_grab_position"):
+		return
+		
+	# 1. Fetch the exact global position exported by this specific ledge
+	var grab_point: Vector2 = collider.get_grab_position()
 	
 	# 2. Align horizontal position to wall contact, and vertical position to your raycast level
 	# Adjust hands_offset to match where your player sprite's hands are relative to global_position
 	var hands_offset: Vector2 = Vector2(-5.0 * direction, 17.0) 
-	var desire_position: Vector2 = Vector2(collision_point.x, $ledge_grab_hit.global_position.y) + hands_offset
+	var desire_position: Vector2 = Vector2(grab_point.x, grab_point.y) + hands_offset
 	
 	# 3. Smoothly move player to the exact ledge edge
 	var pos_tween: Tween = create_tween().set_trans(Tween.TRANS_SINE)

@@ -14,10 +14,13 @@ distance = 7.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tol2v"]
 size = Vector2(40, 6)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8db1l"]
+size = Vector2(40, 32)
+
 [node name="scene_0" type="Node2D" unique_id=1598948707]
 
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1208088206]
-position = Vector2(206, 19)
+position = Vector2(242, 18)
 texture = ExtResource("1_ftal8")
 
 [node name="TrueForestTest116090" type="Sprite2D" parent="." unique_id=1190469094]
@@ -25,7 +28,7 @@ texture = ExtResource("1_ido5y")
 
 [node name="player" parent="." unique_id=623324050 instance=ExtResource("2_kx5p7")]
 z_index = 1
-position = Vector2(0, 38)
+position = Vector2(18, 38)
 
 [node name="Camera2D" type="Camera2D" parent="player" unique_id=697527603]
 process_priority = 1
@@ -47,7 +50,7 @@ shape = SubResource("WorldBoundaryShape2D_tol2v")
 position = Vector2(-89, 37)
 
 [node name="rock-2" parent="." unique_id=1745922833 instance=ExtResource("3_p2ku2")]
-position = Vector2(281, 19)
+position = Vector2(317, 18)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=519323553]
 position = Vector2(47, 15)
@@ -56,32 +59,54 @@ position = Vector2(47, 15)
 position = Vector2(-6, 0)
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D" unique_id=2060227140]
-offset_left = 86.0
-offset_top = 17.0
-offset_right = 126.0
-offset_bottom = 23.0
+offset_left = 122.0
+offset_top = 16.0
+offset_right = 162.0
+offset_bottom = 22.0
 color = Color(0.3764706, 0.45490196, 0.67058825, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1986578470]
-position = Vector2(106, 20)
+position = Vector2(142, 19)
 shape = SubResource("RectangleShape2D_tol2v")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=81863029]
 position = Vector2(50, 0)
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D2" unique_id=615725706]
-offset_left = 86.0
-offset_top = 17.0
-offset_right = 126.0
-offset_bottom = 23.0
+offset_left = 122.0
+offset_top = 16.0
+offset_right = 162.0
+offset_bottom = 22.0
 color = Color(0.3764706, 0.45490196, 0.67058825, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=553352646]
-position = Vector2(106, 20)
+position = Vector2(142, 19)
 shape = SubResource("RectangleShape2D_tol2v")
 
+[node name="big_platform" type="StaticBody2D" parent="." unique_id=1002755214]
+position = Vector2(-119, -10)
+
+[node name="ColorRect" type="ColorRect" parent="big_platform" unique_id=813972537]
+offset_left = 86.0
+offset_top = 17.0
+offset_right = 126.0
+offset_bottom = 49.0
+color = Color(0.3764706, 0.45490196, 0.67058825, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="big_platform" unique_id=1475354431]
+position = Vector2(106, 33)
+shape = SubResource("RectangleShape2D_8db1l")
+
+[node name="right_ledge" parent="big_platform" unique_id=204562003 instance=ExtResource("5_8db1l")]
+position = Vector2(120, 18)
+grab_offset = Vector2(2, 1)
+
+[node name="left_ledge" parent="big_platform" unique_id=716316176 instance=ExtResource("5_8db1l")]
+position = Vector2(92, 18)
+grab_offset = Vector2(-6, 1)
+
 [node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=856730766]
-position = Vector2(120, 0)
+position = Vector2(156, -1)
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D3" unique_id=609327510]
 offset_left = 86.0
@@ -93,6 +118,3 @@ color = Color(0.3764706, 0.45490196, 0.67058825, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=799219458]
 position = Vector2(106, 20)
 shape = SubResource("RectangleShape2D_tol2v")
-
-[node name="ledge" parent="." unique_id=204562003 instance=ExtResource("5_8db1l")]
-position = Vector2(-28, 18)

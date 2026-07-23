@@ -1,17 +1,23 @@
 [gd_scene format=3 uid="uid://bladyxmnd58a8"]
 
+[ext_resource type="Script" uid="uid://7m42t220lmrw" path="res://scripts/ledge.gd" id="1_frswh"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_821qg"]
 size = Vector2(12, 2)
 
 [node name="ledge" type="StaticBody2D" unique_id=204562003]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_frswh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1321599587]
-position = Vector2(1, -7)
 shape = SubResource("RectangleShape2D_821qg")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=423239841]
-offset_left = -5.0
-offset_top = -8.0
-offset_right = 7.0
-offset_bottom = -6.0
+offset_left = -6.0
+offset_top = -1.0
+offset_right = 6.0
+offset_bottom = 1.0
 color = Color(0.45490196, 0.627451, 0.81960785, 1)
+
+[node name="GrabPoint" type="Node2D" parent="." unique_id=142864739]
