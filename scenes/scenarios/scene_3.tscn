@@ -3,6 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://kop41ttjf71c" path="res://scenes/objects/environment/backgrounds/transition_splash_screen.tscn" id="1_v5kny"]
 [ext_resource type="Texture2D" uid="uid://c1h8xyc5xbhba" path="res://assets/environment/scene-sketches/scene-3-sketch.png" id="2_vt0na"]
 [ext_resource type="PackedScene" uid="uid://cgd7skkpupnj4" path="res://scenes/objects/player/player.tscn" id="3_mygcv"]
+[ext_resource type="PackedScene" uid="uid://bladyxmnd58a8" path="res://scenes/objects/environment/ground/ledge.tscn" id="4_mygcv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tol2v"]
+size = Vector2(78, 13.602295)
 
 [node name="Scene3" type="Node2D" unique_id=273871966]
 
@@ -13,7 +17,7 @@ position = Vector2(2721, -8)
 texture = ExtResource("2_vt0na")
 
 [node name="player" parent="." unique_id=623324050 instance=ExtResource("3_mygcv")]
-position = Vector2(-4, -3)
+position = Vector2(837, -104)
 
 [node name="Camera2D" type="Camera2D" parent="player" unique_id=58121032]
 position = Vector2(14, -22)
@@ -22,10 +26,32 @@ position = Vector2(14, -22)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1610726820]
 position = Vector2(-12, -35)
-polygon = PackedVector2Array(-76, -32, -3, 47, 194, 47, 196, 6, 371, 4, 376, -43, 711, -45, 713, -3, 732, -4, 732, -45, 1074, -52, 1072, 53, -41, 138)
+polygon = PackedVector2Array(-76, -32, -3, 47, 194, 47, 195, 10, 373, 3, 373, -39, 711, -45, 713, -3, 732, -4, 732, -45, 1074, -52, 1072, 53, -41, 138)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=147958098]
 polygon = PackedVector2Array(1101, -86, 1239, -34, 1237, 11, 1149, 8, 1096, -31, 1057, -34, 1058, 37, 1308, 40, 1483, 3, 1518, -103, 1523, -145, 1463, -140, 1395, -138, 1377, -138, 1375, -89, 1297, -73, 1199, -82)
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D" unique_id=830684209]
 polygon = PackedVector2Array(1581, -102, 1582, -89, 1629, -88, 1631, -53, 3142, -47, 3139, -81, 2773, -84, 2606, -87, 2428, -89, 2216, -93, 1959, -97, 1869, -101)
+
+[node name="ledge" parent="." unique_id=204562003 instance=ExtResource("4_mygcv")]
+position = Vector2(366, -73)
+grab_offset = Vector2(-6, 1)
+
+[node name="ledge2" parent="." unique_id=1725697901 instance=ExtResource("4_mygcv")]
+position = Vector2(189, -24)
+grab_offset = Vector2(-6, 1)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1237805681]
+position = Vector2(881, -107)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=127251268]
+position = Vector2(23, 0.19885254)
+shape = SubResource("RectangleShape2D_tol2v")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D2" unique_id=999933195]
+offset_left = -16.0
+offset_top = -7.0
+offset_right = 62.0
+offset_bottom = 7.0
+color = Color(0.6392157, 0.5764706, 0.5686275, 1)

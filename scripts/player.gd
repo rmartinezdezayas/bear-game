@@ -13,6 +13,7 @@ const ROLL_MAX_FALL_HEIGHT = -19.0
 # Ledge climb logic
 var on_ledge: bool = false
 
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var animation_tree : AnimationTree = $AnimationTree
 var state_machine
 
@@ -25,6 +26,7 @@ var jump_hold_timer: float = 0.0
 var jump_is_held: bool = false
 var air_start_y: float = 0.0
 var was_crouching: bool = false
+var forced_crouch: bool = false
 var direction := 0.0
 
 func _ready() -> void:
@@ -100,8 +102,9 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		var gravity_multiplier = FALL_GRAVITY_MULTIPLIER if velocity.y >= 0.0 else JUMP_GRAVITY_MULTIPLIER
 		velocity += get_gravity() * delta * gravity_multiplier
-
-	var is_crouching = (Input.is_action_pressed("crouch") if input_enabled else simulated_crouch)
+	
+	var forced_crouch = $ceiling_check.is_colliding()
+	var is_crouching = (Input.is_action_pressed("crouch") or forced_crouch if input_enabled else simulated_crouch)
 	var rolling := is_roll_playing()
 
 	if rolling:
@@ -113,7 +116,7 @@ func _physics_process(delta: float) -> void:
 			jump_hold_timer = 0.0
 			jump_is_held = false
 
-		if is_on_floor() and Input.is_action_just_pressed("jump"):
+		if is_on_floor() and Input.is_action_just_pressed("jump") and !forced_crouch:
 			velocity.y = JUMP_VELOCITY
 			jump_is_held = true
 			jump_hold_timer = 0.0
@@ -179,6 +182,9 @@ func animations(is_crouching: bool):
 		elif moving_left:
 			$Sprite2D.flip_h = true
 
+	# Update collision shape based on crouch state
+	update_crouch_collision(is_crouching)
+	
 	# 2. Air/Jump state logic (Highest Priority)
 	if not is_on_floor():
 		if velocity.y < 0:
@@ -249,3 +255,25 @@ func _ledge_logic() -> void:
 	set_animation_condition("climb", false)
 	set_animation_condition("ledge_grab", true)
 	on_ledge = true
+
+# Handles collision resize when crouching
+func update_crouch_collision(is_crouching: bool) -> void:
+	if not collision_shape or not collision_shape.shape:
+		return
+		
+	if is_crouching:
+		# Set height to 15 (crouch size)
+		set_shape_height(15.0)
+		# Offset shape downward by half the height difference (3px) to keep feet grounded
+		collision_shape.position.y = -7.0
+	else:
+		# Reset height to 21 (standing size)
+		set_shape_height(21.0)
+		# Reset relative vertical position
+		collision_shape.position.y = -10.5
+
+# Handles collision resize
+func set_shape_height(new_height: float) -> void:
+	var shape = collision_shape.shape
+	if shape is RectangleShape2D:
+		shape.size.y = new_height
