@@ -97,15 +97,14 @@ position = Vector2(106, 20)
 shape = SubResource("RectangleShape2D_tol2v")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="." unique_id=1127050515]
-position = Vector2(52, 6)
+position = Vector2(-28, 18)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4" unique_id=376567739]
-position = Vector2(-30, 13)
 shape = SubResource("RectangleShape2D_821qg")
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D4" unique_id=983382299]
-offset_left = -39.0
-offset_top = 5.0
-offset_right = -21.0
-offset_bottom = 21.0
+offset_left = -9.0
+offset_top = -8.0
+offset_right = 11.0
+offset_bottom = 8.0
 color = Color(0.45490196, 0.627451, 0.81960785, 1)
