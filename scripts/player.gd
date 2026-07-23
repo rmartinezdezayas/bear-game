@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-const SPEED = 50.0
+const BASE_SPEED = 50.0
+const PURSUIT_SPEED = 60.0
 const JUMP_VELOCITY = -200.0
 const CROUCH_VELOCITY_MULTIPLIER = 0.5
 const MAX_JUMP_HOLD_TIME = 0.16
@@ -9,6 +10,8 @@ const JUMP_GRAVITY_MULTIPLIER = 1.0
 const FALL_GRAVITY_MULTIPLIER = 0.45
 const ROLL_MIN_FALL_HEIGHT = -140.0
 const ROLL_MAX_FALL_HEIGHT = -19.0
+
+var speed = BASE_SPEED
 
 # Ledge climb logic
 var on_ledge: bool = false
@@ -135,11 +138,11 @@ func _physics_process(delta: float) -> void:
 	# Horizontal Movement
 	var crouch_multiplier = CROUCH_VELOCITY_MULTIPLIER if is_crouching else 1.0
 	if rolling:
-		velocity.x = sign(velocity.x) * SPEED * crouch_multiplier
+		velocity.x = sign(velocity.x) * speed * crouch_multiplier
 	elif direction != 0.0:
-		velocity.x = direction * SPEED * crouch_multiplier
+		velocity.x = direction * speed * crouch_multiplier
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED * crouch_multiplier)
+		velocity.x = move_toward(velocity.x, 0, speed * crouch_multiplier)
 
 	move_and_slide()
 
@@ -280,3 +283,19 @@ func set_shape_height(new_height: float) -> void:
 	var shape = collision_shape.shape
 	if shape is RectangleShape2D:
 		shape.size.y = new_height
+
+# Handles pursuit mode on character
+var is_pursuit_mode: bool = false
+func set_pursuit_mode(enabled: bool) -> void:
+	# Avoid re-running the logic if we are already in the requested state
+	if is_pursuit_mode == enabled:
+		return
+		
+	is_pursuit_mode = enabled
+	
+	if is_pursuit_mode:
+		speed = PURSUIT_SPEED
+		animation_tree["parameters/run/run_speed/scale"] = 1.5
+	else:
+		speed = BASE_SPEED
+		animation_tree["parameters/run/run_speed/scale"] = 1.0

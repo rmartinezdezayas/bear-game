@@ -42,6 +42,9 @@ func run_cutscene() -> void:
 	# STEP 0: Lock Player Controls & Initialize Overlay
 	# ----------------------------------------------------
 	set_player_control(false)
+	# Enable pursuit mode when scene starts (or at any event)
+	if player and player.has_method("set_pursuit_mode"):
+		player.set_pursuit_mode(true)
 	
 	if transition_splash_screen and transition_splash_screen.has_method("fade_in"):
 		await transition_splash_screen.fade_in(FADE_IN_DURATION)

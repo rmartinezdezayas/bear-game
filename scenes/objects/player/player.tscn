@@ -445,11 +445,16 @@ node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uukdq"]
 animation = &"run"
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_y8sqo"]
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_3k3j0"]
-nodes/output/position = Vector2(480, 160)
+graph_offset = Vector2(52, -17)
+nodes/output/position = Vector2(580, 200)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_uukdq")
 nodes/Animation/position = Vector2(195, 108)
-node_connections = [&"output", 0, &"Animation"]
+nodes/run_speed/node = SubResource("AnimationNodeTimeScale_y8sqo")
+nodes/run_speed/position = Vector2(400, 80)
+node_connections = [&"output", 0, &"run_speed", &"run_speed", 0, &"Animation"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0bpox"]
 advance_mode = 2
@@ -596,6 +601,7 @@ parameters/conditions/ledge_grab = false
 parameters/conditions/roll_requested = false
 parameters/conditions/run = false
 parameters/roll/TimeScale/scale = 0.5
+parameters/run/run_speed/scale = 1.0
 
 [node name="ledge_grab_miss" type="RayCast2D" parent="." unique_id=348539148]
 position = Vector2(0, -20)
