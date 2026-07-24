@@ -81,8 +81,7 @@ texture = ExtResource("1_fubmo")
 position = Vector2(40, 35)
 
 [node name="bear" parent="." unique_id=468607151 instance=ExtResource("3_7p1wf")]
-position = Vector2(-102, -10)
-scale = Vector2(-1, 1)
+position = Vector2(-118, 17)
 
 [node name="player" parent="." unique_id=623324050 instance=ExtResource("3_pif6w")]
 position = Vector2(38, 38)
