@@ -137,6 +137,10 @@ func _process(delta: float) -> void:
 		bear.global_position.x = BEAR_STOP_X
 		if not transition_started:
 			transition_started = true
+			
+			if bear.has_method("stop_movement"):
+				bear.stop_movement()
+			
 			stop_player_and_bear()
 			trigger_scene_transition()
 		return

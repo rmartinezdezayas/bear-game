@@ -10,7 +10,11 @@ var should_move: bool = false
 var is_fleeing: bool = false
 
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var animation_player: AnimationPlayer = $AnimationPlayer # Or AnimationTree/Sprite2D depending on your project
+@onready var animation_tree : AnimationTree = $AnimationTree
+var state_machine
+
+func _ready() -> void:
+	state_machine = animation_tree["parameters/playback"]
 
 func _physics_process(delta: float) -> void:
 	# 1. Apply gravity if not on the floor
@@ -25,6 +29,12 @@ func _physics_process(delta: float) -> void:
 		if abs(current_x - target_x) > 5.0: # Prevent jittering when close to target
 			var direction = 1.0 if target_x > current_x else -1.0
 			var speed = RUN_SPEED if is_fleeing else WALK_SPEED
+			if is_fleeing:
+				# Set parameter to 1.0 for running
+				animation_tree["parameters/walk-run/blend-walk-run/blend_amount"] = 1.0
+			else:
+				# Set parameter to 0.0 for walking
+				animation_tree["parameters/walk-run/blend-walk-run/blend_amount"] = 0.0
 			
 			velocity.x = direction * speed
 			
@@ -32,14 +42,17 @@ func _physics_process(delta: float) -> void:
 			if sprite:
 				sprite.flip_h = (direction < 0)
 				
-			# (Optional) Handle animations here if you have them
+			# Handle animations
+			state_machine.travel("walk-run")
 		else:
 			# Arrived at target
 			velocity.x = 0
 			should_move = false
-			# (Optional) Handle animations here if you have them
+			# Handle animations
+			state_machine.travel("idle")
 	else:
 		velocity.x = move_toward(velocity.x, 0, WALK_SPEED)
+		state_machine.travel("idle")
 		# (Optional) Handle animations here if you have them
 
 	# 3. Apply physics movement

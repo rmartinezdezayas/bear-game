@@ -1,19 +1,177 @@
 [gd_scene format=3 uid="uid://d1r5n7c6fm08k"]
 
 [ext_resource type="Script" uid="uid://5qhqqb1ax458" path="res://scripts/bear.gd" id="1_ei0ln"]
-[ext_resource type="Texture2D" uid="uid://blvfulrk5smv8" path="res://assets/npcs/bear.png" id="1_xu8t6"]
+[ext_resource type="Texture2D" uid="uid://bv2j07kugcf12" path="res://assets/npcs/bear-walk/walk1.png" id="2_a6xy8"]
+[ext_resource type="Texture2D" uid="uid://bkiul6jr8poxr" path="res://assets/npcs/bear-run/run5.png" id="3_3mcvt"]
+[ext_resource type="Texture2D" uid="uid://jttht5i400cw" path="res://assets/npcs/bear-walk/walk2.png" id="3_tn7kg"]
+[ext_resource type="Texture2D" uid="uid://b011kr3sqgtu2" path="res://assets/npcs/bear-run/run6.png" id="4_dvh0a"]
+[ext_resource type="Texture2D" uid="uid://b1ykb322pml2h" path="res://assets/npcs/bear-walk/walk3.png" id="4_kiv26"]
+[ext_resource type="Texture2D" uid="uid://ddgdyxe0q1jt0" path="res://assets/npcs/bear-walk/walk4.png" id="5_487s5"]
+[ext_resource type="Texture2D" uid="uid://c3vyk8g3x62lu" path="res://assets/npcs/bear-run/run7.png" id="5_w467s"]
+[ext_resource type="Texture2D" uid="uid://cfhn4f264k81w" path="res://assets/npcs/bear-run/run8.png" id="6_6by6l"]
+[ext_resource type="Texture2D" uid="uid://4pd24h0devtt" path="res://assets/npcs/bear-walk/walk5.png" id="6_55htg"]
+[ext_resource type="Texture2D" uid="uid://y3kl8477b5js" path="res://assets/npcs/bear-run/run1.png" id="7_he4kk"]
+[ext_resource type="Texture2D" uid="uid://djbsyypn4f7fw" path="res://assets/npcs/bear-walk/walk6.png" id="7_mgbif"]
+[ext_resource type="Texture2D" uid="uid://cgn0axb54hq68" path="res://assets/npcs/bear-run/run2.png" id="8_2vkkh"]
+[ext_resource type="Texture2D" uid="uid://b5vajvcp6dnir" path="res://assets/npcs/bear-walk/walk7.png" id="8_sorir"]
+[ext_resource type="Texture2D" uid="uid://bkxh251uu4iw7" path="res://assets/npcs/bear-walk/walk8.png" id="9_aokj4"]
+[ext_resource type="Texture2D" uid="uid://mv0pprhnufp4" path="res://assets/npcs/bear-run/run3.png" id="9_n5hj4"]
+[ext_resource type="Texture2D" uid="uid://dxn6veq3i801x" path="res://assets/npcs/bear-run/run4.png" id="10_wcvhk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tol2v"]
 radius = 15.0
 height = 60.0
 
+[sub_resource type="Animation" id="Animation_3mcvt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_a6xy8")]
+}
+
+[sub_resource type="Animation" id="Animation_txpm2"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_a6xy8")]
+}
+
+[sub_resource type="Animation" id="Animation_efd48"]
+resource_name = "run"
+length = 0.53333336
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2, 0.26666668, 0.33333334, 0.4, 0.46666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_3mcvt"), ExtResource("4_dvh0a"), ExtResource("5_w467s"), ExtResource("6_6by6l"), ExtResource("7_he4kk"), ExtResource("8_2vkkh"), ExtResource("9_n5hj4"), ExtResource("10_wcvhk")]
+}
+
+[sub_resource type="Animation" id="Animation_dvh0a"]
+resource_name = "walk"
+length = 0.93333334
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.21, 0.33333334, 0.43666667, 0.55, 0.6666667, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_a6xy8"), ExtResource("3_tn7kg"), ExtResource("4_kiv26"), ExtResource("5_487s5"), ExtResource("6_55htg"), ExtResource("7_mgbif"), ExtResource("8_sorir"), ExtResource("9_aokj4")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w467s"]
+_data = {
+&"RESET": SubResource("Animation_3mcvt"),
+&"idle": SubResource("Animation_txpm2"),
+&"run": SubResource("Animation_efd48"),
+&"walk": SubResource("Animation_dvh0a")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3mcvt"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_dvh0a"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_w467s"]
+nodes/output/position = Vector2(500, 160)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_3mcvt")
+nodes/Animation/position = Vector2(44, 139)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_dvh0a")
+nodes/TimeScale/position = Vector2(273, 165)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dvh0a"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6by6l"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_w467s"]
+filters = ["../Sprite2D:texture"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_he4kk"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_6by6l"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2vkkh"]
+graph_offset = Vector2(5, 89)
+nodes/output/position = Vector2(920, 140)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_6by6l")
+nodes/Animation/position = Vector2(60, 240)
+nodes/speed-run/node = SubResource("AnimationNodeTimeScale_he4kk")
+nodes/speed-run/position = Vector2(280, 240)
+nodes/blend-walk-run/node = SubResource("AnimationNodeBlend2_w467s")
+nodes/blend-walk-run/position = Vector2(600, 100)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_dvh0a")
+"nodes/Animation 2/position" = Vector2(60, 80)
+nodes/speed-walk/node = SubResource("AnimationNodeTimeScale_6by6l")
+nodes/speed-walk/position = Vector2(280, 80)
+node_connections = [&"output", 0, &"blend-walk-run", &"speed-run", 0, &"Animation", &"blend-walk-run", 0, &"speed-walk", &"blend-walk-run", 1, &"speed-run", &"speed-walk", 0, &"Animation 2"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_he4kk"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2vkkh"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n5hj4"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tol2v"]
+states/idle/node = SubResource("AnimationNodeBlendTree_w467s")
+states/idle/position = Vector2(390, 86)
+states/walk-run/node = SubResource("AnimationNodeBlendTree_2vkkh")
+states/walk-run/position = Vector2(491, 228)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_he4kk"), "idle", "walk-run", SubResource("AnimationNodeStateMachineTransition_2vkkh"), "walk-run", "idle", SubResource("AnimationNodeStateMachineTransition_n5hj4")]
+graph_offset = Vector2(0, 34)
+
 [node name="bear" type="CharacterBody2D" unique_id=468607151]
 script = ExtResource("1_ei0ln")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=42508572]
-texture = ExtResource("1_xu8t6")
+texture = ExtResource("2_a6xy8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1487440639]
 position = Vector2(0, 6)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_tol2v")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2071845540]
+root_node = NodePath("../CollisionShape2D")
+libraries/ = SubResource("AnimationLibrary_w467s")
+autoplay = &"idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=614197403]
+root_node = NodePath("../CollisionShape2D")
+tree_root = SubResource("AnimationNodeStateMachine_tol2v")
+anim_player = NodePath("../AnimationPlayer")
+parameters/idle/TimeScale/scale = 1.0
+parameters/walk-run/speed-run/scale = 1.0
+parameters/walk-run/blend-walk-run/blend_amount = 0.0
+parameters/walk-run/speed-walk/scale = 1.0
