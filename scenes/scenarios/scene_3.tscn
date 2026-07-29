@@ -25,7 +25,7 @@ size = Vector2(226.53668, 12.825623)
 [node name="transition_splash_screen" parent="." unique_id=1645034372 instance=ExtResource("1_v5kny")]
 
 [node name="scene-sketch" type="Sprite2D" parent="." unique_id=1274307234]
-position = Vector2(2721, -8)
+position = Vector2(4722, 246)
 texture = ExtResource("2_vt0na")
 
 [node name="player" parent="." unique_id=623324050 instance=ExtResource("3_mygcv")]
@@ -69,7 +69,7 @@ position = Vector2(6, 2)
 polygon = PackedVector2Array(3581, -118, 3597, -120, 3599, -127, 3600, -137, 3580, -138)
 
 [node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=332557127]
-polygon = PackedVector2Array(3920, -109, 3987, 7, 4067, 97, 4032, 184, 4135, 188, 4181, 189, 4329, 191, 4480, 185, 4889, 185, 5131, 185, 4132, 250, 3884, 122, 3888, -35)
+polygon = PackedVector2Array(3920, -109, 3987, 7, 4067, 97, 4032, 184, 4135, 188, 4181, 189, 4329, 191, 4480, 185, 4889, 185, 5131, 185, 6423, 188, 6583, 145, 6705, 118, 6805, 116, 6647, 303, 4132, 250, 3884, 122, 3888, -35)
 
 [node name="ledge" parent="." unique_id=1966392521 instance=ExtResource("4_mygcv")]
 position = Vector2(366, -73)
