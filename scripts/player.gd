@@ -202,6 +202,7 @@ func animations(is_crouching: bool):
 	# 3. Ground state logic (Only runs when is_on_floor() is true)
 	if is_crouching:
 		if current_state != "idle-to-crouch" and current_state != "crouch-idle" and current_state != "crouch-walk" and current_state != "crouch-to-idle":
+			set_animation_condition("run", false) # To fix bugfix that when pressing left or right and then crouching, when releasing left or right but keep crouching, the animation was transitioning to run.
 			state_machine.travel("idle-to-crouch")
 			was_crouching = true
 		elif current_state == "idle-to-crouch":
