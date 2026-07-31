@@ -271,7 +271,7 @@ func update_crouch_collision(is_crouching: bool) -> void:
 		# Set height to 15 (crouch size)
 		set_shape_height(15.0)
 		# Offset shape downward by half the height difference (3px) to keep feet grounded
-		collision_shape.position.y = -7.0
+		collision_shape.position.y = -8.0
 	else:
 		# Reset height to 21 (standing size)
 		set_shape_height(21.0)
