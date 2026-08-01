@@ -192,7 +192,7 @@ func animations(is_crouching: bool):
 	# 2. Air/Jump state logic (Highest Priority)
 	if not is_on_floor():
 		if velocity.y < 0:
-			state_machine.travel("jump-max")
+			state_machine.travel("jump")
 		else:
 			set_animation_condition("land_requested", false)
 			set_animation_condition("roll_requested", false)
