@@ -23,7 +23,6 @@
 [ext_resource type="Texture2D" uid="uid://cdp5svu2b1aq3" path="res://assets/player/crouch-walk/crouch-walk9.png" id="22_2w11d"]
 [ext_resource type="Texture2D" uid="uid://vmvga20agopq" path="res://assets/player/crouch-walk/crouch-walk10.png" id="23_770dr"]
 [ext_resource type="Texture2D" uid="uid://4vslq7nieo4h" path="res://assets/player/crouch-walk/crouch-walk11.png" id="24_8f1cb"]
-[ext_resource type="Texture2D" uid="uid://cvj4igjavgwxh" path="res://assets/player/fall/fall.png" id="25_vdulj"]
 [ext_resource type="Texture2D" uid="uid://ck1rq8r0uh33p" path="res://assets/player/jump/jump1.png" id="25_y8sqo"]
 [ext_resource type="Texture2D" uid="uid://bf1q1f8c5nsr4" path="res://assets/player/idle/idle2.png" id="26_ior6t"]
 [ext_resource type="Texture2D" uid="uid://3jb2jusllnkl" path="res://assets/player/player.png" id="26_ubkmu"]
@@ -151,7 +150,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("25_vdulj")]
+"values": [ExtResource("28_6quye")]
 }
 
 [sub_resource type="Animation" id="Animation_g5jhy"]
@@ -189,7 +188,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_p3bub"]
 resource_name = "jump"
-length = 0.3
+length = 0.23333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -197,10 +196,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.16666667, 0.26666668),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.06666667, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ExtResource("25_y8sqo"), ExtResource("26_wipsm"), ExtResource("27_3soij"), ExtResource("28_6quye")]
+"values": [ExtResource("25_y8sqo"), ExtResource("26_wipsm"), ExtResource("27_3soij")]
 }
 
 [sub_resource type="Animation" id="Animation_au8ao"]
@@ -433,10 +432,15 @@ node_connections = [&"output", 0, &"Animation"]
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wqna8"]
 animation = &"jump"
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_wipsm"]
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_l7gmo"]
+nodes/output/position = Vector2(840, 140)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_wqna8")
 nodes/Animation/position = Vector2(53, 119)
-node_connections = [&"output", 0, &"Animation"]
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_wipsm")
+nodes/TimeScale/position = Vector2(568, 137)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_edwuo"]
 animation = &"land"
@@ -536,6 +540,7 @@ advance_mode = 2
 advance_condition = &"run"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2xkbm"]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dqoq3"]
 advance_mode = 2
@@ -579,6 +584,8 @@ advance_condition = &"ledge_grab"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f6qwb"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ubkmu"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tol2v"]
 states/End/position = Vector2(963, 121)
 states/Start/position = Vector2(21, 72)
@@ -601,13 +608,13 @@ states/land/position = Vector2(531.1388, -43)
 states/ledge-climb/node = SubResource("AnimationNodeBlendTree_ju8re")
 states/ledge-climb/position = Vector2(1142.0529, 65.32024)
 states/ledge-grab/node = SubResource("AnimationNodeBlendTree_wipsm")
-states/ledge-grab/position = Vector2(1142.0529, -94.67976)
+states/ledge-grab/position = Vector2(1126.0529, -96.67976)
 states/roll/node = SubResource("AnimationNodeBlendTree_c1hhp")
 states/roll/position = Vector2(538.4465, 28)
 states/run/node = SubResource("AnimationNodeBlendTree_3k3j0")
 states/run/position = Vector2(335.1388, 230)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_0bpox"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_5c21n"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_e8m1u"), "idle", "idle-to-crouch", SubResource("AnimationNodeStateMachineTransition_77pet"), "idle-to-crouch", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_tlhxf"), "crouch-idle", "crouch-to-idle", SubResource("AnimationNodeStateMachineTransition_hrkfm"), "crouch-idle", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_oxcmq"), "crouch-walk", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_wylla"), "crouch-to-idle", "idle", SubResource("AnimationNodeStateMachineTransition_a3eqm"), "crouch-walk", "run", SubResource("AnimationNodeStateMachineTransition_plx2b"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_2xkbm"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_dqoq3"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_y8tjj"), "run", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_u2ulf"), "fall", "roll", SubResource("AnimationNodeStateMachineTransition_ugfu1"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_tuph1"), "ledge-grab", "ledge-climb", SubResource("AnimationNodeStateMachineTransition_3soij"), "ledge-climb", "idle", SubResource("AnimationNodeStateMachineTransition_6quye"), "fall", "ledge-grab", SubResource("AnimationNodeStateMachineTransition_278xx"), "jump", "ledge-grab", SubResource("AnimationNodeStateMachineTransition_v8645"), "ledge-grab", "fall", SubResource("AnimationNodeStateMachineTransition_y8sqo"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_wipsm"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_f6qwb")]
-graph_offset = Vector2(-54.947113, -206.16618)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_0bpox"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_5c21n"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_e8m1u"), "idle", "idle-to-crouch", SubResource("AnimationNodeStateMachineTransition_77pet"), "idle-to-crouch", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_tlhxf"), "crouch-idle", "crouch-to-idle", SubResource("AnimationNodeStateMachineTransition_hrkfm"), "crouch-idle", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_oxcmq"), "crouch-walk", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_wylla"), "crouch-to-idle", "idle", SubResource("AnimationNodeStateMachineTransition_a3eqm"), "crouch-walk", "run", SubResource("AnimationNodeStateMachineTransition_plx2b"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_2xkbm"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_dqoq3"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_y8tjj"), "run", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_u2ulf"), "fall", "roll", SubResource("AnimationNodeStateMachineTransition_ugfu1"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_tuph1"), "ledge-grab", "ledge-climb", SubResource("AnimationNodeStateMachineTransition_3soij"), "ledge-climb", "idle", SubResource("AnimationNodeStateMachineTransition_6quye"), "fall", "ledge-grab", SubResource("AnimationNodeStateMachineTransition_278xx"), "jump", "ledge-grab", SubResource("AnimationNodeStateMachineTransition_v8645"), "ledge-grab", "fall", SubResource("AnimationNodeStateMachineTransition_y8sqo"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_wipsm"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_f6qwb"), "run", "fall", SubResource("AnimationNodeStateMachineTransition_ubkmu")]
+graph_offset = Vector2(-79.92551, -198.20331)
 
 [node name="player" type="CharacterBody2D" unique_id=218348890]
 script = ExtResource("1_qhqgy")
@@ -636,6 +643,7 @@ parameters/conditions/roll_requested = false
 parameters/conditions/run = false
 parameters/crouch-idle/speed/scale = 1.0
 parameters/crouch-walk/TimeScale/scale = 0.7999999999999972
+parameters/jump/TimeScale/scale = 0.6000000000000014
 parameters/roll/TimeScale/scale = 0.5
 parameters/run/run_speed/scale = 1.0
 parameters/run/TimeScale/scale = 1.0
