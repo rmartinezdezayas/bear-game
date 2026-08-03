@@ -10,6 +10,10 @@ const JUMP_GRAVITY_MULTIPLIER = 1.0
 const FALL_GRAVITY_MULTIPLIER = 0.45
 const ROLL_MIN_FALL_HEIGHT = -140.0
 const ROLL_MAX_FALL_HEIGHT = -19.0
+const UPDATE_GRAVITY_GOING_UP_AT_JUMP_VELOCITY_PERCENTAGE = 1
+const UPDATE_GRAVITY_GOING_UP_BY_MULTIPLIER = 1
+const UPDATE_GRAVITY_GOING_DOWN_WHILE_VELOCITY_Y_IS_LESS_THAN = 12
+const UPDATE_GRAVITY_GOING_DOWN_BY_MULTIPLIER = 0.01
 
 var speed = BASE_SPEED
 
@@ -104,7 +108,24 @@ func _physics_process(delta: float) -> void:
 	# STANDARD PHYSICS & GRAVITY (Only runs when NOT on ledge)
 	# -------------------------------------------------------------
 	if not is_on_floor():
-		var gravity_multiplier = FALL_GRAVITY_MULTIPLIER if velocity.y >= 0.0 else JUMP_GRAVITY_MULTIPLIER
+		var gravity_multiplier: float
+
+		if velocity.y < 0.0:
+			# Ascending (Going UP)
+			# Check if we are near the apex of the jump (low vertical velocity)
+			var apex_threshold = JUMP_VELOCITY * UPDATE_GRAVITY_GOING_UP_AT_JUMP_VELOCITY_PERCENTAGE
+			if velocity.y < apex_threshold:
+				# Float at the peak of the jump arc
+				gravity_multiplier = UPDATE_GRAVITY_GOING_UP_BY_MULTIPLIER
+			else:
+				gravity_multiplier = JUMP_GRAVITY_MULTIPLIER
+		else:
+			if velocity.y < UPDATE_GRAVITY_GOING_DOWN_WHILE_VELOCITY_Y_IS_LESS_THAN and jump_is_held:
+				gravity_multiplier = JUMP_GRAVITY_MULTIPLIER * UPDATE_GRAVITY_GOING_DOWN_BY_MULTIPLIER
+			else:
+				# Descending (Going DOWN - snappy fall)
+				gravity_multiplier = FALL_GRAVITY_MULTIPLIER
+
 		velocity += get_gravity() * delta * gravity_multiplier
 	
 	var forced_crouch = $ceiling_check.is_colliding()
@@ -128,8 +149,6 @@ func _physics_process(delta: float) -> void:
 			if jump_hold_timer < MAX_JUMP_HOLD_TIME:
 				velocity.y -= JUMP_HOLD_FORCE * delta
 				jump_hold_timer += delta
-			else:
-				jump_is_held = false
 		elif Input.is_action_just_released("jump"):
 			jump_is_held = false
 			if velocity.y < 0.0:
