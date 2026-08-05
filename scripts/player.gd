@@ -129,8 +129,8 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta * gravity_multiplier
 	
 	var forced_crouch = $ceiling_check.is_colliding()
-	var is_crouching = ((Input.is_action_pressed("crouch") and is_on_floor()) or forced_crouch if input_enabled else simulated_crouch)
 	var rolling := is_roll_playing()
+	var is_crouching = ((Input.is_action_pressed("crouch") and is_on_floor() and not rolling) or forced_crouch if input_enabled else simulated_crouch)
 
 	if rolling:
 		direction = 0.0
