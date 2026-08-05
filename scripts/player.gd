@@ -14,6 +14,7 @@ const UPDATE_GRAVITY_GOING_UP_AT_JUMP_VELOCITY_PERCENTAGE = 1
 const UPDATE_GRAVITY_GOING_UP_BY_MULTIPLIER = 1
 const UPDATE_GRAVITY_GOING_DOWN_WHILE_VELOCITY_Y_IS_LESS_THAN = 12
 const UPDATE_GRAVITY_GOING_DOWN_BY_MULTIPLIER = 0.01
+const STUMBLE_VELOCITY_MULTIPLIER = 0.7
 
 var speed = BASE_SPEED
 
@@ -35,6 +36,7 @@ var air_start_y: float = 0.0
 var was_crouching: bool = false
 var forced_crouch: bool = false
 var direction := 0.0
+var is_stumbling: bool = false
 
 func _ready() -> void:
 	state_machine = animation_tree["parameters/playback"]
@@ -156,12 +158,13 @@ func _physics_process(delta: float) -> void:
 
 	# Horizontal Movement
 	var crouch_multiplier = CROUCH_VELOCITY_MULTIPLIER if is_crouching else 1.0
+	var stumble_multiplier = STUMBLE_VELOCITY_MULTIPLIER if is_stumbling else 1.0
 	if rolling:
-		velocity.x = sign(velocity.x) * speed * crouch_multiplier
+		velocity.x = sign(velocity.x) * speed * crouch_multiplier * stumble_multiplier
 	elif direction != 0.0:
-		velocity.x = direction * speed * crouch_multiplier
+		velocity.x = direction * speed * crouch_multiplier * stumble_multiplier
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed * crouch_multiplier)
+		velocity.x = move_toward(velocity.x, 0, speed * crouch_multiplier * stumble_multiplier)
 
 	move_and_slide()
 
@@ -319,3 +322,22 @@ func set_pursuit_mode(enabled: bool) -> void:
 	else:
 		speed = BASE_SPEED
 		animation_tree["parameters/run/run_speed/scale"] = 1.0
+
+# Stumble logic
+func stumble(duration: float = 0.4) -> void:
+	# Ignore stumble if already stumbling, on a ledge, or mid-roll
+	if is_stumbling or on_ledge:
+		return
+		
+	is_stumbling = true
+	
+	# Force animation tree to play the roll/stumble animation
+	if state_machine:
+		state_machine.travel("roll")
+	
+	# Wait for the duration without freezing physics
+	await get_tree().create_timer(duration).timeout
+	
+	# Reset states after timer finishes
+	is_stumbling = false
+	input_enabled = true

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cf3hjxy4svym"]
+
+[ext_resource type="Script" uid="uid://b3ckhdqx6oxfr" path="res://scripts/stumble.gd" id="1_enn5s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tol2v"]
+size = Vector2(2, 6.133728)
+
+[node name="stumble" type="Area2D" unique_id=1337240352]
+script = ExtResource("1_enn5s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=894006767]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_tol2v")

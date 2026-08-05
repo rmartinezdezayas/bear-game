@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://kop41ttjf71c" path="res://scenes/objects/environment/backgrounds/transition_splash_screen.tscn" id="6_xqmc3"]
 [ext_resource type="PackedScene" uid="uid://k8bga01vlylb" path="res://scenes/objects/environment/trees/thin_tree_1.tscn" id="7_76fyk"]
 [ext_resource type="PackedScene" uid="uid://dmi56jvf65wwg" path="res://scenes/objects/environment/trees/thin_tree_2.tscn" id="8_v3ecj"]
+[ext_resource type="PackedScene" uid="uid://cf3hjxy4svym" path="res://scenes/objects/environment/ground/stumble.tscn" id="15_bq3tb"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pif6w"]
 
@@ -102,3 +103,6 @@ limit_bottom = 123
 position_smoothing_speed = 7.0
 
 [node name="transition_splash_screen" parent="." unique_id=1645034372 instance=ExtResource("6_xqmc3")]
+
+[node name="stumble" parent="." unique_id=1337240352 instance=ExtResource("15_bq3tb")]
+position = Vector2(670.7632, 93.75043)

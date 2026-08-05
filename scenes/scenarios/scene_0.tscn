@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cswpw2gg8q8yi" path="res://assets/environment/backgrounds/160-90-cave.png" id="3_6b0k3"]
 [ext_resource type="PackedScene" uid="uid://qwjn1slavbi8" path="res://scenes/objects/environment/rocks/rock_1.tscn" id="3_p2ku2"]
 [ext_resource type="PackedScene" uid="uid://bladyxmnd58a8" path="res://scenes/objects/environment/ground/ledge.tscn" id="5_8db1l"]
+[ext_resource type="PackedScene" uid="uid://cf3hjxy4svym" path="res://scenes/objects/environment/ground/stumble.tscn" id="7_g2472"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tol2v"]
 
@@ -124,3 +125,6 @@ color = Color(0.3764706, 0.45490196, 0.67058825, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=799219458]
 position = Vector2(106, 20)
 shape = SubResource("RectangleShape2D_tol2v")
+
+[node name="stumble" parent="." unique_id=1337240352 instance=ExtResource("7_g2472")]
+position = Vector2(-225, 36)
