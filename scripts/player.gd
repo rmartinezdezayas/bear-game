@@ -333,7 +333,7 @@ func stumble(duration: float = 0.4) -> void:
 	
 	# Force animation tree to play the roll/stumble animation
 	if state_machine:
-		state_machine.travel("roll")
+		state_machine.travel("stumble")
 	
 	# Wait for the duration without freezing physics
 	await get_tree().create_timer(duration).timeout
