@@ -137,8 +137,8 @@ func _physics_process(delta: float) -> void:
 	if rolling:
 		direction = 0.0
 
-	# Jump Logic
-	if input_enabled:
+	# Jump Logic 
+	if input_enabled and not rolling: # Do not jump if rolling
 		if is_on_floor():
 			jump_hold_timer = 0.0
 			jump_is_held = false
@@ -202,6 +202,7 @@ func animations(is_crouching: bool):
 	var rolling := is_roll_playing()
 	var current_state = state_machine.get_current_node()
 
+	# Do not allow flip direction if the player is rolling
 	if not rolling:
 		if moving_right:
 			$Sprite2D.flip_h = false
