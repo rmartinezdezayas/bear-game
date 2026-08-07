@@ -132,7 +132,7 @@ func _physics_process(delta: float) -> void:
 	
 	var forced_crouch = $ceiling_check.is_colliding()
 	var rolling := is_roll_playing()
-	var is_crouching = ((Input.is_action_pressed("crouch") and is_on_floor() and not rolling) or forced_crouch if input_enabled else simulated_crouch)
+	var is_crouching = ((Input.is_action_pressed("crouch") and is_on_floor() and not rolling) or (forced_crouch and not rolling) if input_enabled else simulated_crouch)
 
 	if rolling:
 		direction = 0.0
@@ -210,7 +210,7 @@ func animations(is_crouching: bool):
 			$Sprite2D.flip_h = true
 
 	# Update collision shape based on crouch state
-	update_crouch_collision(is_crouching)
+	update_crouch_collision((is_crouching or rolling))
 	
 	# 2. Air/Jump state logic (Highest Priority)
 	if not is_on_floor():
@@ -288,6 +288,7 @@ func _ledge_logic() -> void:
 
 # Handles collision resize when crouching
 func update_crouch_collision(is_crouching: bool) -> void:
+	print(is_crouching)
 	if not collision_shape or not collision_shape.shape:
 		return
 		
