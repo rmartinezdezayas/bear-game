@@ -288,7 +288,6 @@ func _ledge_logic() -> void:
 
 # Handles collision resize when crouching
 func update_crouch_collision(is_crouching: bool) -> void:
-	print(is_crouching)
 	if not collision_shape or not collision_shape.shape:
 		return
 		
