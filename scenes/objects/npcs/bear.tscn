@@ -19,8 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://dxn6veq3i801x" path="res://assets/npcs/bear-run/run4.png" id="10_wcvhk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tol2v"]
-radius = 15.0
-height = 60.0
+radius = 11.0
+height = 38.0
 
 [sub_resource type="Animation" id="Animation_3mcvt"]
 length = 0.001
@@ -158,7 +158,7 @@ script = ExtResource("1_ei0ln")
 texture = ExtResource("2_a6xy8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1487440639]
-position = Vector2(0, 6)
+position = Vector2(0, 5)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_tol2v")
 

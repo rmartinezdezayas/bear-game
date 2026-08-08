@@ -37,6 +37,7 @@ var was_crouching: bool = false
 var forced_crouch: bool = false
 var direction := 0.0
 var is_stumbling: bool = false
+var ledge_cooldown_timer: float = 3.0
 
 func _ready() -> void:
 	state_machine = animation_tree["parameters/playback"]
@@ -54,15 +55,20 @@ func is_roll_playing() -> bool:
 func _physics_process(delta: float) -> void:
 	var was_on_floor: bool = is_on_floor()
 
-	# Get input direction first so we can track player facing
-	if input_enabled:
+	# Tick down the ledge grab cooldown timer
+	if ledge_cooldown_timer > 0.0:
+		ledge_cooldown_timer -= delta
+
+	# Disable horizontal input entirely while on a ledge
+	if input_enabled and not on_ledge:
 		direction = Input.get_axis("left", "right")
 	else:
-		direction = 0.0 # RESET DIRECTION HERE FIRST!
-		if simulated_left:
-			direction -= 1.0
-		if simulated_right:
-			direction += 1.0
+		direction = 0.0 # Force zero direction when on ledge or input disabled
+		if not on_ledge:
+			if simulated_left:
+				direction -= 1.0
+			if simulated_right:
+				direction += 1.0
 
 	# -------------------------------------------------------------
 	# LEDGE CLIMB STATE HANDLING
@@ -70,10 +76,12 @@ func _physics_process(delta: float) -> void:
 	if on_ledge:
 		velocity = Vector2.ZERO # Completely disable physics/gravity while hanging/climbing
 		
+		# Check horizontal inputs to strictly enforce pure 'Up' or 'Down'
+		var holds_horizontal: bool = Input.is_action_pressed("left") or Input.is_action_pressed("right")
+		
 		if Input.is_action_just_pressed("up"):
 			var facing_dir: float = -1.0 if $Sprite2D.flip_h else 1.0
 			
-			# Define intermediate (up only) and final (forward) positions
 			var vertical_target: Vector2 = global_position + Vector2(0.0, -15.0)
 			var forward_target: Vector2 = vertical_target + Vector2(facing_dir * 10.0, -2.0)
 			
@@ -81,19 +89,14 @@ func _physics_process(delta: float) -> void:
 			set_animation_condition("ledge_grab", false)
 			
 			var climb_tween: Tween = create_tween()
-			
-			# 1. Brief pause to let the grab/climb animation start
 			climb_tween.tween_interval(0.2)
 			
-			# 2. Step 1: Move UP only
 			climb_tween.tween_property(self, "global_position", vertical_target, 0.09)\
 				.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 				
-			# 3. Step 2: Move FORWARD onto the ledge
 			climb_tween.tween_property(self, "global_position", forward_target, 0.2)\
 				.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 			
-			# Finish state cleanup when the entire sequence completes
 			climb_tween.finished.connect(func():
 				on_ledge = false
 				set_animation_condition("climb", false)
@@ -102,6 +105,7 @@ func _physics_process(delta: float) -> void:
 		elif Input.is_action_just_pressed("down"):
 			velocity.y = JUMP_VELOCITY * -0.5
 			on_ledge = false
+			ledge_cooldown_timer = 0.25 # Prevent instantly re-grabbing while dropping
 			set_animation_condition("ledge_grab", false)
 
 		return # Bypass gravity, movement, and move_and_slide completely while on ledge
@@ -257,27 +261,23 @@ func set_input_enabled(enabled: bool) -> void:
 		
 # Handles ledge climb logic. Checks if we are on ledge
 func _ledge_logic() -> void:
-	if is_on_floor() or velocity.y <= 0:
+	# Block grab if on floor, moving up, or on cooldown after dropping
+	if is_on_floor() or velocity.y <= 0 or ledge_cooldown_timer > 0.0:
 		return
 	if !$ledge_grab_hit.is_colliding() or $ledge_grab_miss.is_colliding():
 		return
 	if !Input.is_action_pressed("up") and direction == 0:
 		return
 		
-	# Verify the collider has our grab method before continuing
 	var collider = $ledge_grab_hit.get_collider()
 	if not collider or not collider.has_method("get_grab_position"):
 		return
 		
-	# 1. Fetch the exact global position exported by this specific ledge
 	var grab_point: Vector2 = collider.get_grab_position()
-	
-	# 2. Align horizontal position to wall contact, and vertical position to your raycast level
-	# Adjust hands_offset to match where your player sprite's hands are relative to global_position
-	var hands_offset: Vector2 = Vector2(-5.0 * direction, 17.0) 
+	var facing_dir: float = -1.0 if $Sprite2D.flip_h else 1.0
+	var hands_offset: Vector2 = Vector2(-5.0 * facing_dir, 17.0) 
 	var desire_position: Vector2 = Vector2(grab_point.x, grab_point.y) + hands_offset
 	
-	# 3. Smoothly move player to the exact ledge edge
 	var pos_tween: Tween = create_tween().set_trans(Tween.TRANS_SINE)
 	pos_tween.tween_property(self, "global_position", desire_position, 0.05)
 	
