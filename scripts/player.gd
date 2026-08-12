@@ -14,7 +14,7 @@ const UPDATE_GRAVITY_GOING_UP_AT_JUMP_VELOCITY_PERCENTAGE = 1
 const UPDATE_GRAVITY_GOING_UP_BY_MULTIPLIER = 1
 const UPDATE_GRAVITY_GOING_DOWN_WHILE_VELOCITY_Y_IS_LESS_THAN = 12
 const UPDATE_GRAVITY_GOING_DOWN_BY_MULTIPLIER = 0.01
-const STUMBLE_VELOCITY_MULTIPLIER = 0.7
+const STUMBLE_VELOCITY_MULTIPLIER = 0.5
 
 var speed = BASE_SPEED
 
@@ -325,7 +325,7 @@ func set_pursuit_mode(enabled: bool) -> void:
 		animation_tree["parameters/run/run_speed/scale"] = 1.0
 
 # Stumble logic
-func stumble(duration: float = 0.4) -> void:
+func stumble(duration: float = 0.8) -> void:
 	# Ignore stumble if already stumbling, on a ledge, or mid-roll
 	if is_stumbling or on_ledge:
 		return

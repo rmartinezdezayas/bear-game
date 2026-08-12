@@ -85,7 +85,7 @@ position = Vector2(40, 35)
 position = Vector2(-118, 17)
 
 [node name="player" parent="." unique_id=623324050 instance=ExtResource("3_pif6w")]
-position = Vector2(38, 38)
+position = Vector2(38, 37)
 
 [node name="ground" type="StaticBody2D" parent="." unique_id=144119261]
 physics_material_override = SubResource("PhysicsMaterial_pif6w")

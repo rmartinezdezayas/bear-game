@@ -9,7 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://bladyxmnd58a8" path="res://scenes/objects/environment/ground/ledge.tscn" id="5_8db1l"]
 [ext_resource type="Texture2D" uid="uid://o4ekms6w7wam" path="res://assets/environment/scene-sketches/test-scene-2.png" id="5_qa4ke"]
 [ext_resource type="PackedScene" uid="uid://cf3hjxy4svym" path="res://scenes/objects/environment/ground/stumble.tscn" id="7_g2472"]
-[ext_resource type="Texture2D" uid="uid://djximf8m2d3an" path="res://assets/environment/trees/obstacle-tree-1.png" id="10_bbr2t"]
+[ext_resource type="Texture2D" uid="uid://cqwc45533mpip" path="res://assets/environment/trees/obstacle-tree-1-front.png" id="10_4ly0x"]
+[ext_resource type="Texture2D" uid="uid://l7sqtfjcbjxp" path="res://assets/environment/trees/obstacle-tree-1-back.png" id="11_7l1ra"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tol2v"]
 
@@ -27,6 +28,9 @@ size = Vector2(40, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_821qg"]
 size = Vector2(66, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nt4ef"]
+size = Vector2(21, 31)
 
 [node name="scene_0" type="Node2D" unique_id=1598948707]
 
@@ -168,7 +172,18 @@ shape = SubResource("RectangleShape2D_821qg")
 [node name="stumble" parent="." unique_id=1337240352 instance=ExtResource("7_g2472")]
 position = Vector2(-225, 36)
 
-[node name="Node" type="Node" parent="." unique_id=1373316977]
+[node name="obstacle-tree-1" type="Node2D" parent="." unique_id=1135068698]
+position = Vector2(446, 13)
 
-[node name="Sprite2D" type="Sprite2D" parent="Node" unique_id=1210553425]
-texture = ExtResource("10_bbr2t")
+[node name="front" type="Sprite2D" parent="obstacle-tree-1" unique_id=1210553425]
+z_index = 2
+texture = ExtResource("10_4ly0x")
+
+[node name="back" type="Sprite2D" parent="obstacle-tree-1" unique_id=2010735156]
+texture = ExtResource("11_7l1ra")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="obstacle-tree-1" unique_id=40253691]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="obstacle-tree-1/StaticBody2D" unique_id=1669903332]
+position = Vector2(19.5, -10)
+shape = SubResource("RectangleShape2D_nt4ef")

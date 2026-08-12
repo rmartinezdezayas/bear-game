@@ -157,18 +157,18 @@ script = ExtResource("1_ei0ln")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=42508572]
 texture = ExtResource("2_a6xy8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1487440639]
+[node name="BearBodyCollisionShape2D" type="CollisionShape2D" parent="." unique_id=1487440639]
 position = Vector2(0, 5)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_tol2v")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2071845540]
-root_node = NodePath("../CollisionShape2D")
+root_node = NodePath("../BearBodyCollisionShape2D")
 libraries/ = SubResource("AnimationLibrary_w467s")
 autoplay = &"idle"
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=614197403]
-root_node = NodePath("../CollisionShape2D")
+root_node = NodePath("../BearBodyCollisionShape2D")
 tree_root = SubResource("AnimationNodeStateMachine_tol2v")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle/TimeScale/scale = 1.0

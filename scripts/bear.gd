@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # Configurable movement speeds
 const WALK_SPEED = 10.0
-const RUN_SPEED = 58.0
+const RUN_SPEED = 60.0
 
 # Cutscene control states
 var target_x: float = 0.0
