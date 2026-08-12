@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bladyxmnd58a8" path="res://scenes/objects/environment/ground/ledge.tscn" id="5_8db1l"]
 [ext_resource type="Texture2D" uid="uid://o4ekms6w7wam" path="res://assets/environment/scene-sketches/test-scene-2.png" id="5_qa4ke"]
 [ext_resource type="PackedScene" uid="uid://cf3hjxy4svym" path="res://scenes/objects/environment/ground/stumble.tscn" id="7_g2472"]
+[ext_resource type="Texture2D" uid="uid://djximf8m2d3an" path="res://assets/environment/trees/obstacle-tree-1.png" id="10_bbr2t"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tol2v"]
 
@@ -166,3 +167,8 @@ shape = SubResource("RectangleShape2D_821qg")
 
 [node name="stumble" parent="." unique_id=1337240352 instance=ExtResource("7_g2472")]
 position = Vector2(-225, 36)
+
+[node name="Node" type="Node" parent="." unique_id=1373316977]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node" unique_id=1210553425]
+texture = ExtResource("10_bbr2t")

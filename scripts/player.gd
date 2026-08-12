@@ -73,7 +73,7 @@ func _physics_process(delta: float) -> void:
 	# -------------------------------------------------------------
 	# LEDGE CLIMB STATE HANDLING
 	# -------------------------------------------------------------
-	if on_ledge:
+	if on_ledge: 
 		velocity = Vector2.ZERO # Completely disable physics/gravity while hanging/climbing
 		
 		# Check horizontal inputs to strictly enforce pure 'Up' or 'Down'
