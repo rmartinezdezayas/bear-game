@@ -1,0 +1,366 @@
+[gd_scene format=3 uid="uid://cus2swjhghm07"]
+
+[ext_resource type="Texture2D" uid="uid://b0kghfrgmvgt2" path="res://assets/npcs/wolf.png" id="1_3wwqk"]
+[ext_resource type="Texture2D" uid="uid://dwcjud822cw00" path="res://assets/npcs/wolf-walk/walk1.png" id="1_unt2m"]
+[ext_resource type="Texture2D" uid="uid://cxye5s7hmxgo4" path="res://assets/npcs/wolf-jump/jump.png" id="2_0lls3"]
+[ext_resource type="Texture2D" uid="uid://bg45vakgreels" path="res://assets/npcs/wolf-walk/walk2.png" id="2_2gb48"]
+[ext_resource type="Texture2D" uid="uid://blc1j86qv67jk" path="res://assets/npcs/wolf-bark/bark1.png" id="2_12o3b"]
+[ext_resource type="Texture2D" uid="uid://8xasgtonugvl" path="res://assets/npcs/wolf-run/run1.png" id="2_bjfl6"]
+[ext_resource type="Texture2D" uid="uid://lrij1gkmnw6d" path="res://assets/npcs/wolf-crouch/crouch1.png" id="2_bo317"]
+[ext_resource type="Texture2D" uid="uid://hjvb8twl8h5a" path="res://assets/npcs/wolf-idle/idle2.png" id="3_0b50u"]
+[ext_resource type="Texture2D" uid="uid://d05gbsn5j6i1b" path="res://assets/npcs/wolf-run/run2.png" id="3_0lls3"]
+[ext_resource type="Texture2D" uid="uid://dj81wicywflj2" path="res://assets/npcs/wolf-bark/bark2.png" id="3_2dxko"]
+[ext_resource type="Texture2D" uid="uid://v3k2yhcg7jlu" path="res://assets/npcs/wolf-crouch/crouch2.png" id="3_tffa5"]
+[ext_resource type="Texture2D" uid="uid://f3wlebam7m67" path="res://assets/npcs/wolf-walk/walk3.png" id="3_xp4cs"]
+[ext_resource type="Texture2D" uid="uid://bwscpt2vhi2h4" path="res://assets/npcs/wolf-run/run3.png" id="4_087la"]
+[ext_resource type="Texture2D" uid="uid://qnojvjvprk6k" path="res://assets/npcs/wolf-crouch/crouch3.png" id="4_7435e"]
+[ext_resource type="Texture2D" uid="uid://47c8ntoj38nb" path="res://assets/npcs/wolf-bark/bark3.png" id="4_akjmj"]
+[ext_resource type="Texture2D" uid="uid://cn567y1lgkyce" path="res://assets/npcs/wolf-walk/walk4.png" id="4_x7xrg"]
+[ext_resource type="Texture2D" uid="uid://cw5jo1vqe0bm4" path="res://assets/npcs/wolf-run/run4.png" id="5_3gtkt"]
+[ext_resource type="Texture2D" uid="uid://2yuwrh4kf5dn" path="res://assets/npcs/wolf-crouch/crouch4.png" id="5_7mk2e"]
+[ext_resource type="Texture2D" uid="uid://bkv8wt20wtatn" path="res://assets/npcs/wolf-walk/walk5.png" id="5_36d3u"]
+[ext_resource type="Texture2D" uid="uid://ch0du3w34oqyp" path="res://assets/npcs/wolf-bark/bark4.png" id="5_atgxi"]
+[ext_resource type="Texture2D" uid="uid://b2l4xxgvgvbog" path="res://assets/npcs/wolf-walk/walk6.png" id="6_cc727"]
+[ext_resource type="Texture2D" uid="uid://rt1klgkg5cgl" path="res://assets/npcs/wolf-bark/bark5.png" id="6_cdo2b"]
+[ext_resource type="Texture2D" uid="uid://n460heqdqktk" path="res://assets/npcs/wolf-run/run5.png" id="6_fskwn"]
+[ext_resource type="Texture2D" uid="uid://b8yupfwg8lel6" path="res://assets/npcs/wolf-run/run6.png" id="7_43alc"]
+[ext_resource type="Texture2D" uid="uid://cpcua62oao422" path="res://assets/npcs/wolf-walk/walk7.png" id="7_j8hgl"]
+[ext_resource type="Texture2D" uid="uid://8331jo6pan1o" path="res://assets/npcs/wolf-walk/walk8.png" id="8_bjfl6"]
+[ext_resource type="Texture2D" uid="uid://nq4tulr2fa40" path="res://assets/npcs/wolf-run/run7.png" id="8_m2ias"]
+[ext_resource type="Texture2D" uid="uid://dqd0bvn04j5b1" path="res://assets/npcs/wolf-crouch/crouch5.png" id="9_7mk2e"]
+[ext_resource type="Texture2D" uid="uid://d1foljkh8gk5i" path="res://assets/npcs/wolf-snif/snif1.png" id="10_43alc"]
+[ext_resource type="Texture2D" uid="uid://cqub2o6bt38v0" path="res://assets/npcs/wolf-crouch/crouch6.png" id="10_hj0oq"]
+[ext_resource type="Texture2D" uid="uid://cmem7340vy650" path="res://assets/npcs/wolf-idle/idle1.png" id="10_m2ias"]
+[ext_resource type="Texture2D" uid="uid://cuqxetotleryu" path="res://assets/npcs/wolf-snif/snif2.png" id="11_m2ias"]
+[ext_resource type="Texture2D" uid="uid://budji72tumbxa" path="res://assets/npcs/wolf-crouch/crouch7.png" id="11_ytb08"]
+[ext_resource type="Texture2D" uid="uid://2sfgu0w566pe" path="res://assets/npcs/wolf-snif/snif3.png" id="12_0b50u"]
+[ext_resource type="Texture2D" uid="uid://cjhu87vi8tkom" path="res://assets/npcs/wolf-snif/snif4.png" id="13_nmsrx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tol2v"]
+radius = 7.0
+height = 18.0
+
+[sub_resource type="Animation" id="Animation_0lls3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_unt2m")]
+}
+
+[sub_resource type="Animation" id="Animation_2dxko"]
+resource_name = "alert"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_3wwqk")]
+}
+
+[sub_resource type="Animation" id="Animation_lg1e2"]
+resource_name = "bark"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099920094, 0.1984524, 0.29559693, 0.40106815),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_12o3b"), ExtResource("3_2dxko"), ExtResource("4_akjmj"), ExtResource("5_atgxi"), ExtResource("6_cdo2b")]
+}
+
+[sub_resource type="Animation" id="Animation_hj0oq"]
+resource_name = "crouch"
+length = 0.43333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10269565, 0.19984019, 0.2983725),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_bo317"), ExtResource("3_tffa5"), ExtResource("4_7435e"), ExtResource("5_7mk2e")]
+}
+
+[sub_resource type="Animation" id="Animation_nmsrx"]
+resource_name = "idle"
+length = 5.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("10_m2ias"), ExtResource("3_0b50u")]
+}
+
+[sub_resource type="Animation" id="Animation_087la"]
+resource_name = "jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_0lls3")]
+}
+
+[sub_resource type="Animation" id="Animation_ukfrx"]
+resource_name = "recover-crouch"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10130787, 0.20261574),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("9_7mk2e"), ExtResource("10_hj0oq"), ExtResource("11_ytb08")]
+}
+
+[sub_resource type="Animation" id="Animation_0b50u"]
+resource_name = "run"
+length = 0.73333335
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.114106216, 0.19561066, 0.3117545, 0.4054846, 0.51144034, 0.6072081),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_bjfl6"), ExtResource("3_0lls3"), ExtResource("4_087la"), ExtResource("5_3gtkt"), ExtResource("6_fskwn"), ExtResource("7_43alc"), ExtResource("8_m2ias")]
+}
+
+[sub_resource type="Animation" id="Animation_ragsy"]
+resource_name = "snif"
+length = 7.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.7143955, 1, 1.7143955, 2, 3.1585376, 3.444142, 3.6212754, 4.733333, 6.00547, 6.233333, 6.502709, 6.737041, 6.91279),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("10_m2ias"), ExtResource("10_43alc"), ExtResource("11_m2ias"), ExtResource("12_0b50u"), ExtResource("11_m2ias"), ExtResource("12_0b50u"), ExtResource("11_m2ias"), ExtResource("12_0b50u"), ExtResource("11_m2ias"), ExtResource("12_0b50u"), ExtResource("13_nmsrx"), ExtResource("12_0b50u"), ExtResource("11_m2ias"), ExtResource("12_0b50u"), ExtResource("10_43alc"), ExtResource("10_m2ias")]
+}
+
+[sub_resource type="Animation" id="Animation_3wwqk"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1120686, 0.19968587, 0.3158297, 0.4075222, 0.5175532, 0.6051705, 0.71520144),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_unt2m"), ExtResource("2_2gb48"), ExtResource("3_xp4cs"), ExtResource("4_x7xrg"), ExtResource("5_36d3u"), ExtResource("6_cc727"), ExtResource("7_j8hgl"), ExtResource("8_bjfl6")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8qf65"]
+_data = {
+&"RESET": SubResource("Animation_0lls3"),
+&"alert": SubResource("Animation_2dxko"),
+&"bark": SubResource("Animation_lg1e2"),
+&"crouch": SubResource("Animation_hj0oq"),
+&"idle": SubResource("Animation_nmsrx"),
+&"jump": SubResource("Animation_087la"),
+&"recover-crouch": SubResource("Animation_ukfrx"),
+&"run": SubResource("Animation_0b50u"),
+&"snif": SubResource("Animation_ragsy"),
+&"walk": SubResource("Animation_3wwqk")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0f7ge"]
+animation = &"alert"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_vy00a"]
+nodes/output/position = Vector2(640, 140)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_0f7ge")
+nodes/Animation/position = Vector2(159.5, 149.6)
+node_connections = [&"output", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5hrab"]
+animation = &"bark"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_vy00a"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_v11b5"]
+nodes/output/position = Vector2(720, 140)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_5hrab")
+nodes/Animation/position = Vector2(99, 157.3)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_vy00a")
+nodes/TimeScale/position = Vector2(380, 140)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cdo2b"]
+animation = &"crouch"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_lg1e2"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2tsqq"]
+nodes/output/position = Vector2(580, 160)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_cdo2b")
+nodes/Animation/position = Vector2(165, 150.70001)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_lg1e2")
+nodes/TimeScale/position = Vector2(379.5, 203.5)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1jtnu"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_0f7ge"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5hrab"]
+nodes/output/position = Vector2(520, 160)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_1jtnu")
+nodes/Animation/position = Vector2(156.20001, 152.90001)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_0f7ge")
+nodes/TimeScale/position = Vector2(340, 160)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_atgxi"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2dxko"]
+nodes/output/position = Vector2(540, 160)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_atgxi")
+nodes/Animation/position = Vector2(92.4, 161.70001)
+node_connections = [&"output", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2tsqq"]
+animation = &"recover-crouch"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_1jtnu"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0f7ge"]
+nodes/output/position = Vector2(660, 140)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_2tsqq")
+nodes/Animation/position = Vector2(148.5, 160.6)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_1jtnu")
+nodes/TimeScale/position = Vector2(400, 180)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lg1e2"]
+animation = &"snif"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_2tsqq"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1jtnu"]
+nodes/output/position = Vector2(540, 160)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_lg1e2")
+nodes/Animation/position = Vector2(92.4, 136.40001)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_2tsqq")
+nodes/TimeScale/position = Vector2(308, 220.00002)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_akjmj"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2dxko"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_akjmj"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_atgxi"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_akjmj"]
+graph_offset = Vector2(-62.1109, 68.2809)
+nodes/output/position = Vector2(940, 240)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_2dxko")
+nodes/Animation/position = Vector2(171, 120)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_akjmj")
+"nodes/Animation 2/position" = Vector2(220, 300)
+nodes/wal-run-blend/node = SubResource("AnimationNodeBlend2_atgxi")
+nodes/wal-run-blend/position = Vector2(488.278, 214.80899)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_akjmj")
+nodes/TimeScale/position = Vector2(720, 220)
+node_connections = [&"output", 0, &"TimeScale", &"wal-run-blend", 0, &"Animation", &"wal-run-blend", 1, &"Animation 2", &"TimeScale", 0, &"wal-run-blend"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tol2v"]
+states/alert/node = SubResource("AnimationNodeBlendTree_vy00a")
+states/alert/position = Vector2(754, 19)
+states/bark/node = SubResource("AnimationNodeBlendTree_v11b5")
+states/bark/position = Vector2(731, 107)
+states/crouch/node = SubResource("AnimationNodeBlendTree_2tsqq")
+states/crouch/position = Vector2(490, 39)
+states/idle/node = SubResource("AnimationNodeBlendTree_5hrab")
+states/idle/position = Vector2(324, 180)
+states/jump/node = SubResource("AnimationNodeBlendTree_2dxko")
+states/jump/position = Vector2(591, 100)
+states/recover-crouch/node = SubResource("AnimationNodeBlendTree_0f7ge")
+states/recover-crouch/position = Vector2(737, 212)
+states/snif/node = SubResource("AnimationNodeBlendTree_1jtnu")
+states/snif/position = Vector2(490, 212)
+states/walk-run/node = SubResource("AnimationNodeBlendTree_akjmj")
+states/walk-run/position = Vector2(388, 112)
+graph_offset = Vector2(-41, -17)
+
+[node name="wolf" type="CharacterBody2D" unique_id=607763266]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1375833321]
+texture = ExtResource("1_unt2m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=73011108]
+visible = false
+position = Vector2(1, 9)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_tol2v")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=144773710]
+libraries/ = SubResource("AnimationLibrary_8qf65")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1506694860]
+tree_root = SubResource("AnimationNodeStateMachine_tol2v")
+anim_player = NodePath("../AnimationPlayer")
+parameters/bark/TimeScale/scale = 1.0
+parameters/crouch/TimeScale/scale = 1.0
+parameters/idle/TimeScale/scale = 1.0
+parameters/recover-crouch/TimeScale/scale = 1.0
+parameters/snif/TimeScale/scale = 1.0
+parameters/walk-run/wal-run-blend/blend_amount = 0.04
+parameters/walk-run/TimeScale/scale = 1.0
