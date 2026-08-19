@@ -56,7 +56,7 @@ texture = ExtResource("5_qa4ke")
 
 [node name="player" parent="." unique_id=623324050 instance=ExtResource("2_kx5p7")]
 z_index = 1
-position = Vector2(483.80353, 9.274378)
+position = Vector2(-89.91296, -14.023979)
 
 [node name="Camera2D" type="Camera2D" parent="player" unique_id=697527603]
 process_priority = 1
@@ -98,6 +98,7 @@ grab_offset = Vector2(4, 1)
 
 [node name="left_ledge" parent="ground/big_platform" unique_id=716316176 instance=ExtResource("5_8db1l")]
 position = Vector2(92, 18)
+ledge_side = 1
 grab_offset = Vector2(-4, 1)
 
 [node name="big_platform2" type="StaticBody2D" parent="ground" unique_id=1784896500]

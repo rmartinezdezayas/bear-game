@@ -59,7 +59,8 @@ color = Color(0.3764706, 0.45490196, 0.67058825, 1)
 
 [node name="ledge6" parent="StaticBody2D/CollisionPolygon2D4/ColorRect" unique_id=624027761 instance=ExtResource("4_mygcv")]
 position = Vector2(6, 1)
-grab_offset = Vector2(-6, 1)
+ledge_side = 2
+grab_offset = Vector2(4, 1)
 
 [node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=640119554]
 polygon = PackedVector2Array(3952, -116, 3865, -110, 3727, -105, 3635, -102, 3526, -92, 3485, -93, 3478, -101, 3469, -101, 3469, -93, 3382, -93, 3346, -95, 3339, -76, 3188.117, -79.59246, 3171, -80, 3189, -3)
@@ -73,11 +74,13 @@ polygon = PackedVector2Array(3920, -109, 3987, 7, 4067, 97, 4032, 184, 4135, 188
 
 [node name="ledge" parent="." unique_id=1966392521 instance=ExtResource("4_mygcv")]
 position = Vector2(366, -73)
-grab_offset = Vector2(-6, 1)
+ledge_side = 1
+grab_offset = Vector2(-4, 1)
 
 [node name="ledge2" parent="." unique_id=1725697901 instance=ExtResource("4_mygcv")]
 position = Vector2(189, -24)
-grab_offset = Vector2(-6, 1)
+ledge_side = 1
+grab_offset = Vector2(-4, 1)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1237805681]
 position = Vector2(881, -107)
@@ -95,15 +98,18 @@ color = Color(0.6392157, 0.5764706, 0.5686275, 1)
 
 [node name="ledge3" parent="." unique_id=1676938406 instance=ExtResource("4_mygcv")]
 position = Vector2(1064, -65)
-grab_offset = Vector2(2, 1)
+ledge_side = 2
+grab_offset = Vector2(4, 1)
 
 [node name="ledge4" parent="." unique_id=1957891608 instance=ExtResource("4_mygcv")]
 position = Vector2(1099, -86)
-grab_offset = Vector2(-6, 1)
+ledge_side = 1
+grab_offset = Vector2(-4, 1)
 
 [node name="ledge5" parent="." unique_id=401625886 instance=ExtResource("4_mygcv")]
 position = Vector2(1382, -127)
-grab_offset = Vector2(-6, 1)
+ledge_side = 1
+grab_offset = Vector2(-4, 1)
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=1760270137]
 position = Vector2(1901, -119)
@@ -141,4 +147,5 @@ shape = SubResource("RectangleShape2D_vclkk")
 
 [node name="ledge6" parent="." unique_id=204562003 instance=ExtResource("4_mygcv")]
 position = Vector2(3177, -79)
-grab_offset = Vector2(-6, 1)
+ledge_side = 1
+grab_offset = Vector2(-4, 1)
