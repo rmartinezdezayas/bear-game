@@ -79,7 +79,7 @@ position = Vector2(-155, 0)
 texture = ExtResource("1_fubmo")
 
 [node name="car_1" parent="." unique_id=1161502545 instance=ExtResource("1_n5sij")]
-position = Vector2(40, 35)
+position = Vector2(40, 37)
 
 [node name="bear" parent="." unique_id=468607151 instance=ExtResource("3_7p1wf")]
 position = Vector2(-118, 17)
