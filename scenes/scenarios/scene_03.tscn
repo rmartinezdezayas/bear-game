@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://bhho8jwp4ii84"]
+
+[ext_resource type="Texture2D" uid="uid://c1h8xyc5xbhba" path="res://assets/environment/scene-sketches/scene-3-sketch.png" id="1_btnj1"]
+[ext_resource type="PackedScene" uid="uid://cgd7skkpupnj4" path="res://scenes/objects/player/player.tscn" id="2_jcxmc"]
+[ext_resource type="PackedScene" uid="uid://bladyxmnd58a8" path="res://scenes/objects/environment/ground/ledge.tscn" id="3_jcxmc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_btnj1"]
+size = Vector2(204, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jcxmc"]
+size = Vector2(44, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_10u6m"]
+size = Vector2(172, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aufho"]
+size = Vector2(44, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2wk5u"]
+size = Vector2(332, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ctm3n"]
+size = Vector2(346, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x75io"]
+size = Vector2(40, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e472h"]
+size = Vector2(28, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6okpm"]
+size = Vector2(346, 6)
+
+[node name="scene_03" type="Node2D" unique_id=931929292]
+
+[node name="scene-sketch" type="Sprite2D" parent="." unique_id=1572573476]
+position = Vector2(4722, 246)
+texture = ExtResource("1_btnj1")
+
+[node name="player" parent="." unique_id=218348890 instance=ExtResource("2_jcxmc")]
+position = Vector2(843, -75)
+
+[node name="Camera2D" type="Camera2D" parent="player" unique_id=1811290243]
+position = Vector2(14, -22)
+
+[node name="ground" type="StaticBody2D" parent="." unique_id=921962627]
+position = Vector2(-9, -14)
+
+[node name="001" type="CollisionShape2D" parent="ground" unique_id=1468594966]
+position = Vector2(92, 31)
+shape = SubResource("RectangleShape2D_btnj1")
+
+[node name="002" type="CollisionShape2D" parent="ground" unique_id=940354837]
+position = Vector2(197, 6)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_jcxmc")
+
+[node name="ledge" parent="ground/002" unique_id=1395517669 instance=ExtResource("3_jcxmc")]
+position = Vector2(-65.00001, -179)
+rotation = -1.5707964
+ledge_side = 1
+grab_offset = Vector2(-4, 1)
+
+[node name="003" type="CollisionShape2D" parent="ground" unique_id=1430580084]
+position = Vector2(286, -13)
+shape = SubResource("RectangleShape2D_10u6m")
+
+[node name="004" type="CollisionShape2D" parent="ground" unique_id=1030797475]
+position = Vector2(373, -38)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_aufho")
+
+[node name="ledge" parent="ground/004" unique_id=204562003 instance=ExtResource("3_jcxmc")]
+position = Vector2(23.000008, 173)
+rotation = -1.5707964
+ledge_side = 1
+grab_offset = Vector2(-4, 1)
+
+[node name="005" type="CollisionShape2D" parent="ground" unique_id=534632280]
+position = Vector2(542, -57)
+shape = SubResource("RectangleShape2D_2wk5u")
+
+[node name="006" type="CollisionShape2D" parent="ground" unique_id=1924243957]
+position = Vector2(900, -57)
+shape = SubResource("RectangleShape2D_ctm3n")
+
+[node name="jump-distance" type="CollisionShape2D" parent="ground" unique_id=801329039]
+position = Vector2(1093, -51)
+shape = SubResource("RectangleShape2D_x75io")
+
+[node name="007" type="CollisionShape2D" parent="ground" unique_id=1989475667]
+position = Vector2(903, -80)
+shape = SubResource("RectangleShape2D_e472h")
+
+[node name="008" type="CollisionShape2D" parent="ground" unique_id=2142331138]
+position = Vector2(1286, -57)
+shape = SubResource("RectangleShape2D_6okpm")

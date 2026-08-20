@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bt6rnlc8pcge8"]
 
-[ext_resource type="PackedScene" uid="uid://kop41ttjf71c" path="res://scenes/objects/environment/backgrounds/transition_splash_screen.tscn" id="1_v5kny"]
-[ext_resource type="Texture2D" uid="uid://c1h8xyc5xbhba" path="res://assets/environment/scene-sketches/scene-3-sketch.png" id="2_vt0na"]
-[ext_resource type="PackedScene" uid="uid://cgd7skkpupnj4" path="res://scenes/objects/player/player.tscn" id="3_mygcv"]
-[ext_resource type="PackedScene" uid="uid://bladyxmnd58a8" path="res://scenes/objects/environment/ground/ledge.tscn" id="4_mygcv"]
+[ext_resource type="PackedScene" uid="uid://kop41ttjf71c" path="res://scenes/objects/environment/backgrounds/transition_splash_screen.tscn" id="1_r6xib"]
+[ext_resource type="Texture2D" uid="uid://c1h8xyc5xbhba" path="res://assets/environment/scene-sketches/scene-3-sketch.png" id="2_mm8rl"]
+[ext_resource type="PackedScene" uid="uid://cgd7skkpupnj4" path="res://scenes/objects/player/player.tscn" id="3_hpdrh"]
+[ext_resource type="PackedScene" uid="uid://bladyxmnd58a8" path="res://scenes/objects/environment/ground/ledge.tscn" id="4_s0s5u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tol2v"]
 size = Vector2(78, 13.602295)
@@ -20,16 +20,16 @@ size = Vector2(151.01527, 12.825623)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vclkk"]
 size = Vector2(226.53668, 12.825623)
 
-[node name="Scene3" type="Node2D" unique_id=273871966]
+[node name="sketch_scene_03" type="Node2D" unique_id=273871966]
 
-[node name="transition_splash_screen" parent="." unique_id=1645034372 instance=ExtResource("1_v5kny")]
+[node name="transition_splash_screen" parent="." unique_id=1645034372 instance=ExtResource("1_r6xib")]
 
 [node name="scene-sketch" type="Sprite2D" parent="." unique_id=1274307234]
 position = Vector2(4722, 246)
-texture = ExtResource("2_vt0na")
+texture = ExtResource("2_mm8rl")
 
-[node name="player" parent="." unique_id=623324050 instance=ExtResource("3_mygcv")]
-position = Vector2(367.86835, -96.52893)
+[node name="player" parent="." unique_id=623324050 instance=ExtResource("3_hpdrh")]
+position = Vector2(-62.264328, -66.405334)
 
 [node name="Camera2D" type="Camera2D" parent="player" unique_id=58121032]
 position = Vector2(14, -22)
@@ -57,7 +57,7 @@ offset_right = 1602.0
 offset_bottom = -89.0
 color = Color(0.3764706, 0.45490196, 0.67058825, 1)
 
-[node name="ledge6" parent="StaticBody2D/CollisionPolygon2D4/ColorRect" unique_id=624027761 instance=ExtResource("4_mygcv")]
+[node name="ledge6" parent="StaticBody2D/CollisionPolygon2D4/ColorRect" unique_id=624027761 instance=ExtResource("4_s0s5u")]
 position = Vector2(6, 1)
 ledge_side = 2
 grab_offset = Vector2(4, 1)
@@ -72,12 +72,12 @@ polygon = PackedVector2Array(3581, -118, 3597, -120, 3599, -127, 3600, -137, 358
 [node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=332557127]
 polygon = PackedVector2Array(3920, -109, 3987, 7, 4067, 97, 4032, 184, 4135, 188, 4181, 189, 4329, 191, 4480, 185, 4889, 185, 5131, 185, 6423, 188, 6583, 145, 6705, 118, 6805, 116, 6647, 303, 4132, 250, 3884, 122, 3888, -35)
 
-[node name="ledge" parent="." unique_id=1966392521 instance=ExtResource("4_mygcv")]
+[node name="ledge" parent="." unique_id=1966392521 instance=ExtResource("4_s0s5u")]
 position = Vector2(366, -73)
 ledge_side = 1
 grab_offset = Vector2(-4, 1)
 
-[node name="ledge2" parent="." unique_id=1725697901 instance=ExtResource("4_mygcv")]
+[node name="ledge2" parent="." unique_id=1725697901 instance=ExtResource("4_s0s5u")]
 position = Vector2(189, -24)
 ledge_side = 1
 grab_offset = Vector2(-4, 1)
@@ -96,17 +96,17 @@ offset_right = 62.0
 offset_bottom = 7.0
 color = Color(0.6392157, 0.5764706, 0.5686275, 1)
 
-[node name="ledge3" parent="." unique_id=1676938406 instance=ExtResource("4_mygcv")]
+[node name="ledge3" parent="." unique_id=1676938406 instance=ExtResource("4_s0s5u")]
 position = Vector2(1064, -65)
 ledge_side = 2
 grab_offset = Vector2(4, 1)
 
-[node name="ledge4" parent="." unique_id=1957891608 instance=ExtResource("4_mygcv")]
+[node name="ledge4" parent="." unique_id=1957891608 instance=ExtResource("4_s0s5u")]
 position = Vector2(1099, -86)
 ledge_side = 1
 grab_offset = Vector2(-4, 1)
 
-[node name="ledge5" parent="." unique_id=401625886 instance=ExtResource("4_mygcv")]
+[node name="ledge5" parent="." unique_id=401625886 instance=ExtResource("4_s0s5u")]
 position = Vector2(1382, -127)
 ledge_side = 1
 grab_offset = Vector2(-4, 1)
@@ -145,7 +145,7 @@ rotation = 0.008726646
 scale = Vector2(1.0000002, 1.0000002)
 shape = SubResource("RectangleShape2D_vclkk")
 
-[node name="ledge6" parent="." unique_id=204562003 instance=ExtResource("4_mygcv")]
+[node name="ledge6" parent="." unique_id=204562003 instance=ExtResource("4_s0s5u")]
 position = Vector2(3177, -79)
 ledge_side = 1
 grab_offset = Vector2(-4, 1)

@@ -20,6 +20,9 @@ distance = 7.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8db1l"]
 size = Vector2(40, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14mfn"]
+size = Vector2(44, 6)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0iiog"]
 size = Vector2(145, 32)
 
@@ -32,7 +35,7 @@ size = Vector2(66, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nt4ef"]
 size = Vector2(21, 31)
 
-[node name="scene_0" type="Node2D" unique_id=1598948707]
+[node name="scene_00" type="Node2D" unique_id=1598948707]
 
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1208088206]
 position = Vector2(242, 18)
@@ -56,7 +59,7 @@ texture = ExtResource("5_qa4ke")
 
 [node name="player" parent="." unique_id=623324050 instance=ExtResource("2_kx5p7")]
 z_index = 1
-position = Vector2(-89.91296, -14.023979)
+position = Vector2(-95.58246, -12.469692)
 
 [node name="Camera2D" type="Camera2D" parent="player" unique_id=697527603]
 process_priority = 1
@@ -95,6 +98,20 @@ shape = SubResource("RectangleShape2D_8db1l")
 [node name="right_ledge" parent="ground/big_platform" unique_id=204562003 instance=ExtResource("5_8db1l")]
 position = Vector2(120, 18)
 grab_offset = Vector2(4, 1)
+
+[node name="right_ledge" parent="ground/big_platform/right_ledge" unique_id=1718445851 instance=ExtResource("5_8db1l")]
+position = Vector2(-34, -44)
+grab_offset = Vector2(4, 1)
+
+[node name="right_ledge" parent="ground/big_platform/right_ledge/right_ledge" unique_id=800975497 instance=ExtResource("5_8db1l")]
+position = Vector2(40, -1)
+ledge_side = 2
+grab_offset = Vector2(4, 1)
+
+[node name="002" type="CollisionShape2D" parent="ground/big_platform/right_ledge/right_ledge" unique_id=938695071]
+position = Vector2(-38.47173, -137.18364)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_14mfn")
 
 [node name="left_ledge" parent="ground/big_platform" unique_id=716316176 instance=ExtResource("5_8db1l")]
 position = Vector2(92, 18)
@@ -188,3 +205,12 @@ texture = ExtResource("11_7l1ra")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="obstacle-tree-1/StaticBody2D" unique_id=1669903332]
 position = Vector2(19.5, -10)
 shape = SubResource("RectangleShape2D_nt4ef")
+
+[node name="002" type="CollisionShape2D" parent="." unique_id=445216290]
+position = Vector2(-107, -18)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_14mfn")
+
+[node name="002" type="CollisionShape2D" parent="002" unique_id=287592094]
+position = Vector2(-9.536743e-07, -34)
+shape = SubResource("RectangleShape2D_14mfn")
