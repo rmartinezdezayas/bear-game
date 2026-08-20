@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://enyq60u1b8ac"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x75io"]
+size = Vector2(40, 6)
+
+[node name="jump-distance" type="CollisionShape2D" unique_id=775577163]
+shape = SubResource("RectangleShape2D_x75io")

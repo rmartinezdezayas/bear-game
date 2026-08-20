@@ -264,7 +264,8 @@ func _ledge_logic() -> void:
 	# Block grab if on floor, moving up, or on cooldown after dropping
 	if is_on_floor() or velocity.y <= 0 or ledge_cooldown_timer > 0.0:
 		return
-	if !$ledge_grab_hit.is_colliding() or $ledge_grab_miss.is_colliding():
+	#if !$ledge_grab_hit.is_colliding() or $ledge_grab_miss.is_colliding():
+	if !$ledge_grab_hit.is_colliding():
 		return
 	if !Input.is_action_pressed("up") and direction == 0:
 		return

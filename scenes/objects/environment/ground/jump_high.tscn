@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://brcr5cryy26rl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lyyg"]
+size = Vector2(6.625, 24)
+
+[node name="jump-high" type="CollisionShape2D" unique_id=2076309062]
+shape = SubResource("RectangleShape2D_8lyyg")

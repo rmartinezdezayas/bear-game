@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://p0almkxmuqqm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jcxmc"]
+size = Vector2(44, 6)
+
+[node name="ledge-high" type="CollisionShape2D" unique_id=207841411]
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_jcxmc")
