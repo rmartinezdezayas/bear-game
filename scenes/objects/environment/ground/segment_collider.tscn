@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://jw7q7qsbivl7"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_821qg"]
+
+[node name="segment_collider" type="Node2D" unique_id=552873128]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=818125483]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1554862098]
+shape = SubResource("SegmentShape2D_821qg")
