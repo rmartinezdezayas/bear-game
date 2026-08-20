@@ -38,6 +38,7 @@ var forced_crouch: bool = false
 var direction := 0.0
 var is_stumbling: bool = false
 var ledge_cooldown_timer: float = 3.0
+var was_crouch_collision_active: bool = false
 
 func _ready() -> void:
 	state_machine = animation_tree["parameters/playback"]
@@ -170,6 +171,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed * crouch_multiplier * stumble_multiplier)
 
+	# Update collision shape BEFORE move_and_slide so physics uses the correct shape
+	var should_crouch_collision = is_crouching or rolling
+	if should_crouch_collision != was_crouch_collision_active:
+		update_crouch_collision(should_crouch_collision)
+		was_crouch_collision_active = should_crouch_collision
+
 	move_and_slide()
 
 	# Ledge Grab Detection
@@ -213,9 +220,6 @@ func animations(is_crouching: bool):
 		elif moving_left:
 			$Sprite2D.flip_h = true
 
-	# Update collision shape based on crouch state
-	update_crouch_collision((is_crouching or rolling))
-	
 	# 2. Air/Jump state logic (Highest Priority)
 	if not is_on_floor():
 		if velocity.y < 0:
