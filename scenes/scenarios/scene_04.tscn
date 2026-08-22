@@ -1,3 +1,53 @@
 [gd_scene format=3 uid="uid://cubxxo1lg3fyw"]
 
+[ext_resource type="Texture2D" uid="uid://c1h8xyc5xbhba" path="res://assets/environment/scene-sketches/scene-3-sketch.png" id="1_vrams"]
+[ext_resource type="PackedScene" uid="uid://bladyxmnd58a8" path="res://scenes/objects/environment/ground/ledge.tscn" id="2_5my71"]
+[ext_resource type="PackedScene" uid="uid://enyq60u1b8ac" path="res://scenes/objects/environment/ground/jump_distance.tscn" id="2_rowbk"]
+[ext_resource type="PackedScene" uid="uid://p0almkxmuqqm" path="res://scenes/objects/environment/ground/ledge_high.tscn" id="3_5my71"]
+[ext_resource type="PackedScene" uid="uid://brcr5cryy26rl" path="res://scenes/objects/environment/ground/jump_high.tscn" id="4_4etav"]
+[ext_resource type="PackedScene" uid="uid://hktdbotyc00t" path="res://scenes/objects/player/player_spawn.tscn" id="5_q5ftl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eq6kj"]
+size = Vector2(1425.9375, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4etav"]
+size = Vector2(178.96875, 6)
+
 [node name="scene_04" type="Node2D" unique_id=1222222391]
+
+[node name="scene-sketch" type="Sprite2D" parent="." unique_id=172328488]
+position = Vector2(4722, 246)
+texture = ExtResource("1_vrams")
+
+[node name="ground" type="StaticBody2D" parent="." unique_id=1758975072]
+position = Vector2(4722, 246)
+
+[node name="001" type="CollisionShape2D" parent="ground" unique_id=820429200]
+position = Vector2(-2292.0313, -334)
+shape = SubResource("RectangleShape2D_eq6kj")
+
+[node name="ledge" parent="ground/001" unique_id=204562003 instance=ExtResource("2_5my71")]
+position = Vector2(707.03125, -2)
+ledge_side = 2
+grab_offset = Vector2(4, 1)
+
+[node name="002" type="CollisionShape2D" parent="ground" unique_id=628589840]
+position = Vector2(-1449.4844, -319)
+shape = SubResource("RectangleShape2D_4etav")
+
+[node name="ledge" parent="ground/002" unique_id=467385265 instance=ExtResource("2_5my71")]
+position = Vector2(-551.0156, -2)
+ledge_side = 1
+grab_offset = Vector2(-4, 1)
+
+[node name="jump-distance" parent="." unique_id=775577163 instance=ExtResource("2_rowbk")]
+position = Vector2(3163, -79)
+
+[node name="ledge-high" parent="." unique_id=207841411 instance=ExtResource("3_5my71")]
+position = Vector2(1832.9536, -169.38206)
+
+[node name="jump-high" parent="." unique_id=2076309062 instance=ExtResource("4_4etav")]
+position = Vector2(1890.0139, -166.68326)
+
+[node name="player_spawn" parent="." unique_id=217074554 instance=ExtResource("5_q5ftl")]
+position = Vector2(3119.9229, -99.948364)
