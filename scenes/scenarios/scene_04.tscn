@@ -14,6 +14,7 @@ size = Vector2(1425.9375, 6)
 size = Vector2(178.96875, 6)
 
 [node name="scene_04" type="Node2D" unique_id=1222222391]
+position = Vector2(-10, -5)
 
 [node name="scene-sketch" type="Sprite2D" parent="." unique_id=172328488]
 position = Vector2(4722, 246)
