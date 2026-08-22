@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://enyq60u1b8ac" path="res://scenes/objects/environment/ground/jump_distance.tscn" id="4_2wk5u"]
 [ext_resource type="PackedScene" uid="uid://p0almkxmuqqm" path="res://scenes/objects/environment/ground/ledge_high.tscn" id="5_ctm3n"]
 [ext_resource type="PackedScene" uid="uid://brcr5cryy26rl" path="res://scenes/objects/environment/ground/jump_high.tscn" id="6_x75io"]
+[ext_resource type="PackedScene" uid="uid://b1hrhmthk715w" path="res://scenes/scenarios/00_scene_trigger.tscn" id="7_x75io"]
+[ext_resource type="PackedScene" uid="uid://nma2d4wbcgdx" path="res://scenes/scenarios/scene_00.tscn" id="8_e472h"]
+[ext_resource type="PackedScene" uid="uid://d0sukyfq23jtd" path="res://scenes/scenarios/scene_01.tscn" id="9_e472h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_btnj1"]
 size = Vector2(204, 6)
@@ -189,3 +192,8 @@ position = Vector2(1042, -42)
 
 [node name="jump-high" parent="." unique_id=2076309062 instance=ExtResource("6_x75io")]
 position = Vector2(1060, -5)
+
+[node name="00_scene_trigger" parent="." unique_id=1228326248 instance=ExtResource("7_x75io")]
+position = Vector2(1510, -184)
+scenes_to_load = Array[PackedScene]([ExtResource("8_e472h")])
+scenes_to_unload = Array[PackedScene]([ExtResource("9_e472h")])

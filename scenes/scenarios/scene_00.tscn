@@ -36,6 +36,7 @@ size = Vector2(66, 12)
 size = Vector2(21, 31)
 
 [node name="scene_00" type="Node2D" unique_id=1598948707]
+position = Vector2(1737, -131)
 
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1208088206]
 position = Vector2(242, 18)
