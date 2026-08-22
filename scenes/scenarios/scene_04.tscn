@@ -13,6 +13,15 @@ size = Vector2(1425.9375, 6)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4etav"]
 size = Vector2(178.96875, 6)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5my71"]
+size = Vector2(593.4844, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5ftl"]
+size = Vector2(399.97998, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kuibw"]
+size = Vector2(492, 6)
+
 [node name="scene_04" type="Node2D" unique_id=1222222391]
 position = Vector2(-10, -5)
 
@@ -41,6 +50,20 @@ position = Vector2(-551.0156, -2)
 ledge_side = 1
 grab_offset = Vector2(-4, 1)
 
+[node name="003" type="CollisionShape2D" parent="ground" unique_id=1183568522]
+position = Vector2(-1082.7422, -336)
+shape = SubResource("RectangleShape2D_5my71")
+
+[node name="004" type="CollisionShape2D" parent="ground" unique_id=695389439]
+position = Vector2(-647.41406, -195.41415)
+rotation = 0.7853982
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_q5ftl")
+
+[node name="005" type="CollisionShape2D" parent="ground" unique_id=1616671277]
+position = Vector2(-264, -53)
+shape = SubResource("RectangleShape2D_kuibw")
+
 [node name="jump-distance" parent="." unique_id=775577163 instance=ExtResource("2_rowbk")]
 position = Vector2(3163, -79)
 
@@ -51,4 +74,4 @@ position = Vector2(1832.9536, -169.38206)
 position = Vector2(1890.0139, -166.68326)
 
 [node name="player_spawn" parent="." unique_id=217074554 instance=ExtResource("5_q5ftl")]
-position = Vector2(3119.9229, -99.948364)
+position = Vector2(1730.8195, -105.778)
