@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dkgix50nmg0m1" path="res://scripts/00_scene_manager.gd" id="1_ckjnu"]
 [ext_resource type="PackedScene" uid="uid://bhho8jwp4ii84" path="res://scenes/scenarios/scene_03.tscn" id="2_q3m46"]
+[ext_resource type="PackedScene" uid="uid://cgd7skkpupnj4" path="res://scenes/objects/player/player.tscn" id="3_khhxr"]
 
 [node name="scene_manager" type="Node2D" unique_id=911661010 node_paths=PackedStringArray("current_level_container")]
 script = ExtResource("1_ckjnu")
@@ -10,3 +11,6 @@ current_level_container = NodePath("current_level_container")
 [node name="current_level_container" type="Node2D" parent="." unique_id=984414704]
 
 [node name="scene_03" parent="current_level_container" unique_id=931929292 instance=ExtResource("2_q3m46")]
+
+[node name="player" parent="current_level_container" unique_id=218348890 instance=ExtResource("3_khhxr")]
+position = Vector2(1323.4733, -109.37723)

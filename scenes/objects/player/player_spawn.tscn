@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://hktdbotyc00t"]
+
+[ext_resource type="Script" uid="uid://cxbwxj7qeq3f6" path="res://scripts/player_spawn.gd" id="1_gmvvb"]
+[ext_resource type="PackedScene" uid="uid://cgd7skkpupnj4" path="res://scenes/objects/player/player.tscn" id="2_icths"]
+
+[node name="player_spawn" type="Marker2D" unique_id=217074554]
+script = ExtResource("1_gmvvb")
+player_scene = ExtResource("2_icths")

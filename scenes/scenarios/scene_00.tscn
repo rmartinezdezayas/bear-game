@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://cqf84irxspalc" path="res://assets/environment/scene-sketches/jump-distance.png" id="1_ftal8"]
 [ext_resource type="Texture2D" uid="uid://ddnmx2y5d4xif" path="res://assets/environment/backgrounds/160-90-forest.png" id="2_8db1l"]
-[ext_resource type="PackedScene" uid="uid://cgd7skkpupnj4" path="res://scenes/objects/player/player.tscn" id="2_kx5p7"]
 [ext_resource type="Texture2D" uid="uid://cswpw2gg8q8yi" path="res://assets/environment/backgrounds/160-90-cave.png" id="3_6b0k3"]
 [ext_resource type="PackedScene" uid="uid://qwjn1slavbi8" path="res://scenes/objects/environment/rocks/rock_1.tscn" id="3_p2ku2"]
 [ext_resource type="Texture2D" uid="uid://cw10asu1ybqag" path="res://assets/environment/scene-sketches/test-scene-1.png" id="4_0iiog"]
@@ -11,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cf3hjxy4svym" path="res://scenes/objects/environment/ground/stumble.tscn" id="7_g2472"]
 [ext_resource type="Texture2D" uid="uid://cqwc45533mpip" path="res://assets/environment/trees/obstacle-tree-1-front.png" id="10_4ly0x"]
 [ext_resource type="Texture2D" uid="uid://l7sqtfjcbjxp" path="res://assets/environment/trees/obstacle-tree-1-back.png" id="11_7l1ra"]
+[ext_resource type="PackedScene" uid="uid://hktdbotyc00t" path="res://scenes/objects/player/player_spawn.tscn" id="11_14mfn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tol2v"]
 
@@ -36,7 +36,6 @@ size = Vector2(66, 12)
 size = Vector2(21, 31)
 
 [node name="scene_00" type="Node2D" unique_id=1598948707]
-position = Vector2(1737, -131)
 
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1208088206]
 position = Vector2(242, 18)
@@ -57,19 +56,6 @@ texture = ExtResource("4_0iiog")
 [node name="test-scene-2" type="Sprite2D" parent="." unique_id=1931371525]
 position = Vector2(845, 0)
 texture = ExtResource("5_qa4ke")
-
-[node name="player" parent="." unique_id=623324050 instance=ExtResource("2_kx5p7")]
-z_index = 1
-position = Vector2(-95.58246, -12.469692)
-
-[node name="Camera2D" type="Camera2D" parent="player" unique_id=697527603]
-process_priority = 1
-position = Vector2(0, -38)
-limit_left = -250
-limit_top = 0
-limit_right = 2000
-limit_bottom = 0
-position_smoothing_speed = 7.0
 
 [node name="ground" type="StaticBody2D" parent="." unique_id=1285708268]
 position = Vector2(0, -4)
@@ -215,3 +201,6 @@ shape = SubResource("RectangleShape2D_14mfn")
 [node name="002" type="CollisionShape2D" parent="002" unique_id=287592094]
 position = Vector2(-9.536743e-07, -34)
 shape = SubResource("RectangleShape2D_14mfn")
+
+[node name="player_spawn" parent="." unique_id=217074554 instance=ExtResource("11_14mfn")]
+position = Vector2(-91, 3)

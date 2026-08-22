@@ -626,3 +626,6 @@ hit_from_inside = true
 [node name="ceiling_check" type="RayCast2D" parent="." unique_id=1633177011]
 position = Vector2(0, -15)
 target_position = Vector2(0, -4.5)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=853937793]
+position = Vector2(14, -22)

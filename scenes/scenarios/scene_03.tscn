@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://bhho8jwp4ii84"]
 
 [ext_resource type="Texture2D" uid="uid://c1h8xyc5xbhba" path="res://assets/environment/scene-sketches/scene-3-sketch.png" id="1_btnj1"]
-[ext_resource type="PackedScene" uid="uid://cgd7skkpupnj4" path="res://scenes/objects/player/player.tscn" id="2_jcxmc"]
 [ext_resource type="PackedScene" uid="uid://bladyxmnd58a8" path="res://scenes/objects/environment/ground/ledge.tscn" id="3_jcxmc"]
 [ext_resource type="PackedScene" uid="uid://enyq60u1b8ac" path="res://scenes/objects/environment/ground/jump_distance.tscn" id="4_2wk5u"]
 [ext_resource type="PackedScene" uid="uid://p0almkxmuqqm" path="res://scenes/objects/environment/ground/ledge_high.tscn" id="5_ctm3n"]
 [ext_resource type="PackedScene" uid="uid://brcr5cryy26rl" path="res://scenes/objects/environment/ground/jump_high.tscn" id="6_x75io"]
 [ext_resource type="PackedScene" uid="uid://b1hrhmthk715w" path="res://scenes/scenarios/00_scene_trigger.tscn" id="7_x75io"]
 [ext_resource type="PackedScene" uid="uid://nma2d4wbcgdx" path="res://scenes/scenarios/scene_00.tscn" id="8_e472h"]
+[ext_resource type="PackedScene" uid="uid://hktdbotyc00t" path="res://scenes/objects/player/player_spawn.tscn" id="9_6okpm"]
 [ext_resource type="PackedScene" uid="uid://d0sukyfq23jtd" path="res://scenes/scenarios/scene_01.tscn" id="9_e472h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_btnj1"]
@@ -63,12 +63,6 @@ size = Vector2(142, 6)
 [node name="scene-sketch" type="Sprite2D" parent="." unique_id=1572573476]
 position = Vector2(4722, 246)
 texture = ExtResource("1_btnj1")
-
-[node name="player" parent="." unique_id=218348890 instance=ExtResource("2_jcxmc")]
-position = Vector2(1488.1097, -122.06483)
-
-[node name="Camera2D" type="Camera2D" parent="player" unique_id=1811290243]
-position = Vector2(14, -22)
 
 [node name="ground" type="StaticBody2D" parent="." unique_id=921962627]
 position = Vector2(-9, -14)
@@ -197,3 +191,6 @@ position = Vector2(1060, -5)
 position = Vector2(1510, -184)
 scenes_to_load = Array[PackedScene]([ExtResource("8_e472h")])
 scenes_to_unload = Array[PackedScene]([ExtResource("9_e472h")])
+
+[node name="player_spawn" parent="." unique_id=217074554 instance=ExtResource("9_6okpm")]
+position = Vector2(1431, -144)
