@@ -585,6 +585,14 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_es176"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w33mi"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sl1de"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sl2de"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sl3de"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tol2v"]
 states/End/position = Vector2(963, 121)
 states/Start/position = Vector2(21, 72)
@@ -616,10 +624,12 @@ states/slide/node = SubResource("AnimationNodeBlendTree_v8645")
 states/slide/position = Vector2(571.07446, 144)
 states/stumble/node = SubResource("AnimationNodeBlendTree_278xx")
 states/stumble/position = Vector2(192.0745, 253.79669)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_0bpox"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_5c21n"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_e8m1u"), "idle", "idle-to-crouch", SubResource("AnimationNodeStateMachineTransition_77pet"), "idle-to-crouch", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_tlhxf"), "crouch-idle", "crouch-to-idle", SubResource("AnimationNodeStateMachineTransition_hrkfm"), "crouch-idle", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_oxcmq"), "crouch-walk", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_wylla"), "crouch-to-idle", "idle", SubResource("AnimationNodeStateMachineTransition_a3eqm"), "crouch-walk", "run", SubResource("AnimationNodeStateMachineTransition_plx2b"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_2xkbm"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_dqoq3"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_y8tjj"), "run", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_u2ulf"), "fall", "roll", SubResource("AnimationNodeStateMachineTransition_ugfu1"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_tuph1"), "ledge-grab", "ledge-climb", SubResource("AnimationNodeStateMachineTransition_3soij"), "ledge-climb", "idle", SubResource("AnimationNodeStateMachineTransition_6quye"), "fall", "ledge-grab", SubResource("AnimationNodeStateMachineTransition_278xx"), "jump", "ledge-grab", SubResource("AnimationNodeStateMachineTransition_v8645"), "ledge-grab", "fall", SubResource("AnimationNodeStateMachineTransition_y8sqo"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_wipsm"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_f6qwb"), "run", "fall", SubResource("AnimationNodeStateMachineTransition_ubkmu"), "run", "stumble", SubResource("AnimationNodeStateMachineTransition_ic1rj"), "stumble", "run", SubResource("AnimationNodeStateMachineTransition_2oeox"), "fall", "slide", SubResource("AnimationNodeStateMachineTransition_ju8re"), "slide", "run", SubResource("AnimationNodeStateMachineTransition_ncfio"), "slide", "idle", SubResource("AnimationNodeStateMachineTransition_es176")]
-graph_offset = Vector2(-72.92551, -93.738014)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_0bpox"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_5c21n"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_e8m1u"), "idle", "idle-to-crouch", SubResource("AnimationNodeStateMachineTransition_77pet"), "idle-to-crouch", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_tlhxf"), "crouch-idle", "crouch-to-idle", SubResource("AnimationNodeStateMachineTransition_hrkfm"), "crouch-idle", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_oxcmq"), "crouch-walk", "crouch-idle", SubResource("AnimationNodeStateMachineTransition_wylla"), "crouch-to-idle", "idle", SubResource("AnimationNodeStateMachineTransition_a3eqm"), "crouch-walk", "run", SubResource("AnimationNodeStateMachineTransition_plx2b"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_2xkbm"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_dqoq3"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_y8tjj"), "run", "crouch-walk", SubResource("AnimationNodeStateMachineTransition_u2ulf"), "fall", "roll", SubResource("AnimationNodeStateMachineTransition_ugfu1"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_tuph1"), "ledge-grab", "ledge-climb", SubResource("AnimationNodeStateMachineTransition_3soij"), "ledge-climb", "idle", SubResource("AnimationNodeStateMachineTransition_6quye"), "fall", "ledge-grab", SubResource("AnimationNodeStateMachineTransition_278xx"), "jump", "ledge-grab", SubResource("AnimationNodeStateMachineTransition_v8645"), "ledge-grab", "fall", SubResource("AnimationNodeStateMachineTransition_y8sqo"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_wipsm"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_f6qwb"), "run", "fall", SubResource("AnimationNodeStateMachineTransition_ubkmu"), "run", "stumble", SubResource("AnimationNodeStateMachineTransition_ic1rj"), "stumble", "run", SubResource("AnimationNodeStateMachineTransition_2oeox"), "fall", "slide", SubResource("AnimationNodeStateMachineTransition_ju8re"), "slide", "run", SubResource("AnimationNodeStateMachineTransition_ncfio"), "slide", "idle", SubResource("AnimationNodeStateMachineTransition_es176"), "slide", "jump", SubResource("AnimationNodeStateMachineTransition_w33mi"), "idle", "slide", SubResource("AnimationNodeStateMachineTransition_sl1de"), "run", "slide", SubResource("AnimationNodeStateMachineTransition_sl2de"), "slide", "fall", SubResource("AnimationNodeStateMachineTransition_sl3de")]
+graph_offset = Vector2(-72.92551, -242.33144)
 
 [node name="player" type="CharacterBody2D" unique_id=218348890 groups=["player"]]
+floor_snap_length = 4.0
+floor_max_angle = 0.97738439
 script = ExtResource("1_qhqgy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1213061414]
@@ -672,3 +682,6 @@ target_position = Vector2(0, -4.5)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=853937793]
 position = Vector2(14, -22)
+
+[node name="slide_check" type="RayCast2D" parent="." unique_id=1315028394]
+target_position = Vector2(0, 6)

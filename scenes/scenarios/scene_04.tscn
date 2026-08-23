@@ -17,10 +17,13 @@ size = Vector2(178.96875, 6)
 size = Vector2(593.4844, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q5ftl"]
-size = Vector2(399.97998, 6)
+size = Vector2(353.43213, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kuibw"]
-size = Vector2(492, 6)
+size = Vector2(521, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xv5n"]
+size = Vector2(32, 6)
 
 [node name="scene_04" type="Node2D" unique_id=1222222391]
 position = Vector2(-10, -5)
@@ -55,14 +58,25 @@ position = Vector2(-1082.7422, -336)
 shape = SubResource("RectangleShape2D_5my71")
 
 [node name="004" type="CollisionShape2D" parent="ground" unique_id=695389439]
-position = Vector2(-647.41406, -195.41415)
+position = Vector2(-664.4573, -211.45715)
 rotation = 0.7853982
-scale = Vector2(0.99999994, 0.99999994)
+scale = Vector2(0.9999999, 0.9999999)
 shape = SubResource("RectangleShape2D_q5ftl")
 
+[node name="ColorRect" type="ColorRect" parent="ground/004" unique_id=1803363452]
+offset_left = -199.40413
+offset_top = -2.828416
+offset_right = 176.30583
+offset_bottom = 2.808791
+
 [node name="005" type="CollisionShape2D" parent="ground" unique_id=1616671277]
-position = Vector2(-264, -53)
+position = Vector2(-284.5, -56)
 shape = SubResource("RectangleShape2D_kuibw")
+
+[node name="006" type="CollisionShape2D" parent="ground" unique_id=1853555242]
+position = Vector2(-541, -69)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_0xv5n")
 
 [node name="jump-distance" parent="." unique_id=775577163 instance=ExtResource("2_rowbk")]
 position = Vector2(3163, -79)
@@ -74,4 +88,4 @@ position = Vector2(1832.9536, -169.38206)
 position = Vector2(1890.0139, -166.68326)
 
 [node name="player_spawn" parent="." unique_id=217074554 instance=ExtResource("5_q5ftl")]
-position = Vector2(1730.8195, -105.778)
+position = Vector2(3888.6348, -106.39838)

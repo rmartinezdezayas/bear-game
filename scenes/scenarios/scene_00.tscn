@@ -32,6 +32,9 @@ size = Vector2(40, 6)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_821qg"]
 size = Vector2(66, 12)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g7ivo"]
+size = Vector2(38.89087, 6)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nt4ef"]
 size = Vector2(21, 31)
 
@@ -174,6 +177,18 @@ position = Vector2(2.001831, 0.7957344)
 rotation = 0.08726646
 shape = SubResource("RectangleShape2D_821qg")
 
+[node name="004" type="CollisionShape2D" parent="ground" unique_id=903860630]
+position = Vector2(765.00006, 1.0000234)
+rotation = 0.7853982
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_g7ivo")
+
+[node name="ColorRect" type="ColorRect" parent="ground/004" unique_id=842584157]
+offset_left = -19.066547
+offset_top = -2.8284419
+offset_right = 19.166485
+offset_bottom = 2.8087652
+
 [node name="stumble" parent="." unique_id=1337240352 instance=ExtResource("7_g2472")]
 position = Vector2(-225, 36)
 
@@ -203,4 +218,4 @@ position = Vector2(-9.536743e-07, -34)
 shape = SubResource("RectangleShape2D_14mfn")
 
 [node name="player_spawn" parent="." unique_id=217074554 instance=ExtResource("11_14mfn")]
-position = Vector2(-91, 3)
+position = Vector2(715.9936, -34.548203)
