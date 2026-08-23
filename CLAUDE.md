@@ -10,28 +10,37 @@ Godot 4.7 (Forward Plus) 2D pixel-art platformer. GDScript only, no addons, no t
 
 **After implementing any new feature, mechanic, level, NPC behaviour, input binding, or architectural change, run the `readme-maintainer` agent.** It decides whether `README.md` or this file went stale and updates them. This is not optional and not something to skip because the change felt small — the Mechanics table, Controls table, and Status section in the README go stale faster than anything else in the repo.
 
-Use the `gameplay-engineer` agent for work that writes or changes GDScript in `scripts/` or node structure in `scenes/`.
+**The two implementation agents have a hard split — do not let either cross it:**
 
-Three project skills carry the standards; load the relevant one before working:
+- `gameplay-engineer` writes **`.gd` files only**. It never edits `.tscn`, `project.godot`, `.import`, or `.gd.uid`, even for a one-line change. It reads them freely.
+- `scene-architect` owns **everything that is not GDScript**: `.tscn` node trees and properties, Inspector `@export` values, `AnimationTree` states, `project.godot` (input map, `[layer_names]`, `[global_group]`, autoloads, rendering), import settings and resource wiring. It never writes script logic.
+
+A task that needs both gets both, in that order, with the script agent's report naming exactly what the scene needs.
+
+**Nothing gets build- or parse-verified.** Roberto tests every change manually in the Godot editor before it is committed or called ready. Do not run the Godot binary, a headless parse check, or an import pass to confirm your own work — see the `godot-verification-policy` skill. Run it only when he explicitly asks.
+
+Four project skills carry the standards; load the relevant one before working:
 
 - `godot-gdscript-standards` — before writing or reviewing any `.gd` file.
 - `godot-mechanic-design` — before designing a player ability, NPC behaviour, or game system.
 - `godot-scene-architecture` — before creating a scene, adding a level, changing scene loading, or hand-editing a `.tscn`.
+- `godot-verification-policy` — before calling anything done, and any time you consider running Godot.
 
 The game renders at a **160x90 viewport** upscaled to a 1280x720 window (`window/stretch/mode="viewport"`, `default_texture_filter=0`, `snap_2d_transforms_to_pixel=true`). All positions, collision sizes, and tuning constants are in this tiny pixel space — a "small" number like `7.0` for a raycast length is a meaningful distance here.
 
 ## Commands
 
-There is no CLI build/test pipeline. Everything runs through the Godot editor or its binary (`godot` is **not** on PATH in this environment; use the full path to `Godot_v4.7-stable_win64.exe`):
+There is no CLI build/test pipeline, and agents do not run one. These are the commands **Roberto** uses when he tests (`godot` is **not** on PATH here; the binary is `Godot_v4.7-stable_win64.exe`):
 
 ```bash
-godot --path .                      # open project in editor
-godot --path . --headless --quit    # reimport assets / verify the project parses
-godot --path .                      # then F5 in-editor to run the main scene
+godot --path .                      # open project in editor, F5 to run the main scene
+godot --path . --headless --quit    # reimport assets
 godot --path . res://scenes/scenarios/scene_03.tscn   # run one scenario directly
 ```
 
 Running a scenario `.tscn` directly works because each one carries its own `player_spawn` (see below).
+
+Do not run any of these to verify your own changes. Only run one if he explicitly asks.
 
 ## Architecture
 
