@@ -64,7 +64,7 @@ scale = Vector2(0.9999999, 0.9999999)
 shape = SubResource("RectangleShape2D_q5ftl")
 
 [node name="ColorRect" type="ColorRect" parent="ground/004" unique_id=1803363452]
-offset_left = -199.40413
+offset_left = -176.38557
 offset_top = -2.828416
 offset_right = 176.30583
 offset_bottom = 2.808791
