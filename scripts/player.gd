@@ -194,16 +194,20 @@ func _physics_process(delta: float) -> void:
 			jump_hold_timer = 0.0
 			jump_is_held = false
 
-		if is_on_floor() and Input.is_action_just_pressed("jump") and !forced_crouch:
+		# Jumping is currently blocked while sliding down a slope. To allow it again, delete the
+		# "and not is_sliding" below and uncomment the slide branch inside — nothing else has to
+		# change, SLIDE_JUMP_PUSH / SLIDE_JUMP_CONTROL_LOCK and slide_jump_lock_timer are all still
+		# in place and wired up.
+		if is_on_floor() and Input.is_action_just_pressed("jump") and !forced_crouch and not is_sliding:
 			velocity.y = JUMP_VELOCITY
 			jump_is_held = true
 			jump_hold_timer = 0.0
-			if is_sliding:
-				# Jumping out of a slide launches the player down-slope instead of straight up,
-				# so a jump can never be used to climb the hill.
-				velocity.x = slide_direction * SLIDE_JUMP_PUSH
-				slide_jump_lock_timer = SLIDE_JUMP_CONTROL_LOCK
-				is_sliding = false
+			#if is_sliding:
+			#	# Jumping out of a slide launches the player down-slope instead of straight up,
+			#	# so a jump can never be used to climb the hill.
+			#	velocity.x = slide_direction * SLIDE_JUMP_PUSH
+			#	slide_jump_lock_timer = SLIDE_JUMP_CONTROL_LOCK
+			#	is_sliding = false
 		elif jump_is_held and Input.is_action_pressed("jump") and velocity.y < 0.0:
 			if jump_hold_timer < MAX_JUMP_HOLD_TIME:
 				velocity.y -= JUMP_HOLD_FORCE * delta
