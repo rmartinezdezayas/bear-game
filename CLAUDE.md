@@ -61,13 +61,17 @@ Levels do **not** contain a player instance. Each contains a `player_spawn.tscn`
 
 Single `_physics_process` on a `CharacterBody2D`, ordered deliberately — changing the order breaks things:
 
-1. `is_sliding` recomputed from `slide_check` raycast normal (slope 35°–55° while `velocity.y >= 0`).
+1. `is_sliding` recomputed by `_check_slide_surface()` from the `slide_check` raycast normal (`_is_slide_angle()`: 35°–55°, and only while grounded and not on a ledge). The previous frame's value is cached first: on the frame the slope runs out, the down-slope momentum is handed over as `velocity.x = SLIDE_EXIT_SPEED` with a `slide_exit_timer` window, because `move_toward(velocity.x, 0, speed)` further down is **not** delta-scaled and would otherwise stop the player dead on the last pixels of slope.
 2. Ledge state **returns early**, bypassing gravity, movement and `move_and_slide()` entirely; position is driven by `Tween`s instead.
 3. Asymmetric gravity: separate multipliers for ascent, apex float, and fall, plus variable jump height via `MAX_JUMP_HOLD_TIME` / `JUMP_HOLD_FORCE`.
 4. Collision shape is resized for crouch **before** `move_and_slide()`, guarded by `was_crouch_collision_active` so it only fires on change.
-5. After moving, ledge detection, raycast direction flipping, and fall-height → `roll` vs `land` classification.
+5. After moving, ledge detection, raycast direction flipping, and fall-height → `roll` vs `land` classification — skipped entirely when `_landed_on_slide_slope()` is true, so the player stays in `fall` for one frame and travels straight into `slide` (both `roll` and `land` only leave through an at-end transition, so either would have to play out in full while the player is already sliding).
 
-Tuning lives in the `const` block at the top of the file; prefer editing those over inlining numbers.
+While `is_sliding`, horizontal input is forced to zero, crouch is suppressed, `velocity` is set along the slope tangent rather than horizontally, and the sprite is locked facing downhill.
+
+**Slide jumping is currently disabled on purpose**, by an `and not is_sliding` clause on the jump condition; the down-slope launch it used to do is commented out in place just below it (`scripts/player.gd:197`). `SLIDE_JUMP_PUSH`, `SLIDE_JUMP_CONTROL_LOCK` and `slide_jump_lock_timer` are all still wired up, so it is a deliberate one-line revert, not dead or broken code — do not "fix" it by deleting either half.
+
+Tuning lives in the `const` block at the top of the file; prefer editing those over inlining numbers. `SLIDE_MAX_ANGLE` is cross-file coupled: it must stay below the player's `floor_max_angle` in `player.tscn` (currently 56°), otherwise the slope reads as a wall, `is_on_floor()` is false and the slide never engages.
 
 **Input abstraction for cutscenes**: every input read is gated on `input_enabled`. When false the controller reads `simulated_left` / `simulated_right` / `simulated_crouch` instead. Cutscene directors call `player.set_input_enabled(false)` then poke those booleans (see `scene_2.gd`). Other externally-called player API: `set_pursuit_mode(bool)` (swaps `BASE_SPEED`/`PURSUIT_SPEED` and the run animation's `run_speed` scale) and `stumble(duration)`.
 
