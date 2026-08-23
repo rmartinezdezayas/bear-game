@@ -260,10 +260,18 @@ func _physics_process(delta: float) -> void:
 		slide_jump_lock_timer = 0.0 # Landing hands control straight back to the player
 		var fall_height = air_start_y - global_position.y
 		var is_holding_horizontal = Input.is_action_pressed("left") or Input.is_action_pressed("right")
-		if fall_height >= ROLL_MIN_FALL_HEIGHT and fall_height <= ROLL_MAX_FALL_HEIGHT and is_holding_horizontal:
-			set_animation_condition("roll_requested", true)
-		else:
-			set_animation_condition("land_requested", true)
+		# Dropping onto a slide slope raises no landing request at all. is_sliding is still false here
+		# (it was computed before the move, while we were airborne) so without this the fall height
+		# alone would ask for a roll. "slide" is only reachable from "fall" in the AnimationTree, and
+		# both "roll" and "land" leave only through an at-end transition to "idle", so either one
+		# would have to play out in full while the player is already sliding down the hill. Staying
+		# in "fall" for the single frame until _check_slide_surface() picks the slope up lets
+		# animations() travel straight into "slide" with no hitch.
+		if not _landed_on_slide_slope():
+			if fall_height >= ROLL_MIN_FALL_HEIGHT and fall_height <= ROLL_MAX_FALL_HEIGHT and is_holding_horizontal:
+				set_animation_condition("roll_requested", true)
+			else:
+				set_animation_condition("land_requested", true)
 
 	animations(is_crouching)
 
@@ -437,8 +445,7 @@ func _check_slide_surface() -> bool:
 		return false
 
 	var normal: Vector2 = slide_check.get_collision_normal()
-	var angle: float = abs(rad_to_deg(normal.angle_to(Vector2.UP)))
-	if angle < SLIDE_MIN_ANGLE or angle > SLIDE_MAX_ANGLE:
+	if not _is_slide_angle(normal):
 		return false
 
 	# Rotate the surface normal 90 degrees to get the slope tangent, then point it downhill.
@@ -449,3 +456,25 @@ func _check_slide_surface() -> bool:
 	slide_downhill = downhill
 	slide_direction = signf(downhill.x)
 	return true
+
+# True when a surface normal sits inside the slide band: too steep to stand on, not steep enough to
+# count as a wall. Shared by the per-frame slope check and the landing classifier so there is only
+# one definition of "this is a slide slope".
+func _is_slide_angle(normal: Vector2) -> bool:
+	var angle: float = abs(rad_to_deg(normal.angle_to(Vector2.UP)))
+	return angle >= SLIDE_MIN_ANGLE and angle <= SLIDE_MAX_ANGLE
+
+# True when the surface the player has just touched down on is one the slide will take over on the
+# next frame. Only valid on the landing frame, after move_and_slide().
+# It deliberately asks the raycast rather than get_floor_normal(): _check_slide_surface() reads the
+# same ray at the top of the next frame, so posing the question the same way here means the two can
+# never disagree. A get_floor_normal() answer could say "slope" at the seam where the collision box
+# straddles slope and flat while the ray says "flat", and then we would suppress the landing request
+# for a slide that never engages, leaving the state machine stranded in "fall" (which has no
+# automatic way out). The ray is force-updated because the body has moved since the physics server
+# last stepped it, which puts it exactly where the next frame's check will read it from.
+func _landed_on_slide_slope() -> bool:
+	slide_check.force_raycast_update()
+	if not slide_check.is_colliding():
+		return false
+	return _is_slide_angle(slide_check.get_collision_normal())
