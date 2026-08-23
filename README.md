@@ -38,7 +38,7 @@ Any level under `scenes/scenarios/` can be launched on its own — each one carr
 | Drop from a ledge | <kbd>↓</kbd> while hanging |
 | Roll | automatic — land from a medium-height fall while holding a direction |
 
-Crouching is also forced automatically when there is a low ceiling overhead, and sliding starts on its own when you step onto a steep enough slope.
+Crouching is also forced automatically when there is a low ceiling overhead, and sliding starts on its own when you step onto a steep enough slope — while sliding you can neither steer nor jump, you ride it to the bottom.
 
 ## Mechanics
 
@@ -47,8 +47,8 @@ Crouching is also forced automatically when there is a low ceiling overhead, and
 | **Variable-height jump** | Holding jump applies extra upward force for a short window; releasing early cuts the ascent. Gravity uses separate multipliers for rising, hanging at the apex, and falling, so jumps feel floaty at the peak and snappy on the way down. |
 | **Ledge grab & climb** | Falling into a ledge collider snaps the player onto it and freezes physics entirely; a tween drives the climb up and over. Ledges live on their own physics layer so only the grab raycasts see them. |
 | **Crouch** | Shrinks the collision box (21px → 15px tall) so the player fits through low gaps. Held automatically while under a ceiling. |
-| **Roll** | Triggered by landing from a fall within a specific height band while holding a direction; locks out steering and jumping until it finishes. |
-| **Slide** | Standing on a 35°–55° slope pushes the player down it at a fixed speed and takes away horizontal control until they jump or reach flat ground. |
+| **Roll** | Triggered by landing on flat ground from a fall within a specific height band while holding a direction; locks out steering and jumping until it finishes. |
+| **Slide** | A 35°–55° slope cannot be walked up — standing on one pushes the player down it at a fixed speed, takes away horizontal control and locks the sprite facing downhill. Landing on such a slope plays no roll or landing, it goes straight into the slide. When the slope runs out the down-slope momentum carries for a moment so the player runs onto the flat instead of stopping dead. Jumping out of a slide is deliberately switched off at the moment. |
 | **Stumble** | Obstacle triggers call `stumble()` on the player, halving their speed and playing a recovery animation. |
 | **Pursuit mode** | A scene can call `set_pursuit_mode(true)` to raise the player's top speed and speed up the run animation during chases. |
 | **Bear AI** | Walks or flees toward a target X coordinate, with its run speed jittering slightly over time so the chase doesn't look mechanical. During gameplay a level script keeps it a fixed distance behind the player. |
@@ -98,7 +98,7 @@ Sprites are drawn in Aseprite and exported as individual numbered PNGs per anima
 
 ## Status
 
-Playable vertical slice. Implemented: the full player moveset, bear chase behaviour, scene streaming, and levels `scene_00` through `scene_04` (the later ones still using sketch art as placeholder). The wolf has a complete animation set in `assets/` but no behaviour script yet.
+Playable vertical slice. Implemented: the full player moveset, bear chase behaviour, scene streaming, and levels `scene_00` through `scene_04` (the later ones still using sketch art as placeholder). Slope sliding is the most recent addition; the down-slope launch for jumping out of a slide is written and wired up but deliberately commented off in `scripts/player.gd`, so it is a one-line change to turn back on. The wolf has a complete animation set in `assets/` but no behaviour script yet.
 
 ## Contributing / working on this repo
 

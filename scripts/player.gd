@@ -20,7 +20,7 @@ const STUMBLE_VELOCITY_MULTIPLIER = 0.5
 # slope counts as a wall, is_on_floor() is false and the slide never engages.
 const SLIDE_MIN_ANGLE = 35.0
 const SLIDE_MAX_ANGLE = 55.0
-const SLIDE_SPEED = 80.0 # Travel speed along the slope surface while sliding
+const SLIDE_SPEED = 130.0 # Travel speed along the slope surface while sliding
 const SLIDE_JUMP_PUSH = 80.0 # Horizontal launch down-slope when jumping out of a slide
 const SLIDE_JUMP_CONTROL_LOCK = 0.22 # Seconds the launch ignores horizontal input
 # Slide exit: the slope check is a single short raycast, so it loses the surface a couple of pixels
