@@ -1,9 +1,14 @@
 [gd_scene format=3 uid="uid://bhho8jwp4ii84"]
 
 [ext_resource type="Texture2D" uid="uid://c1h8xyc5xbhba" path="res://assets/environment/scene-sketches/scene-3-sketch.png" id="1_btnj1"]
+[ext_resource type="Texture2D" uid="uid://4j1djj0qr3ye" path="res://assets/environment/grounds/ground-1.png" id="2_6okpm"]
+[ext_resource type="Texture2D" uid="uid://di4psy2vehj4d" path="res://assets/environment/grounds/slope-1.png" id="3_e472h"]
 [ext_resource type="PackedScene" uid="uid://bladyxmnd58a8" path="res://scenes/objects/environment/ground/ledge.tscn" id="3_jcxmc"]
 [ext_resource type="PackedScene" uid="uid://enyq60u1b8ac" path="res://scenes/objects/environment/ground/jump_distance.tscn" id="4_2wk5u"]
+[ext_resource type="Texture2D" uid="uid://bin1645gbo83l" path="res://assets/environment/rocks/rock-4.png" id="4_u1vj0"]
 [ext_resource type="PackedScene" uid="uid://p0almkxmuqqm" path="res://scenes/objects/environment/ground/ledge_high.tscn" id="5_ctm3n"]
+[ext_resource type="Texture2D" uid="uid://cqwc45533mpip" path="res://assets/environment/trees/obstacle-tree-1-front.png" id="5_oypeh"]
+[ext_resource type="Texture2D" uid="uid://l7sqtfjcbjxp" path="res://assets/environment/trees/obstacle-tree-1-back.png" id="6_mf3cu"]
 [ext_resource type="PackedScene" uid="uid://brcr5cryy26rl" path="res://scenes/objects/environment/ground/jump_high.tscn" id="6_x75io"]
 [ext_resource type="PackedScene" uid="uid://b1hrhmthk715w" path="res://scenes/scenarios/00_scene_trigger.tscn" id="7_x75io"]
 [ext_resource type="PackedScene" uid="uid://cubxxo1lg3fyw" path="res://scenes/scenarios/scene_04.tscn" id="8_x75io"]
@@ -27,8 +32,11 @@ size = Vector2(332, 6)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ctm3n"]
 size = Vector2(346, 6)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6okpm"]
+load_path = "res://.godot/imported/ground-1.png-9fe413d8b209e835b46549118f8ab838.ctex"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e472h"]
-size = Vector2(28, 6)
+size = Vector2(18, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6okpm"]
 size = Vector2(270, 6)
@@ -57,6 +65,12 @@ size = Vector2(142, 6)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5jmuf"]
 size = Vector2(142, 6)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x75io"]
+size = Vector2(204, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lyyg"]
+size = Vector2(36, 6)
+
 [node name="scene_03" type="Node2D" unique_id=931929292]
 
 [node name="scene-sketch" type="Sprite2D" parent="." unique_id=1572573476]
@@ -70,13 +84,24 @@ position = Vector2(-9, -14)
 position = Vector2(92, 31)
 shape = SubResource("RectangleShape2D_btnj1")
 
+[node name="Sprite2D" type="Sprite2D" parent="ground/001" unique_id=1776013399]
+position = Vector2(50, -32)
+texture = ExtResource("2_6okpm")
+
+[node name="ColorRect" type="ColorRect" parent="ground/001" unique_id=2126329732]
+offset_left = -107.0
+offset_top = 10.000001
+offset_right = 282.0
+offset_bottom = 60.0
+color = Color(0.4392157, 0.5372549, 0.6156863, 1)
+
 [node name="002" type="CollisionShape2D" parent="ground" unique_id=940354837]
 position = Vector2(197, 6)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_jcxmc")
 
-[node name="ledge" parent="ground/002" unique_id=1395517669 instance=ExtResource("3_jcxmc")]
-position = Vector2(-65.00001, -179)
+[node name="ledge2" parent="ground/002" unique_id=204562003 instance=ExtResource("3_jcxmc")]
+position = Vector2(-21, -3)
 rotation = -1.5707964
 ledge_side = 1
 grab_offset = Vector2(-4, 1)
@@ -85,13 +110,24 @@ grab_offset = Vector2(-4, 1)
 position = Vector2(286, -13)
 shape = SubResource("RectangleShape2D_10u6m")
 
+[node name="ColorRect" type="ColorRect" parent="ground/003" unique_id=872236896]
+offset_left = -92.0
+offset_top = -2.999999
+offset_right = 204.0
+offset_bottom = 47.0
+color = Color(0.4392157, 0.5372549, 0.6156863, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="ground/003" unique_id=1529670026]
+position = Vector2(68, -33)
+texture = ExtResource("2_6okpm")
+
 [node name="004" type="CollisionShape2D" parent="ground" unique_id=1030797475]
 position = Vector2(373, -38)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_aufho")
 
-[node name="ledge" parent="ground/004" unique_id=204562003 instance=ExtResource("3_jcxmc")]
-position = Vector2(23.000008, 173)
+[node name="ledge4" parent="ground/004" unique_id=1395517669 instance=ExtResource("3_jcxmc")]
+position = Vector2(-21, -3)
 rotation = -1.5707964
 ledge_side = 1
 grab_offset = Vector2(-4, 1)
@@ -100,12 +136,52 @@ grab_offset = Vector2(-4, 1)
 position = Vector2(542, -57)
 shape = SubResource("RectangleShape2D_2wk5u")
 
+[node name="ColorRect" type="ColorRect" parent="ground/005" unique_id=1855086868]
+offset_left = -172.0
+offset_top = -2.999999
+offset_right = 166.0
+offset_bottom = 47.0
+color = Color(0.4392157, 0.5372549, 0.6156863, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="ground/005" unique_id=644230192]
+position = Vector2(-12, -35)
+texture = ExtResource("2_6okpm")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ground/005" unique_id=247314211]
+position = Vector2(156, -33)
+texture = ExtResource("2_6okpm")
+region_enabled = true
+region_rect = Rect2(0, 0, 20, 90)
+
 [node name="006" type="CollisionShape2D" parent="ground" unique_id=1924243957]
 position = Vector2(900, -57)
 shape = SubResource("RectangleShape2D_ctm3n")
 
+[node name="Sprite2D" type="Sprite2D" parent="ground/006" unique_id=1119150082]
+position = Vector2(-13, -33)
+texture = ExtResource("2_6okpm")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ground/006" unique_id=1224956370]
+position = Vector2(160, -31)
+texture = SubResource("CompressedTexture2D_6okpm")
+region_enabled = true
+region_rect = Rect2(0, 0, 26, 90)
+
+[node name="back-rock" type="Sprite2D" parent="ground/006" unique_id=1530282484]
+position = Vector2(29, -21)
+texture = ExtResource("4_u1vj0")
+
+[node name="front-obstacle-tree" type="Sprite2D" parent="ground/006" unique_id=917205160]
+z_index = 1
+position = Vector2(-20, -22)
+texture = ExtResource("5_oypeh")
+
+[node name="back-obstacle-tree" type="Sprite2D" parent="ground/006" unique_id=1088506129]
+position = Vector2(-20, -22)
+texture = ExtResource("6_mf3cu")
+
 [node name="007" type="CollisionShape2D" parent="ground" unique_id=1989475667]
-position = Vector2(903, -80)
+position = Vector2(898, -93)
 shape = SubResource("RectangleShape2D_e472h")
 
 [node name="008" type="CollisionShape2D" parent="ground" unique_id=2142331138]
@@ -177,6 +253,40 @@ position = Vector2(-65, -2)
 ledge_side = 1
 grab_offset = Vector2(-4, 1)
 
+[node name="018" type="CollisionShape2D" parent="ground" unique_id=1294195586]
+position = Vector2(-76.00001, -76.00001)
+rotation = 0.7853982
+shape = SubResource("RectangleShape2D_x75io")
+
+[node name="Sprite2D" type="Sprite2D" parent="ground/018" unique_id=521433949]
+position = Vector2(13.435039, -3.5355377)
+rotation = -0.7853982
+texture = ExtResource("3_e472h")
+
+[node name="ColorRect" type="ColorRect" parent="ground/018" unique_id=1966793998]
+offset_left = -89.80254
+offset_top = 0.7071066
+offset_right = 91.64451
+offset_bottom = 136.94989
+color = Color(0.4392157, 0.5372549, 0.6156863, 1)
+
+[node name="019" type="CollisionShape2D" parent="ground" unique_id=618164796]
+position = Vector2(-5, 15.999999)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_8lyyg")
+
+[node name="Sprite2D" type="Sprite2D" parent="ground/019" unique_id=1318522382]
+position = Vector2(137, -31.000006)
+scale = Vector2(-1, 1)
+texture = ExtResource("2_6okpm")
+
+[node name="ColorRect" type="ColorRect" parent="ground/019" unique_id=1493029462]
+offset_left = -22.0
+offset_top = 10.000001
+offset_right = 60.22003
+offset_bottom = 146.24278
+color = Color(0.4392157, 0.5372549, 0.6156863, 1)
+
 [node name="jump-distance" parent="." unique_id=775577163 instance=ExtResource("4_2wk5u")]
 position = Vector2(1542, -91)
 
@@ -186,8 +296,12 @@ position = Vector2(1042, -42)
 [node name="jump-high" parent="." unique_id=2076309062 instance=ExtResource("6_x75io")]
 position = Vector2(1060, -5)
 
+[node name="player_spawn2" parent="." unique_id=299756768 instance=ExtResource("9_6okpm")]
+position = Vector2(642.7337, -100.488464)
+
 [node name="player_spawn" parent="." unique_id=217074554 instance=ExtResource("9_6okpm")]
-position = Vector2(1431, -144)
+visible = false
+position = Vector2(-65.22197, -86.83818)
 
 [node name="00_scene_trigger" parent="." unique_id=319290981 instance=ExtResource("7_x75io")]
 position = Vector2(1679, -163)
